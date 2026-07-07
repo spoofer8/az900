@@ -1,0 +1,124 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>3.4 Monitoring tools · AZ-900 quiz</title>
+  <link rel="stylesheet" href="quiz.css">
+</head>
+<body>
+<div class="container">
+
+  <header class="q-header">
+    <div class="q-crumb"><a href="index.html">All quizzes</a><span class="sep">Domain 3 · Management and governance</span></div>
+    <h1 class="q-title">Monitoring tools</h1>
+    <p class="q-subtitle">Azure Advisor, Service Health, Azure Monitor, Log Analytics, Application Insights.</p>
+  </header>
+
+  <div id="setup">
+    <p class="setup-intro">Choose a difficulty tier. Easy tests recall, Medium tests scenarios, Hard tests distractor traps.</p>
+    <div class="setup-diff">
+      <button class="start-btn diff-easy" data-difficulty="easy"><span class="btn-label">Tier · Recall</span><span class="btn-title">Easy</span><span class="btn-count" id="count-easy">— questions</span></button>
+      <button class="start-btn diff-medium" data-difficulty="medium"><span class="btn-label">Tier · Scenarios</span><span class="btn-title">Medium</span><span class="btn-count" id="count-medium">— questions</span></button>
+      <button class="start-btn diff-hard" data-difficulty="hard"><span class="btn-label">Tier · Gotchas</span><span class="btn-title">Hard</span><span class="btn-count" id="count-hard">— questions</span></button>
+      <button class="start-btn diff-all" data-difficulty="all"><span class="btn-label">All tiers</span><span class="btn-title">Full quiz</span><span class="btn-count" id="count-all">— questions</span></button>
+    </div>
+  </div>
+
+  <div id="quiz" style="display: none;">
+    <div class="q-progress"><span>Q<span id="q-num">1</span> / <span id="q-total">0</span></span><div class="progress-track"><div class="progress-fill" id="progress-fill"></div></div></div>
+    <div class="q-card">
+      <div class="q-meta"><span class="chip diff-easy" id="q-difficulty">easy</span></div>
+      <div class="q-text" id="q-text"></div>
+      <div class="q-options" id="q-options"></div>
+      <div class="feedback" id="feedback"><div class="feedback-verdict" id="feedback-verdict"></div><div class="feedback-explanation" id="feedback-explanation"></div></div>
+      <div class="q-controls"><span></span><button class="btn btn-primary" id="next-btn" style="display: none;">Next question</button></div>
+    </div>
+  </div>
+
+  <div id="results" style="display: none;">
+    <div class="results-hero">
+      <div class="score-pct" id="score-pct">0%</div>
+      <div class="score-fraction"><span id="score-num">0</span> of <span id="score-total">0</span> correct</div>
+      <div class="verdict" id="score-verdict"></div>
+    </div>
+    <div class="results-actions">
+      <button class="btn btn-primary" id="retry-btn">Retry same tier</button>
+      <button class="btn btn-secondary" id="back-btn">Change tier</button>
+    </div>
+    <h2 class="review-title">Review</h2>
+    <div id="review"></div>
+  </div>
+
+</div>
+
+<script>
+window.QUIZ_META = { title: "Monitoring tools", code: "3.4", domain: "Domain 3" };
+
+window.QUIZ_QUESTIONS = [
+  // EASY
+  { q: "Azure Advisor provides:", o: ["Cost invoicing", "Personalised best-practice recommendations for your Azure environment", "Physical security", "Load balancing"], a: 1, d: "easy", e: "Advisor analyses your resources and surfaces recommendations across five pillars." },
+  { q: "How many pillars does Azure Advisor cover?", o: ["3", "4", "5", "7"], a: 2, d: "easy", e: "Advisor covers 5 pillars: reliability, security, performance, cost, and operational excellence." },
+  { q: "Which is NOT an Advisor pillar?", o: ["Reliability", "Security", "Performance", "Compliance"], a: 3, d: "easy", e: "Advisor pillars: reliability, security, performance, cost, operational excellence. Compliance is a governance concern (Purview/Policy)." },
+  { q: "Azure Service Health shows:", o: ["Individual resource status only", "Azure-side incidents affecting your subscriptions, planned maintenance, health advisories, and security advisories", "Cost analysis", "RBAC assignments"], a: 1, d: "easy", e: "Service Health is filtered to your subscriptions, showing Azure's own incidents and communications." },
+  { q: "How many content categories does Azure Service Health provide?", o: ["2", "3", "4", "10"], a: 2, d: "easy", e: "Four: Service issues, Planned maintenance, Health advisories, Security advisories." },
+  { q: "Azure Resource Health shows:", o: ["All Azure incidents globally", "The current health of an individual Azure resource that you own", "Only Azure Storage", "Only PaaS services"], a: 1, d: "easy", e: "Resource Health tells you the current status of one specific resource — 'Is my VM up right now?'" },
+  { q: "Azure Status is:", o: ["A personal dashboard", "The public global page at status.azure.com showing overall Azure health worldwide", "A billing tool", "A security scanner"], a: 1, d: "easy", e: "Azure Status is the unfiltered public dashboard — visible to everyone, not scoped to your account." },
+  { q: "Azure Monitor is:", o: ["A specific product for VM metrics only", "The umbrella observability service — metrics, logs, alerts, App Insights, VM/Container Insights, Network Watcher", "A CDN", "A backup service"], a: 1, d: "easy", e: "Azure Monitor is the top-level observability stack. Everything monitoring-related in Azure lives under it." },
+  { q: "In Azure Monitor, 'Metrics' are:", o: ["Text log entries", "Numerical values captured at intervals (near real-time), like CPU % or request count", "Configuration settings", "Alerts"], a: 1, d: "easy", e: "Metrics = time-series numerical data, near-real-time, chartable in Metrics Explorer." },
+  { q: "In Azure Monitor, 'Logs' are:", o: ["Only VM performance", "Text/structured records stored in a Log Analytics workspace, queryable via KQL", "The same as metrics", "Not queryable"], a: 1, d: "easy", e: "Logs are richer records — activity, resource, guest OS, application, or custom events — stored in Log Analytics." },
+  { q: "The query language for Log Analytics is:", o: ["SQL", "KQL (Kusto Query Language)", "Python", "PowerShell"], a: 1, d: "easy", e: "KQL is Microsoft's Kusto query language — SQL-like syntax used across Log Analytics, Sentinel, and Defender for Cloud." },
+  { q: "Which service is Azure's Application Performance Monitoring (APM) tool?", o: ["Azure Advisor", "Application Insights", "Cost Management", "Azure Firewall"], a: 1, d: "easy", e: "Application Insights is Azure's APM — tracks requests, dependencies, exceptions, page views, and more for web / API apps." },
+  { q: "In Azure Monitor, what fires when a condition is met (like CPU > 90%)?", o: ["Automatic remediation always", "An Alert, which then triggers an Action Group", "Nothing", "Only email"], a: 1, d: "easy", e: "Alerts are triggered by conditions on metrics/logs/activity. Action Groups are attached to alerts and define what happens." },
+  { q: "An Action Group in Azure Monitor can do which of the following?", o: ["Only send email", "Send email, SMS, voice call, webhook, or trigger a Function / Logic App / Runbook", "Only trigger Runbooks", "Only send SMS"], a: 1, d: "easy", e: "Action Groups are the multi-channel notification + automation engine for alerts." },
+  { q: "Which service captures request telemetry, dependency calls, and exceptions for web apps?", o: ["Advisor", "Application Insights", "Firewall", "Bastion"], a: 1, d: "easy", e: "Application Insights instruments applications to capture requests, dependencies, exceptions, page views, and more." },
+  { q: "Which tool is used for network diagnostics and packet capture in Azure?", o: ["Azure Monitor Network Watcher", "Azure Advisor", "Azure Firewall", "Cost Management"], a: 0, d: "easy", e: "Network Watcher is Azure Monitor's networking-focused feature — connection troubleshooting, packet capture, topology diagrams." },
+  { q: "Metric alerts fire at approximately:", o: ["Once per hour", "Near-real-time (~1 minute latency)", "Only weekly", "Only via a batch"], a: 1, d: "easy", e: "Metric-based alerts are close to real-time (roughly 1 min evaluation latency)." },
+  { q: "Which of these is TRUE about Azure Monitor autoscale?", o: ["It's a separate service", "It's part of Azure Monitor — metric-driven scale rules for VMSS, App Service, and more", "It only works for Storage", "It requires ExpressRoute"], a: 1, d: "easy", e: "Autoscale rules use metric signals to scale VMSS, App Service Plans, and other services in and out." },
+  { q: "Container Insights is used for monitoring:", o: ["Physical servers", "AKS clusters and container workloads", "Only Storage", "Only Networking"], a: 1, d: "easy", e: "Container Insights collects performance and health data from AKS clusters and container workloads." },
+  { q: "VM Insights is used for monitoring:", o: ["Only OS boot events", "VM guest OS performance, processes, and network dependency mapping", "Only Storage", "Only App Service"], a: 1, d: "easy", e: "VM Insights extends monitoring into the guest OS with performance metrics and dependency maps." },
+  { q: "Azure Monitor Action Groups are triggered by:", o: ["Manual clicks only", "Alerts firing based on rule conditions", "Only Service Health incidents", "Only Cost Management"], a: 1, d: "easy", e: "Action Groups are the response side of alerts. When an alert fires, its associated Action Group executes." },
+  { q: "What does an 'alert rule' consist of?", o: ["A resource, a condition, and an Action Group to notify/act", "A pricing tier", "A region", "A tag"], a: 0, d: "easy", e: "Alert rules combine: the signal source (metric/log/activity), the condition, and the Action Group to invoke." },
+
+  // MEDIUM
+  { q: "You want a recommendation to right-size a VM based on utilisation. Best tool?", o: ["Azure Advisor (Cost or Performance category)", "Azure Firewall", "Purview", "Bastion"], a: 0, d: "medium", e: "Advisor's cost and performance recommendations include right-sizing VMs based on observed utilisation." },
+  { q: "You want to check if Azure has an ongoing regional issue affecting your services. Best tool?", o: ["Cost Management", "Azure Service Health", "Resource Health", "Advisor"], a: 1, d: "medium", e: "Service Health surfaces Azure-side incidents filtered to your subscriptions and impacted services." },
+  { q: "You suspect your specific VM is unavailable right now. Best diagnostic?", o: ["Azure Advisor", "Azure Service Health", "Resource Health for that VM", "Azure Status"], a: 2, d: "medium", e: "Resource Health tells you the up-to-the-minute status of your individual resource." },
+  { q: "You want a chart of your VM's CPU % over the last 24 hours. Best tool?", o: ["Advisor", "Azure Monitor Metrics Explorer", "Cost Management", "Log Analytics only"], a: 1, d: "medium", e: "Metrics Explorer charts near-real-time numerical metrics — the fastest tool for time-series data." },
+  { q: "You want to search 7 days of firewall logs for a specific source IP across multiple resources. Best tool?", o: ["Metrics Explorer", "Azure Monitor Logs (Log Analytics) with a KQL query", "Advisor", "Service Health"], a: 1, d: "medium", e: "Log Analytics with KQL is the tool for searching, filtering, and joining logs across resources." },
+  { q: "You want failed-request telemetry for your web app, with distributed tracing to downstream services. Best tool?", o: ["Advisor", "Application Insights", "Firewall logs", "Cost Management"], a: 1, d: "medium", e: "Application Insights captures request telemetry, dependency traces, and exceptions with correlation IDs — designed for APM." },
+  { q: "You want to notify a team on Teams whenever a critical alert fires. Best approach?", o: ["Manual monitoring", "Alert rule → Action Group → webhook or Logic App integration to post to Teams", "Only email", "Only SMS"], a: 1, d: "medium", e: "Action Groups can trigger webhooks or Logic Apps, which integrate cleanly with Teams for chat notifications." },
+  { q: "You want VMSS to scale out when average CPU > 70% for 5 minutes. Best feature?", o: ["Azure Advisor", "Azure Monitor autoscale rule", "Manual watching", "Sentinel"], a: 1, d: "medium", e: "Azure Monitor autoscale evaluates metric signals against thresholds and issues scale actions to VMSS, App Service, etc." },
+  { q: "Which of these represents the CORRECT alert flow?", o: ["Signal → Alert rule fires → Action Group triggers notifications/automation", "Advisor → Cost Management", "Firewall → Storage", "Portal → Bicep"], a: 0, d: "medium", e: "The pipeline is Signal (metric/log/activity) → Alert rule condition met → Action Group runs its actions." },
+  { q: "Which is TRUE about the difference between Service Health and Azure Status?", o: ["They are the same", "Service Health is filtered to YOUR subscriptions; Azure Status is a global public dashboard", "Service Health is global; Azure Status is filtered", "Only Service Health is free"], a: 1, d: "medium", e: "Service Health = personal / subscription-scoped. Azure Status = public global page." },
+  { q: "You want to receive an alert when a subscription-level Azure event happens (e.g. a Resource Group is deleted). Best signal source?", o: ["Metric alert", "Activity log alert", "Application Insights", "Firewall log"], a: 1, d: "medium", e: "Activity log alerts fire on management operations at the subscription level — RG deletion, role assignment, policy assignment, etc." },
+  { q: "You want to detect unusual increases in request failure rate with automatic anomaly detection. Best fit?", o: ["Manual dashboards", "Application Insights smart detection", "Cost Management", "Azure Firewall"], a: 1, d: "medium", e: "App Insights includes 'smart detection' — AI-driven anomaly detection for failures, performance, and resource issues." },
+  { q: "Which of these is TRUE about Azure Advisor recommendations?", o: ["They automatically apply themselves", "They are surfaced but must be reviewed and applied by you (some can trigger automation)", "They only cover VMs", "They are paid-only"], a: 1, d: "medium", e: "Advisor recommends, you decide. Some recommendations link into automated remediation (like Defender for Cloud auto-fix)." },
+  { q: "You want to be alerted if planned Azure maintenance will affect your VMs. Best feature?", o: ["Metric alert", "Service Health alert on 'Planned maintenance' category", "App Insights", "Cost alert"], a: 1, d: "medium", e: "Service Health supports alerts scoped to specific event types (issues, planned maintenance, advisories) — configurable in Action Groups." },
+  { q: "Which is TRUE about the Log Analytics workspace?", o: ["It stores only metric data", "It's the central store for log data across your Azure services, queryable with KQL", "It's the same as App Insights (they use it under the hood, though)", "It only supports on-prem"], a: 1, d: "medium", e: "Log Analytics workspaces are the central log store. App Insights, Sentinel, and Defender for Cloud all use workspaces underneath." },
+  { q: "Which of these is a valid data source for Azure Monitor Logs?", o: ["Only VMs", "Azure resources (activity + resource logs), guest OS (via agent), applications (App Insights SDK), custom sources", "Only App Service", "Only Storage"], a: 1, d: "medium", e: "Monitor Logs ingests from platform, guest OS, applications, and custom sources — a broad range." },
+  { q: "Which is TRUE about the difference between Application Insights and Log Analytics?", o: ["They are unrelated", "App Insights is APM data (requests, deps, exceptions); Log Analytics is a broader log store used by App Insights, Sentinel, Defender for Cloud", "Log Analytics only handles VM logs", "App Insights is deprecated"], a: 1, d: "medium", e: "App Insights = APM data model. Log Analytics = the underlying workspace store. App Insights is now workspace-based." },
+  { q: "You want to notify an on-call engineer via SMS AND email when a critical alert fires. Best fit?", o: ["Two separate alert rules", "One alert rule with an Action Group that includes both an email and SMS action", "Only email is possible", "Manual"], a: 1, d: "medium", e: "Action Groups support multiple actions (email, SMS, voice, webhook, Function, Logic App, Runbook) in one group." },
+  { q: "Which is FALSE about Azure Monitor?", o: ["It provides metrics", "It provides logs", "It provides billing", "It provides alerts and autoscale"], a: 2, d: "medium", e: "Billing lives under Cost Management + Billing. Monitor is metrics / logs / alerts / autoscale / App Insights / etc." },
+  { q: "Which is TRUE about the Azure Advisor category 'operational excellence'?", o: ["It's not a real category", "It covers recommendations for tagging, monitoring configuration, and process improvements", "It only covers cost", "It covers only VMs"], a: 1, d: "medium", e: "Operational excellence includes tagging, resource organisation, monitoring configuration, and best practices for reliable operations." },
+  { q: "Which is TRUE about alert severity in Azure Monitor?", o: ["All alerts are the same severity", "Alerts have severity levels (Sev 0 Critical through Sev 4 Verbose) to help routing and prioritisation", "Severity is unsupported", "Only Sev 0 exists"], a: 1, d: "medium", e: "Alerts have 5 severity levels (Sev 0-4). Route them through Action Groups accordingly — page for Sev 0, email for Sev 3, etc." },
+  { q: "Which is TRUE about Azure Monitor's cost model?", o: ["Fully free", "Ingestion + retention of logs is billed (usually per GB); some free tier available", "Only Metrics is billed", "Only Alerts are billed"], a: 1, d: "medium", e: "Metrics are usually free for basic use; logs are billed by ingestion and retention (per GB). Retention beyond default period costs more." },
+
+  // HARD
+  { q: "Which of these best describes when to use Metrics vs Logs?", o: ["They're identical — pick either", "Metrics = time-series numerical data (fast, near-real-time). Logs = deeper structured / text data queryable via KQL", "Metrics only for VMs", "Logs are always cheaper"], a: 1, d: "hard", e: "Rule of thumb: metrics for known numerical dimensions and dashboards; logs for ad-hoc investigation, correlation, and structured events." },
+  { q: "Which is TRUE about the retention of Log Analytics data?", o: ["Data is stored forever for free", "Default retention is typically 30 days (free); extending retention costs more per GB per month", "Only 7 days ever", "No retention"], a: 1, d: "hard", e: "Default retention (free) is around 30 days. Extending to 30/90/730 days incurs per-GB retention charges." },
+  { q: "Which of these BEST captures the boundary between Service Health and Resource Health?", o: ["They are the same", "Service Health = Azure-side incidents. Resource Health = the health of *your* individual resources right now", "Service Health is for VMs; Resource Health is for storage", "Only Service Health is free"], a: 1, d: "hard", e: "Service Health = the provider's incidents. Resource Health = your resources' current state. Together they answer 'why is my thing down?'" },
+  { q: "Which of these is a valid use of KQL in Log Analytics?", o: ["Provisioning VMs", "Aggregating log records by resource, joining across data types, and computing time-series metrics — e.g. avg(CounterValue) by Computer", "Deleting resources", "Sending SMS"], a: 1, d: "hard", e: "KQL is a query language — read/aggregate/join/summarise log data. It doesn't provision or modify resources." },
+  { q: "Which is TRUE about Azure Advisor and Defender for Cloud?", o: ["Both are the same", "They complement each other — Advisor's Security pillar links to Defender for Cloud recommendations; Defender adds deeper security posture management", "Only Advisor covers security", "Advisor replaces Defender"], a: 1, d: "hard", e: "Advisor's Security pillar surfaces high-level items; Defender for Cloud provides the deeper CSPM + workload protection engine with Secure Score." },
+  { q: "You need to alert on 'CPU > 90% for 5 min' AND 'memory > 80% for 5 min' simultaneously. Best approach?", o: ["Only one metric can be used per alert", "Multi-dimensional / multi-condition metric alerts — configure both signals in a single alert rule", "Impossible in Azure", "Only via Sentinel"], a: 1, d: "hard", e: "Metric alerts support multi-signal conditions in one rule, so you can require multiple metrics to breach before firing." },
+  { q: "Which is TRUE about Application Insights instrumentation?", o: ["It works only for .NET", "It supports multiple languages via SDKs (.NET, Java, Node.js, Python, JS) and codeless attach for some services", "It requires manual setup for every request", "It replaces Log Analytics"], a: 1, d: "hard", e: "App Insights has SDKs for major languages. For App Service and Functions, codeless instrumentation is often possible." },
+  { q: "Which is TRUE about Azure Monitor autoscale rules?", o: ["Only threshold-based rules are supported", "Both threshold-based rules (CPU > 70%) and time-based schedules (business hours) are supported", "Only schedules are supported", "Autoscale is not supported"], a: 1, d: "hard", e: "Autoscale can react to metrics OR run on schedules (e.g. scale out at 09:00 weekdays, scale in at 18:00)." },
+  { q: "You have a globally distributed application. Which Azure Monitor feature helps identify slow dependency calls across services?", o: ["Metrics Explorer only", "Application Insights end-to-end transaction / dependency tracking", "Sentinel", "Cost Management"], a: 1, d: "hard", e: "App Insights correlates requests across services and captures dependency call duration and failure rate — the go-to for distributed diagnostics." },
+  { q: "Which is TRUE about smart-detection features in Azure Monitor?", o: ["They are manual", "They apply anomaly detection to metrics/App Insights data — surfacing unusual patterns (spike in failures, degraded response times) automatically", "Only available for VMs", "They replace alerts"], a: 1, d: "hard", e: "Smart Detection uses machine learning to surface anomalies that fixed thresholds might miss." },
+  { q: "Which is TRUE about the relationship between Sentinel and Log Analytics?", o: ["They are unrelated", "Sentinel is built on top of a Log Analytics workspace — it uses the same KQL query engine and workspace storage", "Sentinel replaces Log Analytics", "Only Sentinel supports KQL"], a: 1, d: "hard", e: "Sentinel runs on a Log Analytics workspace. Data ingested for Sentinel is queried with KQL like any other Monitor log data." },
+  { q: "Which is TRUE about Advisor's actionability?", o: ["Recommendations are informational only", "Recommendations often include a link to apply the change (right-size VM, buy RI, enable backup, restrict inbound port)", "Advisor auto-applies changes", "Recommendations require Sentinel"], a: 1, d: "hard", e: "Many Advisor recommendations link directly to the fix — right-size, buy RI, apply setting. You still decide when to click." }
+];
+</script>
+<script src="quiz.js"></script>
+</body>
+</html>

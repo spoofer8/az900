@@ -1,0 +1,120 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>2.1 Core architecture · AZ-900 quiz</title>
+  <link rel="stylesheet" href="quiz.css">
+</head>
+<body>
+<div class="container">
+
+  <header class="q-header">
+    <div class="q-crumb"><a href="index.html">All quizzes</a><span class="sep">Domain 2 · Architecture and services</span></div>
+    <h1 class="q-title">Core architecture</h1>
+    <p class="q-subtitle">Regions, availability zones, sovereign regions, resource hierarchy, ARM.</p>
+  </header>
+
+  <div id="setup">
+    <p class="setup-intro">Choose a difficulty tier. Easy tests recall, Medium tests scenarios, Hard tests distractor traps.</p>
+    <div class="setup-diff">
+      <button class="start-btn diff-easy" data-difficulty="easy"><span class="btn-label">Tier · Recall</span><span class="btn-title">Easy</span><span class="btn-count" id="count-easy">— questions</span></button>
+      <button class="start-btn diff-medium" data-difficulty="medium"><span class="btn-label">Tier · Scenarios</span><span class="btn-title">Medium</span><span class="btn-count" id="count-medium">— questions</span></button>
+      <button class="start-btn diff-hard" data-difficulty="hard"><span class="btn-label">Tier · Gotchas</span><span class="btn-title">Hard</span><span class="btn-count" id="count-hard">— questions</span></button>
+      <button class="start-btn diff-all" data-difficulty="all"><span class="btn-label">All tiers</span><span class="btn-title">Full quiz</span><span class="btn-count" id="count-all">— questions</span></button>
+    </div>
+  </div>
+
+  <div id="quiz" style="display: none;">
+    <div class="q-progress"><span>Q<span id="q-num">1</span> / <span id="q-total">0</span></span><div class="progress-track"><div class="progress-fill" id="progress-fill"></div></div></div>
+    <div class="q-card">
+      <div class="q-meta"><span class="chip diff-easy" id="q-difficulty">easy</span></div>
+      <div class="q-text" id="q-text"></div>
+      <div class="q-options" id="q-options"></div>
+      <div class="feedback" id="feedback"><div class="feedback-verdict" id="feedback-verdict"></div><div class="feedback-explanation" id="feedback-explanation"></div></div>
+      <div class="q-controls"><span></span><button class="btn btn-primary" id="next-btn" style="display: none;">Next question</button></div>
+    </div>
+  </div>
+
+  <div id="results" style="display: none;">
+    <div class="results-hero">
+      <div class="score-pct" id="score-pct">0%</div>
+      <div class="score-fraction"><span id="score-num">0</span> of <span id="score-total">0</span> correct</div>
+      <div class="verdict" id="score-verdict"></div>
+    </div>
+    <div class="results-actions">
+      <button class="btn btn-primary" id="retry-btn">Retry same tier</button>
+      <button class="btn btn-secondary" id="back-btn">Change tier</button>
+    </div>
+    <h2 class="review-title">Review</h2>
+    <div id="review"></div>
+  </div>
+
+</div>
+
+<script>
+window.QUIZ_META = { title: "Core architecture", code: "2.1", domain: "Domain 2" };
+
+window.QUIZ_QUESTIONS = [
+  // EASY
+  { q: "What is an Azure region?", o: ["A single datacentre", "A set of datacentres within a latency-defined perimeter, connected by a dedicated regional network", "A country where Azure operates", "A pricing zone"], a: 1, d: "easy", e: "An Azure region is a set of datacentres connected by a dedicated low-latency regional network, within a latency-defined perimeter." },
+  { q: "Approximately how many Azure regions exist globally?", o: ["Around 10", "Around 25", "60+", "500+"], a: 2, d: "easy", e: "Azure has 60+ regions worldwide — more than any other cloud provider." },
+  { q: "What is an Availability Zone?", o: ["A datacentre", "One or more datacentres within a region, with independent power, cooling, and networking", "A geographical continent", "A subscription boundary"], a: 1, d: "easy", e: "An AZ is one or more datacentres inside a region with independent power, cooling, and networking. AZ-enabled regions have a minimum of 3 zones." },
+  { q: "Zone-enabled Azure regions have a MINIMUM of how many availability zones?", o: ["1", "2", "3", "5"], a: 2, d: "easy", e: "Every zone-enabled region has a minimum of 3 physically separate availability zones." },
+  { q: "What is an Azure 'region pair'?", o: ["A region and its backup DC", "Two regions in the same geography that are paired for disaster-recovery replication", "A pair of availability zones", "Two subscriptions linked together"], a: 1, d: "easy", e: "Region pairs are two regions in the same geography (e.g. West Europe ↔ North Europe) used for cross-region DR and staggered updates." },
+  { q: "Region pairs are typically how far apart?", o: ["Adjacent to each other", "Within 100 km", "300+ miles apart", "Always in different continents"], a: 2, d: "easy", e: "Region pairs are typically 300+ miles apart to isolate them from a common disaster." },
+  { q: "Which of these is a sovereign Azure region?", o: ["West Europe", "East US", "Azure Government (US)", "UK South"], a: 2, d: "easy", e: "Azure Government (US) is a sovereign region — a physically isolated instance of Azure for US federal, state, and local government + contractors." },
+  { q: "Azure China is operated by:", o: ["Microsoft directly", "21Vianet", "Alibaba", "Baidu"], a: 1, d: "easy", e: "Azure China is operated by 21Vianet (not by Microsoft), physically isolated from global Azure." },
+  { q: "In Azure's resource hierarchy, what sits ABOVE subscriptions?", o: ["Resource groups", "Management groups", "Datacentres", "Regions"], a: 1, d: "easy", e: "Management groups sit above subscriptions for scaled governance across many subs." },
+  { q: "How many levels deep can management groups be nested (excluding the root)?", o: ["3", "5", "6", "Unlimited"], a: 2, d: "easy", e: "Up to 6 levels of management group nesting below the root are supported." },
+  { q: "What is a resource group?", o: ["A billing account", "A logical container for a set of related Azure resources", "A physical datacentre", "A subscription type"], a: 1, d: "easy", e: "A resource group is a logical container that holds related Azure resources for a common lifecycle." },
+  { q: "Every Azure resource must belong to exactly:", o: ["Zero resource groups", "One resource group", "Two resource groups (primary + backup)", "As many as needed"], a: 1, d: "easy", e: "Every resource lives in exactly one resource group at any time. It can be moved, with some limitations." },
+  { q: "What is ARM (Azure Resource Manager)?", o: ["A billing system", "The unified control plane through which all Azure requests are processed", "A monitoring tool", "A container orchestrator"], a: 1, d: "easy", e: "ARM is Azure's unified deployment and management layer. Every Portal/CLI/PowerShell/REST call goes through ARM." },
+  { q: "A subscription in Azure is:", o: ["A billing and access-management container for resource groups", "A physical datacentre", "A user identity", "A network"], a: 0, d: "easy", e: "A subscription is a billing + access-management container. It holds resource groups and has one associated billing account." },
+  { q: "When you delete a resource group in Azure:", o: ["Only the RG itself is deleted", "All resources inside the RG are also deleted", "Only some resources are deleted", "It cannot be deleted"], a: 1, d: "easy", e: "Deleting a resource group deletes ALL resources within it. RG = lifecycle boundary." },
+  { q: "In Azure, an individual VM lives in exactly:", o: ["One region and one resource group", "Multiple regions simultaneously", "Multiple resource groups", "A geography (but no specific region)"], a: 0, d: "easy", e: "A resource lives in exactly one region and one resource group." },
+  { q: "Which are Azure's sovereign / dedicated regions?", o: ["West US and East US", "Azure Government (US) and Azure China (21Vianet)", "UK South and UK West", "None — all regions are equal"], a: 1, d: "easy", e: "Azure Government (US) and Azure China (21Vianet) are the current sovereign instances of Azure." },
+  { q: "Some Azure services are 'global', meaning:", o: ["They live in every region simultaneously", "They don't have a specific region — examples include Microsoft Entra ID, Front Door, Traffic Manager, DNS", "They're only available in the US", "They're not real Azure services"], a: 1, d: "easy", e: "Global services (Entra ID, Front Door, Traffic Manager, DNS) don't have a region — they're provided by Azure's global infrastructure." },
+  { q: "A resource group has a region property. Can it contain resources from other regions?", o: ["No, all resources must match the RG's region", "Yes, the RG's region is just metadata; it can hold resources from any region", "Only if the RG is in West Europe", "Only in sovereign regions"], a: 1, d: "easy", e: "The RG's region is metadata (where the RG's info is stored). Resources within can be in any region." },
+  { q: "A tenant in Microsoft Entra ID has how many root management groups?", o: ["Zero", "Exactly one", "One per subscription", "Unlimited"], a: 1, d: "easy", e: "Every tenant has exactly one root management group at the top of the hierarchy." },
+
+  // MEDIUM
+  { q: "You need to protect a workload from a single-datacentre failure inside a region. Which Azure feature helps?", o: ["Availability Sets (fault + update domains inside one DC)", "Availability Zones (spread across separate DCs in a region)", "Region pairs", "Local Redundant Storage"], a: 1, d: "medium", e: "Availability Zones use separate physical datacentres within a region — protection against a full-DC outage." },
+  { q: "You need to protect a workload from a region-wide outage. Which Azure feature helps?", o: ["Availability Sets", "Availability Zones", "Region pairs / cross-region replication", "Fault domains"], a: 2, d: "medium", e: "Region-wide protection requires deploying to a paired region (with geo-redundant data / GRS)." },
+  { q: "Which is TRUE about region pairs?", o: ["They are in different countries", "They are always in the same continent, but 300+ miles apart, with staggered maintenance updates", "They are adjacent to each other", "They cannot be used for disaster recovery"], a: 1, d: "medium", e: "Region pairs are typically 300+ miles apart in the same geography, with Azure staggering their updates so both aren't updated at once." },
+  { q: "You must deploy Azure resources ONLY into approved regions. Which Azure feature enforces this?", o: ["Availability Set", "Azure Policy 'Allowed locations'", "Region pair", "Availability Zone"], a: 1, d: "medium", e: "Azure Policy with 'Allowed locations' effect enforces region restrictions on deployments." },
+  { q: "Which of these BEST describes a fault domain in an Availability Set?", o: ["A group of racks with independent power/network", "A geographic zone", "A subscription boundary", "A billing zone"], a: 0, d: "medium", e: "Fault domains represent racks (or logical failure groups). VMs in a set are distributed across FDs so a rack failure doesn't take all of them down." },
+  { q: "What are Update Domains in an Availability Set?", o: ["Zones of the world where updates roll out", "Groups of VMs that Azure reboots together during planned maintenance", "Subscription rollout groups", "Regions where firmware updates apply"], a: 1, d: "medium", e: "Update domains group VMs that will be updated together. Only one UD is updated at a time, preserving service." },
+  { q: "You need to apply an Azure Policy to ALL current and future subscriptions in your organisation. Where should you assign it?", o: ["At each resource group", "At the tenant root management group", "At each individual resource", "At each region"], a: 1, d: "medium", e: "Policies applied at the root management group cascade to every child MG, subscription, RG, and resource." },
+  { q: "You want to enforce different governance rules for Dev vs Prod subscriptions. Which structure helps?", o: ["Put both under the root MG only", "Use separate management groups: one for Dev, one for Prod, assign Policies at each", "Rely on RBAC only", "Create two tenants"], a: 1, d: "medium", e: "Separate MGs for Dev and Prod let you apply different policies + role assignments at each MG scope." },
+  { q: "Which best describes the CORRECT top-down hierarchy?", o: ["Subscriptions → Management Groups → Resource Groups → Resources", "Tenant → Management Groups → Subscriptions → Resource Groups → Resources", "Regions → Zones → Resources", "Resource Groups → Subscriptions → Resources"], a: 1, d: "medium", e: "The hierarchy is: Tenant → Root MG → MGs (up to 6 deep) → Subscriptions → Resource Groups → Resources." },
+  { q: "You need to give an outside contractor access to only one project's resources for a limited time. Best approach?", o: ["Move all their resources to a new subscription and give them owner", "Create a resource group for the project, grant them RBAC roles at RG scope only", "Give them tenant admin", "Add them at management group level"], a: 1, d: "medium", e: "RGs are natural scoping boundaries for project-based access. Assign minimum RBAC at the RG scope." },
+  { q: "Which is TRUE about Azure Resource Manager (ARM)?", o: ["It's a monitoring service", "Every deployment / management request goes through it, no matter the interface used", "It's the same as ARM templates", "It only handles VMs"], a: 1, d: "medium", e: "ARM is the control plane. Portal, CLI, PowerShell, REST — everything ultimately calls ARM's APIs." },
+  { q: "Which service is available in Azure Government but NOT in the standard commercial Azure?", o: ["It uses the same services as commercial Azure, with restrictions and compliance additions", "Front Door", "SQL Database", "Cosmos DB"], a: 0, d: "medium", e: "Azure Government offers most of the same services as commercial Azure but with additional compliance requirements and restricted personnel access." },
+  { q: "The SLA for a VM inside an Availability Set is:", o: ["99.9%", "99.95%", "99.99%", "99%"], a: 1, d: "medium", e: "Availability Sets deliver 99.95% by distributing VMs across fault and update domains inside a single datacentre." },
+  { q: "The SLA for a VM deployed across multiple Availability Zones is:", o: ["99.9%", "99.95%", "99.99%", "99%"], a: 2, d: "medium", e: "Availability Zones (across separate DCs in a region) deliver 99.99% — Azure's top single-region VM SLA." },
+  { q: "A single VM using Premium SSD in Azure receives what SLA?", o: ["99.9%", "99.95%", "99.99%", "No SLA for single VMs"], a: 0, d: "medium", e: "A single VM with Premium SSD (or Ultra Disk) gets 99.9%. Availability Set → 99.95%. Availability Zones → 99.99%." },
+  { q: "Which is TRUE about resource groups?", o: ["A resource can belong to multiple RGs simultaneously", "Deleting the RG deletes all resources in it", "RGs cannot be deleted", "RGs must be in the same region as all their resources"], a: 1, d: "medium", e: "Deleting an RG deletes everything in it. That's why locks are important on production RGs." },
+  { q: "A company has 50 subscriptions and wants to apply one identical Policy to all of them. Best approach?", o: ["Assign the policy to each subscription one by one", "Use a management group containing all 50 subs, and assign the policy at MG level (inherits down)", "Manually enforce with RBAC", "Not possible in Azure"], a: 1, d: "medium", e: "MGs let one Policy assignment govern many subscriptions via inheritance." },
+  { q: "Which is TRUE about Azure services that are 'global' (no region)?", o: ["They must be deployed to every region individually", "Examples include Microsoft Entra ID, Azure DNS, Front Door, Traffic Manager — deployed across the global fabric", "They only work in the US", "They cannot be used in production"], a: 1, d: "medium", e: "Global services live in Microsoft's global fabric — they're not tied to a specific region." },
+  { q: "You need to move a set of resources to a different subscription. Which is TRUE?", o: ["Not possible", "Possible via ARM 'move' operations, subject to service-specific limitations", "Requires deleting and redeploying every resource", "Only possible during a migration engagement with Microsoft"], a: 1, d: "medium", e: "ARM supports moving resources between RGs and between subscriptions — with some service-specific restrictions." },
+  { q: "Which describes an Azure geography correctly?", o: ["A single datacentre", "A discrete market with data-residency and compliance boundaries, often containing multiple regions", "A subscription boundary", "A billing zone"], a: 1, d: "medium", e: "A geography (e.g. United States, Europe) is a market boundary. Each geography contains one or more Azure regions." },
+
+  // HARD
+  { q: "Which is CORRECT about Availability Zones vs Availability Sets?", o: ["Both protect against DC-level failure", "Availability Sets protect against rack-level; AZs protect against DC-level", "AZs and Availability Sets are the same thing", "Only AZs are supported for Premium SSD"], a: 1, d: "hard", e: "Availability Sets: rack-level (in one DC). AZs: DC-level (across separate DCs in a region). Different scopes." },
+  { q: "Which is TRUE about the root management group in a tenant?", o: ["It can be deleted", "There can be multiple root MGs", "There is exactly one, and it cannot be deleted", "Only Enterprise Agreement customers have one"], a: 2, d: "hard", e: "Every tenant has one root MG. It cannot be deleted; you inherit governance from it downward." },
+  { q: "Which of the following can NOT be locked with an Azure resource lock?", o: ["A subscription", "A resource group", "An individual resource", "A management group"], a: 3, d: "hard", e: "Resource locks work at subscription, resource group, or individual resource scope — NOT at management group scope." },
+  { q: "You need very low latency between two Azure workloads. Which placement matters MOST?", o: ["Same region (and ideally same AZ if network latency-critical)", "Same subscription", "Same resource group", "Same tenant"], a: 0, d: "hard", e: "Latency is a physical/geographic property. Same region (or same AZ) is what matters. Subscription/RG are logical containers." },
+  { q: "Which is TRUE about sovereign Azure regions?", o: ["Sovereign regions are the same as normal regions but restricted", "Sovereign regions are separate instances of Azure with different portals, sign-in URLs, and (for China) a different operator", "There are no sovereign regions any more", "Sovereign regions are subscription tiers"], a: 1, d: "hard", e: "Sovereign regions like Azure Government and Azure China are entirely separate instances of Azure with their own portals and identity boundaries." },
+  { q: "Which is INCORRECT about Azure regions?", o: ["Some regions do not support Availability Zones", "Every region has at least 3 AZs", "Regions are grouped into geographies", "Some services are only available in certain regions"], a: 1, d: "hard", e: "Not every region is zone-enabled. Zone-enabled regions have a minimum of 3 AZs; other regions have zero." },
+  { q: "A resource has been moved from RG1 to RG2. Which of these does NOT change?", o: ["The resource's ID (its ARM path)", "Its resource group scope", "Its region", "The RBAC assignments inherited from the new RG"], a: 2, d: "hard", e: "Moving a resource between RGs changes its ID (which includes the RG name) and its inherited RBAC — but not the region it lives in." },
+  { q: "Which is TRUE about the relationship between subscriptions and Entra ID tenants?", o: ["A subscription can span multiple tenants", "A subscription is associated with exactly one tenant at a time", "Every tenant has exactly one subscription", "Subscriptions have no tenant"], a: 1, d: "hard", e: "A subscription is associated with one Entra ID tenant. The tenant provides the identities and RBAC for the subscription." },
+  { q: "Which best describes the difference between region and region pair for DR?", o: ["A region pair is one region; region is many", "Region = where you deploy; region pair = the automatic partner region used by geo-redundant services and for staggered maintenance", "There's no difference", "Region pairs are used for HA, regions for DR"], a: 1, d: "hard", e: "A region is where you deploy. Its region pair is the partner region used by GRS storage replication, staggered updates, and recovery ordering." },
+  { q: "Which is TRUE about deploying a workload across multiple AZs vs a region pair?", o: ["AZs protect against a full-region outage; region pairs don't", "Multi-AZ protects against DC-level failure inside a region; region-pair deployment protects against a full-region outage", "AZs and region pairs solve the same problem", "You must choose one or the other, never both"], a: 1, d: "hard", e: "AZs → DC-level HA. Region pairs → cross-region DR. Robust designs use both." },
+  { q: "The physical hierarchy in Azure (top down) is:", o: ["Region → Geography → AZ → Datacentre", "Geography → Region → Availability Zone → Datacentre", "Datacentre → Region → Geography → AZ", "Zone → Region → Geography"], a: 1, d: "hard", e: "Top-down physical hierarchy: Geography → Region → Availability Zone → Datacentre." },
+  { q: "Which of these is a SHARED responsibility even when using an Availability Set?", o: ["The customer must design their app to handle instance failure and load-balance across the set", "Azure guarantees zero downtime with an AS", "Azure handles all application-level state", "The customer must manually place VMs across fault domains"], a: 0, d: "hard", e: "Availability Sets guarantee only that VMs are spread across FDs/UDs. The customer must architect the app to survive an instance restart (statelessness, LB, health checks)." }
+];
+</script>
+<script src="quiz.js"></script>
+</body>
+</html>

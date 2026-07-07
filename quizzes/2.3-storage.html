@@ -1,0 +1,124 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>2.3 Storage · AZ-900 quiz</title>
+  <link rel="stylesheet" href="quiz.css">
+</head>
+<body>
+<div class="container">
+
+  <header class="q-header">
+    <div class="q-crumb"><a href="index.html">All quizzes</a><span class="sep">Domain 2 · Architecture and services</span></div>
+    <h1 class="q-title">Storage</h1>
+    <p class="q-subtitle">Storage services, redundancy, access tiers, migration tools.</p>
+  </header>
+
+  <div id="setup">
+    <p class="setup-intro">Choose a difficulty tier. Easy tests recall, Medium tests scenarios, Hard tests distractor traps.</p>
+    <div class="setup-diff">
+      <button class="start-btn diff-easy" data-difficulty="easy"><span class="btn-label">Tier · Recall</span><span class="btn-title">Easy</span><span class="btn-count" id="count-easy">— questions</span></button>
+      <button class="start-btn diff-medium" data-difficulty="medium"><span class="btn-label">Tier · Scenarios</span><span class="btn-title">Medium</span><span class="btn-count" id="count-medium">— questions</span></button>
+      <button class="start-btn diff-hard" data-difficulty="hard"><span class="btn-label">Tier · Gotchas</span><span class="btn-title">Hard</span><span class="btn-count" id="count-hard">— questions</span></button>
+      <button class="start-btn diff-all" data-difficulty="all"><span class="btn-label">All tiers</span><span class="btn-title">Full quiz</span><span class="btn-count" id="count-all">— questions</span></button>
+    </div>
+  </div>
+
+  <div id="quiz" style="display: none;">
+    <div class="q-progress"><span>Q<span id="q-num">1</span> / <span id="q-total">0</span></span><div class="progress-track"><div class="progress-fill" id="progress-fill"></div></div></div>
+    <div class="q-card">
+      <div class="q-meta"><span class="chip diff-easy" id="q-difficulty">easy</span></div>
+      <div class="q-text" id="q-text"></div>
+      <div class="q-options" id="q-options"></div>
+      <div class="feedback" id="feedback"><div class="feedback-verdict" id="feedback-verdict"></div><div class="feedback-explanation" id="feedback-explanation"></div></div>
+      <div class="q-controls"><span></span><button class="btn btn-primary" id="next-btn" style="display: none;">Next question</button></div>
+    </div>
+  </div>
+
+  <div id="results" style="display: none;">
+    <div class="results-hero">
+      <div class="score-pct" id="score-pct">0%</div>
+      <div class="score-fraction"><span id="score-num">0</span> of <span id="score-total">0</span> correct</div>
+      <div class="verdict" id="score-verdict"></div>
+    </div>
+    <div class="results-actions">
+      <button class="btn btn-primary" id="retry-btn">Retry same tier</button>
+      <button class="btn btn-secondary" id="back-btn">Change tier</button>
+    </div>
+    <h2 class="review-title">Review</h2>
+    <div id="review"></div>
+  </div>
+
+</div>
+
+<script>
+window.QUIZ_META = { title: "Storage", code: "2.3", domain: "Domain 2" };
+
+window.QUIZ_QUESTIONS = [
+  // EASY
+  { q: "Which is NOT a service inside an Azure Storage account?", o: ["Blob", "File", "Table", "Cosmos DB"], a: 3, d: "easy", e: "Storage account services: Blob, File, Queue, Table, Disk. Cosmos DB is a separate database service." },
+  { q: "Which storage service stores unstructured objects like images, video, and backups?", o: ["Table", "Blob", "Queue", "Disk"], a: 1, d: "easy", e: "Blob is for unstructured objects (documents, images, videos, logs, backups)." },
+  { q: "Which storage service provides SMB / NFS file shares?", o: ["Blob", "File", "Queue", "Disk"], a: 1, d: "easy", e: "Azure Files provides fully managed SMB and NFS file shares." },
+  { q: "Which storage service is used for message-based communication between application components?", o: ["Blob", "Queue", "File", "Table"], a: 1, d: "easy", e: "Queue Storage holds messages (up to 64 KB each) — decouples app components." },
+  { q: "Which storage service is a NoSQL key-value store?", o: ["Blob", "File", "Table", "Disk"], a: 2, d: "easy", e: "Table Storage is Azure's cheap NoSQL key-value store (largely superseded by Cosmos DB Table API for new workloads)." },
+  { q: "Managed Disks are which type of Azure Storage?", o: ["Blob", "Disk (page blobs underneath, used for VM disks)", "File shares", "Queue"], a: 1, d: "easy", e: "Managed Disks are used for VM OS and data disks. Under the hood they're page blobs." },
+  { q: "What redundancy option keeps three copies of data in a single datacentre?", o: ["LRS", "ZRS", "GRS", "GZRS"], a: 0, d: "easy", e: "LRS (Locally Redundant Storage) = 3 copies, one datacentre. Cheapest option, protects only against disk/rack failure." },
+  { q: "Which redundancy option keeps three copies across three availability zones in one region?", o: ["LRS", "ZRS", "GRS", "GZRS"], a: 1, d: "easy", e: "ZRS (Zone Redundant Storage) = 3 copies across 3 AZs. Protects against a datacentre outage inside the region." },
+  { q: "Which redundancy option keeps six copies across two regions (LRS in each)?", o: ["LRS", "ZRS", "GRS", "GZRS"], a: 2, d: "easy", e: "GRS = LRS in the primary region + LRS in the paired region = 6 copies total across 2 regions." },
+  { q: "Which redundancy option combines ZRS in the primary region with LRS in the paired region?", o: ["LRS", "ZRS", "GRS", "GZRS"], a: 3, d: "easy", e: "GZRS = ZRS (3 zones) in primary + LRS (3 copies) in paired region. Highest durability option." },
+  { q: "Which redundancy option is BEST if you also need read access to the secondary region?", o: ["GRS", "GZRS", "RA-GRS or RA-GZRS", "LRS"], a: 2, d: "easy", e: "The 'RA-' prefix (Read-Access) gives you read access to the secondary region without initiating failover." },
+  { q: "How many copies of data does LRS maintain?", o: ["1", "3 (in a single DC)", "6", "9"], a: 1, d: "easy", e: "LRS = 3 synchronous copies within a single datacentre." },
+  { q: "What is the Blob access tier with the CHEAPEST storage cost but highest retrieval latency?", o: ["Hot", "Cool", "Cold", "Archive"], a: 3, d: "easy", e: "Archive is cheapest to store but requires rehydration (up to 15 hours) to read." },
+  { q: "What is the Blob access tier with the LOWEST latency and HIGHEST storage cost?", o: ["Hot", "Cool", "Cold", "Archive"], a: 0, d: "easy", e: "Hot tier has the highest storage cost but lowest access cost and latency — best for frequently accessed data." },
+  { q: "Archive tier rehydration can take up to:", o: ["30 seconds", "5 minutes", "1 hour", "15 hours"], a: 3, d: "easy", e: "Standard-priority rehydration from Archive can take up to 15 hours." },
+  { q: "The Cool access tier has a minimum retention of:", o: ["7 days", "30 days", "90 days", "180 days"], a: 1, d: "easy", e: "Cool tier requires a minimum retention of 30 days; early deletion incurs a fee." },
+  { q: "The Cold access tier has a minimum retention of:", o: ["30 days", "60 days", "90 days", "180 days"], a: 2, d: "easy", e: "Cold tier has a 90-day minimum retention." },
+  { q: "The Archive access tier has a minimum retention of:", o: ["30 days", "90 days", "180 days", "365 days"], a: 2, d: "easy", e: "Archive tier has a 180-day minimum retention (early deletion incurs a fee)." },
+  { q: "By default, data at rest in Azure Storage is encrypted with:", o: ["Not encrypted", "AES-256 using Microsoft-managed keys", "3DES", "Optional customer setup"], a: 1, d: "easy", e: "Azure Storage encrypts all data at rest by default using AES-256 with Microsoft-managed keys. Customer-managed keys (CMK) are optional." },
+  { q: "Which tool is a command-line utility for bulk-copying data to and from Azure Storage?", o: ["AzCopy", "Azure Migrate", "Data Box", "Azure Backup"], a: 0, d: "easy", e: "AzCopy is the CLI tool for high-throughput copy of blobs and files." },
+  { q: "Which tool provides a cross-platform GUI for managing Azure Storage accounts?", o: ["AzCopy", "Azure Storage Explorer", "Azure File Sync", "AzureRM"], a: 1, d: "easy", e: "Azure Storage Explorer is a free desktop GUI for browsing and managing blob/file/queue/table data." },
+  { q: "Which service extends on-prem Windows Server file shares to Azure with tiering?", o: ["Azure Migrate", "AzCopy", "Azure File Sync", "Azure Data Box"], a: 2, d: "easy", e: "Azure File Sync syncs on-prem Windows Server shares with Azure Files, with cloud tiering for cold data." },
+  { q: "Which service is used for large offline bulk data transfer via a physical device?", o: ["AzCopy", "Azure Data Box", "Azure Migrate", "Azure Blob"], a: 1, d: "easy", e: "Azure Data Box is a family of physical devices (Disk, Box, Heavy) shipped for offline bulk transfer." },
+  { q: "Storage account names must be:", o: ["Unique per subscription", "Unique per resource group", "Globally unique across all of Azure, 3–24 lowercase alphanumeric", "Unique per region"], a: 2, d: "easy", e: "Storage account names are globally unique across all of Azure, and must be 3–24 lowercase alphanumeric characters." },
+
+  // MEDIUM
+  { q: "You need data protection against a full-region outage AND read access to the secondary region. Choose:", o: ["LRS", "ZRS", "GRS", "RA-GRS or RA-GZRS"], a: 3, d: "medium", e: "The RA- variants give read access to the secondary without failing over — perfect for reading from the other region." },
+  { q: "You need protection against a single-datacentre outage inside a region, but keeping all copies in one region. Best redundancy?", o: ["LRS", "ZRS", "GRS", "GZRS"], a: 1, d: "medium", e: "ZRS spreads copies across availability zones in one region — protects against DC-level failure." },
+  { q: "Log files are written frequently but read weekly for the first two months, then rarely. Best tier progression?", o: ["Archive → Cold → Cool → Hot", "Hot → Cool (30d min) → Cold (90d min) → Archive (180d min)", "Hot → Archive only", "Always Hot"], a: 1, d: "medium", e: "Move data through tiers as access frequency drops. Lifecycle management can automate this." },
+  { q: "You need to ship 100 TB of on-prem data to Azure over a slow WAN. Fastest option?", o: ["AzCopy over the WAN", "Azure Data Box (physical device)", "Azure Storage Explorer", "Azure File Sync"], a: 1, d: "medium", e: "Data Box (100 TB rugged appliance) is designed for exactly this scenario — WAN would take weeks." },
+  { q: "You want to discover, assess, and migrate on-prem servers to Azure. Best service?", o: ["Azure Migrate", "AzCopy", "Data Box", "Azure File Sync"], a: 0, d: "medium", e: "Azure Migrate handles discovery, dependency mapping, sizing, and migration for servers, DBs, web apps, and desktops." },
+  { q: "You have a Windows file server on-prem and want its shares synced to Azure Files with cloud tiering. Best service?", o: ["AzCopy", "Data Box", "Azure File Sync", "Storage Explorer"], a: 2, d: "medium", e: "Azure File Sync is designed for hybrid Windows file shares — local cache + Azure Files with tiering." },
+  { q: "Which access tier is BEST for data accessed rarely, but must be readable within seconds?", o: ["Hot", "Cool", "Cold", "Archive"], a: 2, d: "medium", e: "Cold tier gives millisecond retrieval at low cost, for data accessed rarely but must not require rehydration." },
+  { q: "Which access tier is BEST for compliance archival where you accept up to 15h retrieval time?", o: ["Hot", "Cool", "Cold", "Archive"], a: 3, d: "medium", e: "Archive is designed for long-term retention. Cheapest storage, highest access cost/latency (rehydration required)." },
+  { q: "A storage account in ZRS suddenly loses one availability zone. Data is:", o: ["Lost", "Still available from the other zones", "Only readable, not writable", "Requires manual failover"], a: 1, d: "medium", e: "ZRS keeps 3 synchronous copies across 3 zones. Losing one zone still leaves 2 usable copies — data remains available." },
+  { q: "You want time-limited, scoped access to a specific blob without sharing storage account keys. Use:", o: ["Storage Account Key", "Shared Access Signature (SAS)", "Entra ID login", "Azure Firewall"], a: 1, d: "medium", e: "SAS tokens are time-limited and scoped — the recommended way to grant temporary, granular access." },
+  { q: "Which is the RECOMMENDED way to grant a user access to a storage account, security-wise?", o: ["Give them the account key", "Assign RBAC via Entra ID identity", "Email them a SAS token forever", "Set the account to public"], a: 1, d: "medium", e: "Entra ID + RBAC is preferred for human access. SAS is for scoped, time-limited scenarios. Account keys are like passwords — avoid." },
+  { q: "You need to restrict access to a storage account to only your VNet, not the public internet. Use:", o: ["A resource lock", "A private endpoint or service endpoint", "SAS token", "Public IP only"], a: 1, d: "medium", e: "Private endpoints give a private IP inside your VNet for the storage account, and firewall rules can restrict public access." },
+  { q: "The number of copies of data maintained by GRS is:", o: ["3", "6", "9", "12"], a: 1, d: "medium", e: "GRS keeps LRS (3 copies) in the primary + LRS (3 copies) in the paired region = 6 total." },
+  { q: "You have a 100 TB blob dataset that must remain accessible with millisecond latency to a globally distributed user base. Best combination?", o: ["Archive tier + Data Box", "Hot tier + CDN or Front Door", "Cold + AzCopy", "LRS + Archive"], a: 1, d: "medium", e: "Hot tier for fast access + CDN/Front Door for global edge caching serves the described access pattern." },
+  { q: "The 'RA-' prefix in RA-GRS or RA-GZRS means:", o: ["Redundant Archive", "Read-Access to the secondary region", "Regional Availability", "Rapid Access"], a: 1, d: "medium", e: "RA = Read-Access. Enables the secondary region's copies to be read directly without needing failover." },
+  { q: "You have a scenario where you must ensure secure transfer (HTTPS) for a storage account. What enforces this?", o: ["Set 'Secure transfer required' on the account, or apply Azure Policy", "Delete non-HTTPS clients manually", "Change the SKU", "Use only Archive tier"], a: 0, d: "medium", e: "The storage account has a 'Secure transfer required' setting, and Azure Policy can enforce this globally." },
+  { q: "Which encryption is applied by default to Azure Storage at rest?", o: ["No encryption", "AES-256 with Microsoft-managed keys", "Only if you enable it", "Only for Premium tier"], a: 1, d: "medium", e: "All Azure Storage is encrypted at rest by default (AES-256, Microsoft-managed keys). Customer-managed keys (Key Vault) are optional." },
+  { q: "Which is TRUE about the Premium performance tier of Azure Storage?", o: ["It uses HDDs", "It uses SSDs, is available for specific service types (block blob, file, page blob, disk)", "It's cheaper than Standard", "It's only for backups"], a: 1, d: "medium", e: "Premium is SSD-backed with lower latency, available for specific service types like Premium Block Blob and Premium File Shares." },
+  { q: "Which is TRUE about Archive tier?", o: ["It's immediately readable at any time", "It requires rehydration (up to 15 hours) before data can be read", "It's the same as Cold tier", "It's free to store data"], a: 1, d: "medium", e: "Archive is cheapest storage but not immediately readable. Rehydration (to Hot or Cool) takes up to 15 hours (standard priority)." },
+
+  // HARD
+  { q: "You must move 500 TB of archival data from on-prem to Azure, one-time. Fastest cost-effective path?", o: ["AzCopy over 100 Mbps link", "Azure Data Box Heavy (~1 PB device shipped)", "Storage Explorer", "Azure File Sync"], a: 1, d: "hard", e: "Data Box Heavy is the largest offline device (~1 PB), designed for this multi-hundred-TB scenario." },
+  { q: "Which is TRUE about failover behaviour with GRS?", o: ["Failover is instantaneous and automatic", "Failover to secondary region can be customer-initiated or Microsoft-initiated in a broad regional event; the RPO is typically < 15 minutes", "Failover requires deleting the primary account", "GRS does not support failover"], a: 1, d: "hard", e: "GRS uses asynchronous replication. Customer-initiated failover is available; RPO is typically minutes, not zero." },
+  { q: "The correct order from FEWEST to MOST copies of data:", o: ["ZRS → LRS → GRS → GZRS", "LRS → ZRS → GRS → GZRS", "GRS → GZRS → LRS → ZRS", "All keep 3 copies"], a: 1, d: "hard", e: "LRS: 3 (1 DC) → ZRS: 3 (3 zones) → GRS: 6 (2 regions) → GZRS: 6 (ZRS + geo secondary)." },
+  { q: "Which is TRUE about early deletion fees on cool tiers?", o: ["There are no fees ever", "Data moved out of Cool, Cold, or Archive before the minimum retention period incurs an early-deletion fee", "Only Hot tier has fees", "You cannot delete data in these tiers"], a: 1, d: "hard", e: "Cool: 30d min. Cold: 90d min. Archive: 180d min. Moving data out or deleting before that incurs early-deletion charges." },
+  { q: "A storage account has been set to ZRS. Later, you want it to be GRS. Which is TRUE?", o: ["You can freely change between all redundancy options at any time", "Some redundancy changes are supported live; others require creating a new account and migrating data", "Redundancy cannot be changed after creation", "Only Microsoft can change redundancy"], a: 1, d: "hard", e: "Some conversions (like LRS ↔ ZRS in some regions) are live. Others (e.g. changes involving geo-redundancy) may require account recreation and data migration." },
+  { q: "Which is TRUE about accessing the secondary region in a GRS account (without 'RA-')?", o: ["The secondary is always readable", "The secondary is NOT readable until failover is initiated", "You cannot access the secondary at all", "The secondary is deleted"], a: 1, d: "hard", e: "Without RA-, the secondary is a passive replica — not readable until you initiate failover. That's why RA-GRS / RA-GZRS exist." },
+  { q: "Which of these is a valid Blob type?", o: ["Block, Append, Page", "Small, Medium, Large", "Cold, Hot, Warm", "Managed, Unmanaged"], a: 0, d: "hard", e: "Blob types: Block (default), Append (log-optimised), Page (VHDs / managed disks). Not to be confused with tiers." },
+  { q: "Which best describes the STANDARD vs PREMIUM performance tiers?", o: ["Standard uses HDDs; Premium uses SSDs, with lower latency and higher IOPS for specific service types", "Standard is for text; Premium is for images", "Premium is always required for Blob", "There is no difference"], a: 0, d: "hard", e: "Standard = HDD-backed, cheaper. Premium = SSD-backed, more expensive, lower latency, only supported for certain service types." },
+  { q: "Which is TRUE about SAS (Shared Access Signature) tokens?", o: ["They provide unlimited access forever", "They are time-limited, scoped tokens that can grant read/write/delete access to specific resources", "They can't be revoked", "They only work for VMs"], a: 1, d: "hard", e: "SAS tokens are scoped (which resource, which operations) and time-limited. They can be revoked by rotating account keys or user delegation keys." },
+  { q: "You need a globally unique namespace for a storage account. Which is TRUE?", o: ["Names can conflict within a region", "Names are globally unique across all Azure — same name cannot exist twice anywhere", "Names are only unique per subscription", "Names must be uppercase"], a: 1, d: "hard", e: "Storage account names must be globally unique — 3–24 lowercase alphanumeric characters. The endpoint is: <name>.blob.core.windows.net." },
+  { q: "Which is TRUE about High-priority rehydration from Archive?", o: ["It takes 15 hours", "It's faster than Standard priority but costs more (typically < 1 hour for small blobs)", "It's free", "There's no such thing as high priority"], a: 1, d: "hard", e: "You can request High-priority rehydration for faster retrieval at a higher cost — useful for urgent access to archived data." },
+  { q: "You need to encrypt storage with your own keys and revoke Microsoft's ability to access them. Use:", o: ["Standard SAS", "Customer-managed keys (CMK) with Azure Key Vault", "Cold tier only", "Public IP filter"], a: 1, d: "hard", e: "CMK stored in Key Vault (with soft-delete and purge protection) gives customer control of the key. Revoking key access effectively locks Microsoft out." },
+  { q: "Which is TRUE about Azure Data Box vs Azure Data Box Gateway?", o: ["They are the same", "Data Box = one-time offline bulk transfer via physical device; Data Box Gateway = continuous online data movement to Azure", "Both are physical devices", "Only Data Box Gateway is real"], a: 1, d: "hard", e: "Data Box = one-time bulk shipment. Data Box Gateway (and Data Box Edge) = ongoing hybrid data movement." }
+];
+</script>
+<script src="quiz.js"></script>
+</body>
+</html>

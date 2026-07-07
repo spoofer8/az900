@@ -1,0 +1,1946 @@
+<title>AZ-900 in 14 Days · A Roadmap to 100%</title>
+
+<style>
+  :root {
+    --ground: #F7F6F1;
+    --ground-2: #EFEEE7;
+    --panel: #FFFFFF;
+    --ink: #14161C;
+    --ink-2: #2E3340;
+    --muted: #6C7280;
+    --muted-2: #8A8F98;
+    --rule: #E2E1D8;
+    --rule-strong: #C7C6BC;
+    --accent: #164FBF;
+    --accent-deep: #0B2A6B;
+    --accent-tint: #E7EEFB;
+    --success: #0F6E4A;
+    --success-tint: #E4F0E9;
+    --alert: #9A3320;
+    --alert-tint: #F5E8E4;
+
+    --serif: Georgia, 'Iowan Old Style', 'Times New Roman', serif;
+    --sans: -apple-system, BlinkMacSystemFont, 'Segoe UI', system-ui, 'Helvetica Neue', Arial, sans-serif;
+    --mono: ui-monospace, 'SF Mono', Menlo, Consolas, 'Courier New', monospace;
+
+    --measure: 68ch;
+    --page-max: 1180px;
+  }
+
+  * { box-sizing: border-box; }
+
+  html, body {
+    background: var(--ground);
+    color: var(--ink);
+    font-family: var(--sans);
+    font-size: 15.5px;
+    line-height: 1.55;
+    -webkit-font-smoothing: antialiased;
+    text-rendering: optimizeLegibility;
+  }
+
+  body {
+    margin: 0;
+    padding: 0;
+  }
+
+  main {
+    max-width: var(--page-max);
+    margin: 0 auto;
+    padding: 56px 40px 96px;
+  }
+
+  @media (max-width: 720px) {
+    main { padding: 32px 20px 64px; }
+    html, body { font-size: 15px; }
+  }
+
+  a {
+    color: var(--accent);
+    text-decoration: none;
+    border-bottom: 1px solid rgba(22, 79, 191, 0.25);
+    transition: border-color 120ms ease, color 120ms ease;
+  }
+  a:hover { color: var(--accent-deep); border-bottom-color: var(--accent-deep); }
+  a:focus-visible {
+    outline: 2px solid var(--accent);
+    outline-offset: 2px;
+    border-bottom-color: transparent;
+  }
+
+  h1, h2, h3, h4 { margin: 0; text-wrap: balance; color: var(--ink); }
+  p { margin: 0; }
+
+  .eyebrow {
+    font-family: var(--mono);
+    font-size: 11.5px;
+    letter-spacing: 0.14em;
+    text-transform: uppercase;
+    color: var(--muted);
+  }
+
+  .rule {
+    height: 1px;
+    background: var(--rule);
+    border: 0;
+    margin: 0;
+  }
+
+  /* ---------------- Masthead ---------------- */
+  .masthead {
+    display: grid;
+    grid-template-columns: 1fr;
+    gap: 28px;
+    padding-bottom: 44px;
+    border-bottom: 1px solid var(--rule);
+    margin-bottom: 56px;
+  }
+
+  .mast-top {
+    display: flex;
+    justify-content: space-between;
+    align-items: baseline;
+    gap: 24px;
+    flex-wrap: wrap;
+  }
+
+  .mast-brand {
+    font-family: var(--mono);
+    font-size: 11.5px;
+    letter-spacing: 0.14em;
+    text-transform: uppercase;
+    color: var(--muted);
+  }
+  .mast-brand strong {
+    color: var(--ink);
+    font-weight: 600;
+  }
+  .mast-date {
+    font-family: var(--mono);
+    font-size: 11.5px;
+    letter-spacing: 0.12em;
+    text-transform: uppercase;
+    color: var(--muted);
+  }
+
+  h1.title {
+    font-family: var(--serif);
+    font-weight: 400;
+    font-size: clamp(38px, 6vw, 68px);
+    line-height: 1.02;
+    letter-spacing: -0.015em;
+    color: var(--ink);
+  }
+  h1.title em {
+    font-style: italic;
+    color: var(--accent-deep);
+  }
+  h1.title .num {
+    font-family: var(--mono);
+    font-style: normal;
+    font-weight: 500;
+    font-size: 0.72em;
+    color: var(--accent);
+    letter-spacing: -0.02em;
+  }
+
+  .lede {
+    font-family: var(--serif);
+    font-size: clamp(17px, 1.6vw, 20px);
+    line-height: 1.5;
+    color: var(--ink-2);
+    max-width: 62ch;
+  }
+
+  /* Exam meta strip */
+  .exam-meta {
+    display: grid;
+    grid-template-columns: repeat(6, minmax(0, 1fr));
+    gap: 0;
+    border-top: 1px solid var(--rule);
+    border-bottom: 1px solid var(--rule);
+    background: var(--panel);
+  }
+  .exam-meta > div {
+    padding: 18px 20px;
+    border-right: 1px solid var(--rule);
+    display: flex;
+    flex-direction: column;
+    gap: 6px;
+  }
+  .exam-meta > div:last-child { border-right: 0; }
+  .exam-meta dt {
+    font-family: var(--mono);
+    font-size: 10.5px;
+    letter-spacing: 0.14em;
+    text-transform: uppercase;
+    color: var(--muted);
+  }
+  .exam-meta dd {
+    margin: 0;
+    font-family: var(--mono);
+    font-size: 18px;
+    font-weight: 500;
+    color: var(--ink);
+    font-variant-numeric: tabular-nums;
+  }
+  @media (max-width: 900px) {
+    .exam-meta { grid-template-columns: repeat(3, 1fr); }
+    .exam-meta > div:nth-child(3) { border-right: 0; }
+    .exam-meta > div:nth-child(-n+3) { border-bottom: 1px solid var(--rule); }
+  }
+  @media (max-width: 480px) {
+    .exam-meta { grid-template-columns: repeat(2, 1fr); }
+    .exam-meta > div { border-right: 1px solid var(--rule) !important; border-bottom: 1px solid var(--rule); }
+    .exam-meta > div:nth-child(2n) { border-right: 0 !important; }
+  }
+
+  /* ---------------- Section chrome ---------------- */
+  section {
+    margin: 72px 0;
+    scroll-margin-top: 24px;
+  }
+  section.tight { margin: 48px 0; }
+
+  .section-head {
+    display: grid;
+    grid-template-columns: 120px 1fr;
+    gap: 32px;
+    align-items: baseline;
+    margin-bottom: 32px;
+    padding-bottom: 20px;
+    border-bottom: 1px solid var(--rule);
+  }
+  @media (max-width: 720px) {
+    .section-head { grid-template-columns: 1fr; gap: 8px; }
+  }
+
+  .section-num {
+    font-family: var(--mono);
+    font-size: 12px;
+    letter-spacing: 0.16em;
+    text-transform: uppercase;
+    color: var(--muted);
+    padding-top: 8px;
+  }
+
+  h2.section-title {
+    font-family: var(--serif);
+    font-weight: 400;
+    font-size: clamp(28px, 3.4vw, 40px);
+    line-height: 1.1;
+    letter-spacing: -0.01em;
+    color: var(--ink);
+  }
+  h2.section-title em {
+    font-style: italic;
+    color: var(--accent-deep);
+  }
+
+  .section-lede {
+    grid-column: 2 / -1;
+    font-size: 16px;
+    color: var(--ink-2);
+    max-width: 62ch;
+    margin-top: 8px;
+  }
+  @media (max-width: 720px) { .section-lede { grid-column: 1; } }
+
+  /* ---------------- Strategy phase bar ---------------- */
+  .phase-bar {
+    display: grid;
+    grid-template-columns: repeat(4, 1fr);
+    background: var(--panel);
+    border: 1px solid var(--rule);
+  }
+  .phase {
+    padding: 22px 22px 26px;
+    border-right: 1px solid var(--rule);
+    position: relative;
+    display: flex;
+    flex-direction: column;
+    gap: 8px;
+  }
+  .phase:last-child { border-right: 0; }
+  .phase-rail {
+    position: absolute; top: 0; left: 0; right: 0; height: 3px;
+    background: var(--accent);
+  }
+  .phase:nth-child(1) .phase-rail { background: #C08A2E; }
+  .phase:nth-child(2) .phase-rail { background: var(--accent); }
+  .phase:nth-child(3) .phase-rail { background: #206C68; }
+  .phase:nth-child(4) .phase-rail { background: var(--success); }
+
+  .phase-days {
+    font-family: var(--mono);
+    font-size: 11.5px;
+    letter-spacing: 0.14em;
+    text-transform: uppercase;
+    color: var(--muted);
+    font-variant-numeric: tabular-nums;
+  }
+  .phase-name {
+    font-family: var(--serif);
+    font-size: 22px;
+    color: var(--ink);
+    line-height: 1.15;
+  }
+  .phase-desc {
+    font-size: 13.5px;
+    color: var(--ink-2);
+    line-height: 1.45;
+  }
+  .phase-weight {
+    font-family: var(--mono);
+    font-size: 11px;
+    letter-spacing: 0.1em;
+    text-transform: uppercase;
+    color: var(--muted-2);
+    margin-top: auto;
+    padding-top: 6px;
+  }
+  @media (max-width: 900px) {
+    .phase-bar { grid-template-columns: repeat(2, 1fr); }
+    .phase:nth-child(2) { border-right: 0; }
+    .phase:nth-child(-n+2) { border-bottom: 1px solid var(--rule); }
+  }
+  @media (max-width: 520px) {
+    .phase-bar { grid-template-columns: 1fr; }
+    .phase { border-right: 0; border-bottom: 1px solid var(--rule); }
+    .phase:last-child { border-bottom: 0; }
+  }
+
+  /* ---------------- Domains ---------------- */
+  .domains {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 20px;
+  }
+  @media (max-width: 900px) { .domains { grid-template-columns: 1fr; } }
+
+  .domain-card {
+    background: var(--panel);
+    border: 1px solid var(--rule);
+    padding: 24px 24px 28px;
+    display: flex;
+    flex-direction: column;
+    gap: 14px;
+  }
+  .domain-head {
+    display: flex;
+    justify-content: space-between;
+    align-items: baseline;
+    gap: 12px;
+    padding-bottom: 12px;
+    border-bottom: 1px solid var(--rule);
+  }
+  .domain-num {
+    font-family: var(--mono);
+    font-size: 11.5px;
+    letter-spacing: 0.14em;
+    text-transform: uppercase;
+    color: var(--muted);
+  }
+  .domain-weight {
+    font-family: var(--mono);
+    font-size: 22px;
+    font-weight: 500;
+    color: var(--accent-deep);
+    font-variant-numeric: tabular-nums;
+    letter-spacing: -0.02em;
+  }
+  .domain-title {
+    font-family: var(--serif);
+    font-size: 22px;
+    line-height: 1.2;
+    color: var(--ink);
+  }
+  .domain-list {
+    list-style: none;
+    padding: 0;
+    margin: 0;
+    display: flex;
+    flex-direction: column;
+    gap: 6px;
+  }
+  .domain-list li {
+    font-size: 14px;
+    color: var(--ink-2);
+    padding-left: 14px;
+    position: relative;
+    line-height: 1.45;
+  }
+  .domain-list li::before {
+    content: "";
+    position: absolute;
+    left: 0;
+    top: 0.7em;
+    width: 6px;
+    height: 1px;
+    background: var(--muted-2);
+  }
+
+  /* ---------------- Day cards ---------------- */
+  .days-grid {
+    display: flex;
+    flex-direction: column;
+    gap: 0;
+    border-top: 1px solid var(--rule);
+  }
+
+  .day {
+    display: grid;
+    grid-template-columns: 140px 1fr;
+    gap: 32px;
+    padding: 36px 0 40px;
+    border-bottom: 1px solid var(--rule);
+    position: relative;
+  }
+  @media (max-width: 720px) {
+    .day { grid-template-columns: 1fr; gap: 20px; padding: 28px 0 32px; }
+  }
+
+  .day-rail {
+    position: relative;
+    padding-left: 12px;
+  }
+  .day-rail::before {
+    content: "";
+    position: absolute;
+    left: 0; top: 4px; bottom: 4px;
+    width: 3px;
+    background: var(--accent);
+  }
+  .day.phase-1 .day-rail::before { background: #C08A2E; }
+  .day.phase-2 .day-rail::before { background: var(--accent); }
+  .day.phase-3 .day-rail::before { background: #206C68; }
+  .day.phase-4 .day-rail::before { background: var(--success); }
+
+  .day-num {
+    font-family: var(--mono);
+    font-weight: 500;
+    font-size: 44px;
+    line-height: 1;
+    color: var(--ink);
+    letter-spacing: -0.03em;
+    font-variant-numeric: tabular-nums;
+  }
+  .day-slug {
+    font-family: var(--mono);
+    font-size: 10.5px;
+    letter-spacing: 0.16em;
+    text-transform: uppercase;
+    color: var(--muted);
+    margin-top: 8px;
+  }
+  .day-budget {
+    margin-top: 12px;
+    font-family: var(--mono);
+    font-size: 12px;
+    color: var(--muted);
+    line-height: 1.5;
+    padding-top: 12px;
+    border-top: 1px dashed var(--rule);
+    max-width: 120px;
+  }
+  .day-budget strong { color: var(--ink); font-weight: 500; }
+
+  .day-body {
+    display: flex;
+    flex-direction: column;
+    gap: 20px;
+  }
+
+  .day-title {
+    font-family: var(--serif);
+    font-size: clamp(22px, 2.4vw, 28px);
+    line-height: 1.2;
+    color: var(--ink);
+    letter-spacing: -0.005em;
+  }
+  .day-summary {
+    font-size: 15.5px;
+    color: var(--ink-2);
+    max-width: 62ch;
+    line-height: 1.55;
+  }
+
+  .day-sections {
+    display: grid;
+    grid-template-columns: repeat(2, 1fr);
+    gap: 22px 32px;
+    margin-top: 6px;
+  }
+  @media (max-width: 720px) {
+    .day-sections { grid-template-columns: 1fr; }
+  }
+
+  .day-block h4 {
+    font-family: var(--mono);
+    font-size: 10.5px;
+    letter-spacing: 0.16em;
+    text-transform: uppercase;
+    color: var(--muted);
+    margin-bottom: 8px;
+    font-weight: 500;
+  }
+  .day-block ul {
+    list-style: none;
+    padding: 0;
+    margin: 0;
+    display: flex;
+    flex-direction: column;
+    gap: 6px;
+  }
+  .day-block li {
+    font-size: 14px;
+    color: var(--ink-2);
+    padding-left: 16px;
+    position: relative;
+    line-height: 1.5;
+  }
+  .day-block li::before {
+    content: "";
+    position: absolute;
+    left: 0; top: 0.68em;
+    width: 8px; height: 1px;
+    background: var(--muted-2);
+  }
+  .day-block.resources li::before {
+    background: var(--accent);
+    opacity: 0.6;
+  }
+  .day-block.check li {
+    padding-left: 22px;
+  }
+  .day-block.check li::before {
+    content: "☐";
+    background: transparent;
+    width: auto; height: auto;
+    top: 0;
+    font-family: var(--mono);
+    color: var(--muted);
+    font-size: 14px;
+  }
+  .day-block.lab {
+    background: var(--ground-2);
+    padding: 16px 18px;
+    border-left: 2px solid var(--accent);
+  }
+  .day-block.lab p {
+    font-size: 14px;
+    color: var(--ink-2);
+    line-height: 1.55;
+  }
+  .day-block.lab p + p { margin-top: 8px; }
+
+  /* ---------------- Library / cheatsheet ---------------- */
+  .library-grid {
+    display: grid;
+    grid-template-columns: repeat(2, 1fr);
+    gap: 20px;
+  }
+  @media (max-width: 720px) { .library-grid { grid-template-columns: 1fr; } }
+
+  .lib-card {
+    background: var(--panel);
+    border: 1px solid var(--rule);
+    padding: 22px 24px 24px;
+  }
+  .lib-card h3 {
+    font-family: var(--serif);
+    font-size: 20px;
+    line-height: 1.2;
+    color: var(--ink);
+    margin-bottom: 12px;
+  }
+  .lib-card ul {
+    list-style: none;
+    padding: 0;
+    margin: 0;
+    display: flex;
+    flex-direction: column;
+    gap: 8px;
+  }
+  .lib-card li {
+    font-size: 14px;
+    line-height: 1.5;
+    color: var(--ink-2);
+  }
+  .lib-card li .kind {
+    font-family: var(--mono);
+    font-size: 10.5px;
+    letter-spacing: 0.14em;
+    text-transform: uppercase;
+    color: var(--muted);
+    margin-right: 8px;
+  }
+
+  /* ---------------- Cheatsheet table ---------------- */
+  .cheat-wrap {
+    overflow-x: auto;
+    border: 1px solid var(--rule);
+    background: var(--panel);
+  }
+  table.cheat {
+    width: 100%;
+    border-collapse: collapse;
+    font-variant-numeric: tabular-nums;
+  }
+  table.cheat th,
+  table.cheat td {
+    padding: 12px 16px;
+    text-align: left;
+    font-size: 13.5px;
+    vertical-align: top;
+    border-bottom: 1px solid var(--rule);
+  }
+  table.cheat thead th {
+    font-family: var(--mono);
+    font-size: 10.5px;
+    letter-spacing: 0.14em;
+    text-transform: uppercase;
+    color: var(--muted);
+    font-weight: 500;
+    background: var(--ground-2);
+    border-bottom: 1px solid var(--rule-strong);
+  }
+  table.cheat td.k {
+    font-family: var(--mono);
+    color: var(--ink);
+    white-space: nowrap;
+    width: 30%;
+  }
+  table.cheat td.v { color: var(--ink-2); }
+  table.cheat tbody tr:last-child td { border-bottom: 0; }
+
+  /* ---------------- Exam-day playbook ---------------- */
+  .playbook {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 20px;
+  }
+  @media (max-width: 900px) { .playbook { grid-template-columns: 1fr; } }
+
+  .play-card {
+    background: var(--panel);
+    border: 1px solid var(--rule);
+    padding: 22px 22px 24px;
+    display: flex;
+    flex-direction: column;
+    gap: 12px;
+  }
+  .play-when {
+    font-family: var(--mono);
+    font-size: 11px;
+    letter-spacing: 0.16em;
+    text-transform: uppercase;
+    color: var(--accent);
+  }
+  .play-card h3 {
+    font-family: var(--serif);
+    font-size: 20px;
+    line-height: 1.2;
+    color: var(--ink);
+  }
+  .play-card ul {
+    list-style: none;
+    padding: 0;
+    margin: 0;
+    display: flex;
+    flex-direction: column;
+    gap: 6px;
+  }
+  .play-card li {
+    font-size: 14px;
+    color: var(--ink-2);
+    padding-left: 16px;
+    position: relative;
+    line-height: 1.5;
+  }
+  .play-card li::before {
+    content: "";
+    position: absolute;
+    left: 0; top: 0.7em;
+    width: 8px; height: 1px;
+    background: var(--muted-2);
+  }
+
+  /* ---------------- Callouts ---------------- */
+  .callout {
+    background: var(--accent-tint);
+    border-left: 3px solid var(--accent);
+    padding: 16px 20px;
+    font-size: 14.5px;
+    color: var(--ink-2);
+    line-height: 1.55;
+    max-width: 68ch;
+  }
+  .callout strong { color: var(--accent-deep); }
+
+  .warn {
+    background: var(--alert-tint);
+    border-left-color: var(--alert);
+  }
+  .warn strong { color: var(--alert); }
+
+  /* ---------------- Footer ---------------- */
+  footer {
+    margin-top: 72px;
+    padding-top: 32px;
+    border-top: 1px solid var(--rule);
+    display: flex;
+    flex-wrap: wrap;
+    gap: 12px 24px;
+    justify-content: space-between;
+    align-items: baseline;
+  }
+  footer .mark {
+    font-family: var(--serif);
+    font-style: italic;
+    font-size: 15px;
+    color: var(--ink-2);
+  }
+  footer .meta {
+    font-family: var(--mono);
+    font-size: 11px;
+    letter-spacing: 0.14em;
+    text-transform: uppercase;
+    color: var(--muted);
+  }
+
+  /* ---------------- Calendar ---------------- */
+  .calendar-block {
+    margin-bottom: 44px;
+  }
+  .calendar-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: baseline;
+    gap: 16px;
+    margin-bottom: 18px;
+    flex-wrap: wrap;
+  }
+  .calendar-eyebrow {
+    font-family: var(--mono);
+    font-size: 11px;
+    letter-spacing: 0.16em;
+    text-transform: uppercase;
+    color: var(--muted);
+  }
+  .calendar-note {
+    font-family: var(--serif);
+    font-style: italic;
+    font-size: 14px;
+    color: var(--muted);
+    max-width: 42ch;
+  }
+  .calendar {
+    display: flex;
+    flex-direction: column;
+    gap: 20px;
+  }
+  .cal-week {
+    display: grid;
+    grid-template-columns: 80px repeat(7, 1fr);
+    gap: 8px;
+    align-items: stretch;
+  }
+  .cal-week-label {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: flex-start;
+    font-family: var(--mono);
+    font-size: 11px;
+    letter-spacing: 0.14em;
+    text-transform: uppercase;
+    color: var(--muted);
+    padding: 0 4px;
+    line-height: 1.3;
+    border-right: 1px solid var(--rule);
+  }
+  .cal-week-label strong {
+    display: block;
+    font-family: var(--serif);
+    font-size: 18px;
+    font-weight: 400;
+    color: var(--ink);
+    text-transform: none;
+    letter-spacing: 0;
+    margin-bottom: 2px;
+  }
+  .cal-cell {
+    background: var(--panel);
+    border: 1px solid var(--rule);
+    position: relative;
+    transition: border-color 120ms ease, transform 120ms ease, background 120ms ease;
+    display: flex;
+    flex-direction: column;
+    padding: 14px 12px 12px;
+    text-decoration: none;
+    border-bottom-width: 1px;
+    min-height: 108px;
+  }
+  .cal-cell::before {
+    content: "";
+    position: absolute;
+    top: 0; left: 0; right: 0; height: 3px;
+    background: var(--accent);
+  }
+  .cal-cell.phase-1::before { background: #C08A2E; }
+  .cal-cell.phase-2::before { background: var(--accent); }
+  .cal-cell.phase-3::before { background: #206C68; }
+  .cal-cell.phase-4::before { background: var(--success); }
+  .cal-cell:hover {
+    border-color: var(--ink-2);
+    background: #FCFCF7;
+    transform: translateY(-1px);
+  }
+  .cal-cell:focus-visible {
+    outline: 2px solid var(--accent);
+    outline-offset: 2px;
+  }
+  .cal-num {
+    font-family: var(--mono);
+    font-weight: 500;
+    font-size: 20px;
+    line-height: 1;
+    color: var(--ink);
+    font-variant-numeric: tabular-nums;
+    letter-spacing: -0.03em;
+  }
+  .cal-phase {
+    font-family: var(--mono);
+    font-size: 9.5px;
+    letter-spacing: 0.16em;
+    text-transform: uppercase;
+    color: var(--muted);
+    margin-top: 4px;
+  }
+  .cal-theme {
+    font-family: var(--serif);
+    font-size: 13px;
+    color: var(--ink);
+    line-height: 1.28;
+    margin-top: 8px;
+    letter-spacing: -0.005em;
+  }
+  .cal-time {
+    font-family: var(--mono);
+    font-size: 10px;
+    color: var(--muted);
+    margin-top: auto;
+    padding-top: 6px;
+    font-variant-numeric: tabular-nums;
+  }
+  .cal-cell.milestone {
+    background: var(--ground-2);
+  }
+  .cal-cell.milestone .cal-theme {
+    font-weight: 600;
+  }
+
+  @media (max-width: 960px) {
+    .cal-week { grid-template-columns: 60px repeat(7, 1fr); gap: 6px; }
+    .cal-cell { padding: 10px 8px 8px; min-height: 96px; }
+    .cal-num { font-size: 16px; }
+    .cal-theme { font-size: 11.5px; }
+  }
+  @media (max-width: 720px) {
+    .cal-week {
+      grid-template-columns: repeat(4, 1fr);
+    }
+    .cal-week-label {
+      grid-column: 1 / -1;
+      border-right: 0;
+      border-bottom: 1px solid var(--rule);
+      padding: 0 0 8px;
+    }
+    .cal-cell { min-height: 92px; }
+  }
+  @media (max-width: 440px) {
+    .cal-week { grid-template-columns: repeat(2, 1fr); }
+  }
+
+  /* focus */
+  :focus-visible { outline: 2px solid var(--accent); outline-offset: 3px; }
+
+  @media (prefers-reduced-motion: reduce) {
+    * { transition: none !important; animation: none !important; }
+  }
+</style>
+
+<main>
+
+  <header class="masthead">
+    <div class="mast-top">
+      <div class="mast-brand"><strong>AZ-900</strong> · Microsoft Azure Fundamentals</div>
+      <div class="mast-date">Roadmap · 14 Days · Target 1000 / 1000</div>
+    </div>
+
+    <h1 class="title">Fourteen days from zero to <em>Azure Fundamentals</em>, engineered for a <span class="num">100%</span> score.</h1>
+
+    <p class="lede">A structured, day-by-day curriculum that walks the exact contours of the official AZ-900 skills outline — every objective mapped to a Microsoft Learn module, a hands-on task in the Azure portal, and a self-check drill. No fluff. No overloaded days. Two weeks in, you sit the exam prepared to beat it, not just pass it.</p>
+
+    <dl class="exam-meta">
+      <div><dt>Exam code</dt><dd>AZ-900</dd></div>
+      <div><dt>Duration</dt><dd>60 min</dd></div>
+      <div><dt>Questions</dt><dd>40–60</dd></div>
+      <div><dt>Passing</dt><dd>700 / 1000</dd></div>
+      <div><dt>Cost</dt><dd>$99 USD</dd></div>
+      <div><dt>Validity</dt><dd>No expiry</dd></div>
+    </dl>
+  </header>
+
+  <!-- ============ STRATEGY ============ -->
+  <section id="strategy">
+    <div class="section-head">
+      <div class="section-num">§ 01 · Strategy</div>
+      <div>
+        <h2 class="section-title">How the fourteen days <em>break</em>.</h2>
+        <p class="section-lede">The plan follows the three official skill domains, then adds a fourth phase for mastery. Study time compounds: concepts on day one anchor everything you learn in week two. Days are sized to fit around a job — roughly two to three hours of focused work each, front-loaded on weekdays with lighter sessions on weekends.</p>
+      </div>
+    </div>
+
+    <div class="phase-bar">
+      <div class="phase">
+        <div class="phase-rail"></div>
+        <div class="phase-days">Days 01 – 03</div>
+        <div class="phase-name">Concepts</div>
+        <p class="phase-desc">Cloud models, service types, benefits, shared responsibility. The mental scaffolding for everything else.</p>
+        <div class="phase-weight">Domain 1 · 25–30%</div>
+      </div>
+      <div class="phase">
+        <div class="phase-rail"></div>
+        <div class="phase-days">Days 04 – 08</div>
+        <div class="phase-name">Architecture</div>
+        <p class="phase-desc">Regions, compute, networking, storage, identity. The largest domain and the exam's technical spine.</p>
+        <div class="phase-weight">Domain 2 · 35–40%</div>
+      </div>
+      <div class="phase">
+        <div class="phase-rail"></div>
+        <div class="phase-days">Days 09 – 11</div>
+        <div class="phase-name">Governance</div>
+        <p class="phase-desc">Cost management, policy, compliance, monitoring. The operational discipline of running Azure.</p>
+        <div class="phase-weight">Domain 3 · 30–35%</div>
+      </div>
+      <div class="phase">
+        <div class="phase-rail"></div>
+        <div class="phase-days">Days 12 – 14</div>
+        <div class="phase-name">Mastery</div>
+        <p class="phase-desc">Two full-length practice exams, targeted revision on weak areas, and a calm exam-day ritual.</p>
+        <div class="phase-weight">Full-syllabus · 100%</div>
+      </div>
+    </div>
+
+    <div class="callout" style="margin-top: 28px;">
+      <strong>A word on 100%.</strong> A perfect score is achievable but not required — Microsoft passes you at 700. Chasing the last few points comes down to <em>knowing distractors</em>: understanding not just what a service is, but which adjacent services it is <em>not</em>. Every day below includes contrast prompts for exactly that.
+    </div>
+  </section>
+
+  <!-- ============ EXAM ANATOMY ============ -->
+  <section id="anatomy">
+    <div class="section-head">
+      <div class="section-num">§ 02 · Anatomy</div>
+      <div>
+        <h2 class="section-title">The three <em>domains</em>.</h2>
+        <p class="section-lede">The examiners publish a skills-measured document that lists every testable topic under three weighted domains. Every objective below is mapped to a specific day in this roadmap.</p>
+      </div>
+    </div>
+
+    <div class="domains">
+      <article class="domain-card">
+        <div class="domain-head">
+          <div class="domain-num">Domain 1</div>
+          <div class="domain-weight">25–30%</div>
+        </div>
+        <h3 class="domain-title">Describe cloud concepts</h3>
+        <ul class="domain-list">
+          <li>Cloud computing definition &amp; shared responsibility model</li>
+          <li>Cloud models — public, private, hybrid, multi-cloud</li>
+          <li>Consumption-based pricing &amp; CapEx / OpEx</li>
+          <li>Benefits — high availability, scalability, reliability, predictability, security, governance, manageability</li>
+          <li>Service categories — IaaS, PaaS, SaaS, serverless</li>
+        </ul>
+      </article>
+
+      <article class="domain-card">
+        <div class="domain-head">
+          <div class="domain-num">Domain 2</div>
+          <div class="domain-weight">35–40%</div>
+        </div>
+        <h3 class="domain-title">Azure architecture &amp; services</h3>
+        <ul class="domain-list">
+          <li>Regions, region pairs, sovereign regions, Availability Zones</li>
+          <li>Management groups, subscriptions, resource groups, resources, ARM</li>
+          <li>Compute — VMs, App Service, Container Instances / Apps, AKS, Functions, Virtual Desktop</li>
+          <li>Networking — VNet, VPN Gateway, ExpressRoute, DNS, Load Balancer, App Gateway</li>
+          <li>Storage — Blob, File, Queue, Table, Disk; redundancy &amp; access tiers</li>
+          <li>Identity, access, security — Microsoft Entra ID, MFA, Zero Trust, Defender for Cloud</li>
+        </ul>
+      </article>
+
+      <article class="domain-card">
+        <div class="domain-head">
+          <div class="domain-num">Domain 3</div>
+          <div class="domain-weight">30–35%</div>
+        </div>
+        <h3 class="domain-title">Management &amp; governance</h3>
+        <ul class="domain-list">
+          <li>Cost management — pricing calculator, TCO, Cost Management + Billing, tags, Reserved Instances</li>
+          <li>Governance — Azure Policy, resource locks, Service Trust Portal, Microsoft Purview</li>
+          <li>Deployment &amp; management tools — Portal, CLI, PowerShell, Cloud Shell, ARM / Bicep, Arc</li>
+          <li>Monitoring — Azure Monitor, Service Health, Advisor, Log Analytics, Application Insights</li>
+        </ul>
+      </article>
+    </div>
+  </section>
+
+  <!-- ============ THE PLAN ============ -->
+  <section id="plan">
+    <div class="section-head">
+      <div class="section-num">§ 03 · The Plan</div>
+      <div>
+        <h2 class="section-title">Fourteen days, <em>fourteen briefings</em>.</h2>
+        <p class="section-lede">Each day is a self-contained unit — one central theme, curated Microsoft Learn resources, one hands-on lab in the Azure portal, and a set of self-check prompts. Complete the check before you move on; if you can't answer any bullet, that's a re-read signal, not a keep-going signal.</p>
+      </div>
+    </div>
+
+    <div class="calendar-block">
+      <div class="calendar-header">
+        <div class="calendar-eyebrow">§ 03.a · Calendar</div>
+        <p class="calendar-note">A glance across the fortnight. Tap any day to jump to its full briefing.</p>
+      </div>
+
+      <div class="calendar">
+        <div class="cal-week">
+          <div class="cal-week-label"><strong>Week 1</strong>Foundation</div>
+          <a class="cal-cell phase-1" href="#day-01">
+            <div class="cal-num">01</div>
+            <div class="cal-phase">Concepts</div>
+            <div class="cal-theme">Cloud fundamentals &amp; shared responsibility</div>
+            <div class="cal-time">2h 30m</div>
+          </a>
+          <a class="cal-cell phase-1" href="#day-02">
+            <div class="cal-num">02</div>
+            <div class="cal-phase">Concepts</div>
+            <div class="cal-theme">Benefits &amp; service types</div>
+            <div class="cal-time">2h 30m</div>
+          </a>
+          <a class="cal-cell phase-1" href="#day-03">
+            <div class="cal-num">03</div>
+            <div class="cal-phase">Consolidation</div>
+            <div class="cal-theme">Domain 1 quiz &amp; review</div>
+            <div class="cal-time">2h 30m</div>
+          </a>
+          <a class="cal-cell phase-2" href="#day-04">
+            <div class="cal-num">04</div>
+            <div class="cal-phase">Architecture</div>
+            <div class="cal-theme">Regions, zones &amp; hierarchy</div>
+            <div class="cal-time">2h 45m</div>
+          </a>
+          <a class="cal-cell phase-2" href="#day-05">
+            <div class="cal-num">05</div>
+            <div class="cal-phase">Architecture</div>
+            <div class="cal-theme">Compute — VMs to Functions</div>
+            <div class="cal-time">3h 00m</div>
+          </a>
+          <a class="cal-cell phase-2" href="#day-06">
+            <div class="cal-num">06</div>
+            <div class="cal-phase">Architecture</div>
+            <div class="cal-theme">Networking &amp; load balancing</div>
+            <div class="cal-time">2h 45m</div>
+          </a>
+          <a class="cal-cell phase-2" href="#day-07">
+            <div class="cal-num">07</div>
+            <div class="cal-phase">Architecture</div>
+            <div class="cal-theme">Storage — redundancy &amp; tiers</div>
+            <div class="cal-time">2h 45m</div>
+          </a>
+        </div>
+
+        <div class="cal-week">
+          <div class="cal-week-label"><strong>Week 2</strong>Depth &amp; exam</div>
+          <a class="cal-cell phase-2" href="#day-08">
+            <div class="cal-num">08</div>
+            <div class="cal-phase">Architecture</div>
+            <div class="cal-theme">Identity, access &amp; security</div>
+            <div class="cal-time">3h 00m</div>
+          </a>
+          <a class="cal-cell phase-3" href="#day-09">
+            <div class="cal-num">09</div>
+            <div class="cal-phase">Governance</div>
+            <div class="cal-theme">Cost management &amp; savings</div>
+            <div class="cal-time">2h 30m</div>
+          </a>
+          <a class="cal-cell phase-3" href="#day-10">
+            <div class="cal-num">10</div>
+            <div class="cal-phase">Governance</div>
+            <div class="cal-theme">Policy, locks &amp; compliance</div>
+            <div class="cal-time">2h 45m</div>
+          </a>
+          <a class="cal-cell phase-3" href="#day-11">
+            <div class="cal-num">11</div>
+            <div class="cal-phase">Governance</div>
+            <div class="cal-theme">Tools &amp; monitoring</div>
+            <div class="cal-time">3h 00m</div>
+          </a>
+          <a class="cal-cell phase-4" href="#day-12">
+            <div class="cal-num">12</div>
+            <div class="cal-phase">Mastery</div>
+            <div class="cal-theme">Full practice exam #1</div>
+            <div class="cal-time">3h 00m</div>
+          </a>
+          <a class="cal-cell phase-4" href="#day-13">
+            <div class="cal-num">13</div>
+            <div class="cal-phase">Mastery</div>
+            <div class="cal-theme">Weak-area drill + exam #2</div>
+            <div class="cal-time">3h 00m</div>
+          </a>
+          <a class="cal-cell phase-4 milestone" href="#day-14">
+            <div class="cal-num">14</div>
+            <div class="cal-phase">Exam day</div>
+            <div class="cal-theme">Final polish &amp; sit the exam</div>
+            <div class="cal-time">1h 30m</div>
+          </a>
+        </div>
+      </div>
+    </div>
+
+    <div class="days-grid">
+
+      <!-- ============ DAY 01 ============ -->
+      <article class="day phase-1" id="day-01">
+        <div class="day-rail">
+          <div class="day-num">01</div>
+          <div class="day-slug">Phase I · Concepts</div>
+          <div class="day-budget"><strong>2 h</strong> reading<br><strong>30 m</strong> setup</div>
+        </div>
+        <div class="day-body">
+          <h3 class="day-title">Cloud computing, shared responsibility, and CapEx vs OpEx</h3>
+          <p class="day-summary">Ground zero. What "the cloud" actually is, why organisations move to it, and the single model that governs who owns what between the customer and the cloud provider. Also: create your free Azure account today so you can practise from Day 4 onward.</p>
+
+          <div class="day-sections">
+            <div class="day-block">
+              <h4>Learn</h4>
+              <ul>
+                <li>Definition of cloud computing and its role in modern IT</li>
+                <li>The <strong>shared responsibility model</strong> — where the customer's line ends and the provider's begins in IaaS / PaaS / SaaS</li>
+                <li>CapEx (buy hardware) vs OpEx (rent capacity) — the finance lens that drives most cloud decisions</li>
+                <li>The <strong>consumption-based</strong> pricing model — pay only for what you use</li>
+              </ul>
+            </div>
+            <div class="day-block resources">
+              <h4>Study</h4>
+              <ul>
+                <li><a href="https://learn.microsoft.com/en-us/training/modules/describe-cloud-compute/">MS Learn · Describe cloud computing</a></li>
+                <li><a href="https://learn.microsoft.com/en-us/training/modules/describe-cloud-service-types/">MS Learn · Describe cloud service types</a> (skim; deep tomorrow)</li>
+                <li><a href="https://learn.microsoft.com/en-us/azure/security/fundamentals/shared-responsibility">Azure docs · Shared responsibility in the cloud</a></li>
+                <li><a href="https://azure.microsoft.com/en-us/free/">Create a free Azure account · $200 credit + 12 months of services</a></li>
+              </ul>
+            </div>
+            <div class="day-block lab">
+              <h4>Hands-on</h4>
+              <p>Sign up for the free Azure account. Sign in to the <a href="https://portal.azure.com/">Azure portal</a> and pin these blades to your dashboard: <strong>Subscriptions</strong>, <strong>Resource groups</strong>, <strong>Cost Management</strong>, <strong>Microsoft Entra ID</strong>.</p>
+              <p>Open <a href="https://shell.azure.com/">Cloud Shell</a>, choose Bash, and run <code>az account show</code> to confirm your subscription is active.</p>
+            </div>
+            <div class="day-block check">
+              <h4>Self-check</h4>
+              <ul>
+                <li>In IaaS, who patches the guest operating system — customer or provider?</li>
+                <li>Which pricing model shifts IT spend from CapEx to OpEx and why does that matter to a CFO?</li>
+                <li>Name one workload where the consumption model saves money and one where it doesn't.</li>
+              </ul>
+            </div>
+          </div>
+        </div>
+      </article>
+
+      <!-- ============ DAY 02 ============ -->
+      <article class="day phase-1" id="day-02">
+        <div class="day-rail">
+          <div class="day-num">02</div>
+          <div class="day-slug">Phase I · Concepts</div>
+          <div class="day-budget"><strong>2 h</strong> reading<br><strong>30 m</strong> quiz</div>
+        </div>
+        <div class="day-body">
+          <h3 class="day-title">Benefits, cloud models, and service categories</h3>
+          <p class="day-summary">The vocabulary the exam expects you to use fluently: availability vs reliability vs scalability; public vs private vs hybrid vs multi-cloud; IaaS vs PaaS vs SaaS vs serverless. Distractor questions live in these boundaries.</p>
+
+          <div class="day-sections">
+            <div class="day-block">
+              <h4>Learn</h4>
+              <ul>
+                <li><strong>Benefits</strong>: high availability, scalability (vertical vs horizontal), elasticity, reliability, predictability, security, governance, manageability</li>
+                <li><strong>Cloud models</strong>: public (rented from a hyperscaler), private (single tenant), hybrid (both), multi-cloud (more than one provider) — and their trade-offs</li>
+                <li><strong>Service categories</strong>: IaaS (VMs, networks), PaaS (App Service, SQL DB), SaaS (Microsoft 365) — with the shared-responsibility line for each</li>
+                <li><strong>Serverless</strong> as a consumption pattern (Functions, Logic Apps) — event-driven, pay-per-execution, no server management</li>
+              </ul>
+            </div>
+            <div class="day-block resources">
+              <h4>Study</h4>
+              <ul>
+                <li><a href="https://learn.microsoft.com/en-us/training/modules/describe-benefits-use-cloud-services/">MS Learn · Describe the benefits of using cloud services</a></li>
+                <li><a href="https://learn.microsoft.com/en-us/training/modules/describe-cloud-service-types/">MS Learn · Cloud service types</a> (full read today)</li>
+                <li><a href="https://azure.microsoft.com/en-us/resources/cloud-computing-dictionary/what-is-cloud-computing/">Azure · What is cloud computing?</a></li>
+                <li><a href="https://www.youtube.com/@NTFAQGuy">John Savill's Technical Training · YouTube</a> — search "AZ-900 Study Cram v3" and watch the concepts section</li>
+              </ul>
+            </div>
+            <div class="day-block lab">
+              <h4>Hands-on</h4>
+              <p>In the portal, browse the <strong>Marketplace</strong>. Filter by category and identify at least one example of each service type: an IaaS offering (a Linux VM image), a PaaS offering (App Service or Azure SQL Database), and a SaaS offering (a third-party image like a WordPress-managed stack).</p>
+              <p>Do not create anything yet — this is a taxonomy exercise.</p>
+            </div>
+            <div class="day-block check">
+              <h4>Self-check</h4>
+              <ul>
+                <li>Scalability vs elasticity — define both without using either word.</li>
+                <li>You're moving a legacy on-prem SQL server to Azure but keeping some workloads in your datacentre. Which cloud model?</li>
+                <li>Which service category has the customer responsible for the guest OS but not the physical host?</li>
+                <li>Is Azure Functions serverless, PaaS, both, or neither?</li>
+              </ul>
+            </div>
+          </div>
+        </div>
+      </article>
+
+      <!-- ============ DAY 03 ============ -->
+      <article class="day phase-1" id="day-03">
+        <div class="day-rail">
+          <div class="day-num">03</div>
+          <div class="day-slug">Phase I · Consolidation</div>
+          <div class="day-budget"><strong>1.5 h</strong> revision<br><strong>1 h</strong> quiz</div>
+        </div>
+        <div class="day-body">
+          <h3 class="day-title">Domain 1 consolidation and first quiz</h3>
+          <p class="day-summary">Half study, half assessment. Close out the Cloud Concepts learning path on Microsoft Learn, then take a domain-scoped practice quiz to catch any conceptual gaps before you move into services. Weak answers today become tomorrow's re-read list.</p>
+
+          <div class="day-sections">
+            <div class="day-block">
+              <h4>Learn</h4>
+              <ul>
+                <li>Finish any remaining modules in the "Describe cloud concepts" learning path</li>
+                <li>Build a personal one-page glossary of every term you've met so far</li>
+                <li>Draw the shared-responsibility matrix from memory: rows = customer / provider, columns = IaaS / PaaS / SaaS</li>
+              </ul>
+            </div>
+            <div class="day-block resources">
+              <h4>Study</h4>
+              <ul>
+                <li><a href="https://learn.microsoft.com/en-us/training/paths/microsoft-azure-fundamentals-describe-cloud-concepts/">MS Learn · Path — Describe cloud concepts</a> (complete all modules today)</li>
+                <li><a href="https://learn.microsoft.com/en-us/credentials/certifications/azure-fundamentals/practice/assessment?assessment-type=practice&amp;assessmentId=23">MS Learn · Official free AZ-900 practice assessment</a> — filter by Domain 1</li>
+                <li><a href="https://marczak.io/az-900/">Adam Marczak · AZ-900 series</a> — free structured YouTube course</li>
+              </ul>
+            </div>
+            <div class="day-block lab">
+              <h4>Hands-on</h4>
+              <p>Take the official Microsoft practice assessment focused on Domain 1 questions. Log every wrong answer in a note file with the correct answer <em>and</em> a one-line explanation of why you got it wrong. This log becomes your Day 12–13 revision file.</p>
+            </div>
+            <div class="day-block check">
+              <h4>Self-check</h4>
+              <ul>
+                <li>Can you recite four benefits of cloud computing in under 30 seconds?</li>
+                <li>Draw the shared-responsibility matrix from memory. Verify against the official docs.</li>
+                <li>You scored below 80% on the practice quiz — which specific topics? Schedule 30 min of tomorrow morning to re-read those before starting Day 4.</li>
+              </ul>
+            </div>
+          </div>
+        </div>
+      </article>
+
+      <!-- ============ DAY 04 ============ -->
+      <article class="day phase-2" id="day-04">
+        <div class="day-rail">
+          <div class="day-num">04</div>
+          <div class="day-slug">Phase II · Architecture</div>
+          <div class="day-budget"><strong>2 h</strong> reading<br><strong>45 m</strong> portal lab</div>
+        </div>
+        <div class="day-body">
+          <h3 class="day-title">Azure's core architectural components</h3>
+          <p class="day-summary">Regions, Availability Zones, and the four-level resource hierarchy. This is the single most heavily tested topic in Domain 2 — get it precise. Know the difference between an availability <em>zone</em> and an availability <em>set</em>, and where region pairs fit in disaster recovery.</p>
+
+          <div class="day-sections">
+            <div class="day-block">
+              <h4>Learn</h4>
+              <ul>
+                <li><strong>Regions</strong>: 60+ globally, each with one or more datacentres. Some are <em>sovereign</em> (Azure Government, Azure China 21Vianet)</li>
+                <li><strong>Region pairs</strong>: replicated for DR, usually 300+ miles apart, updates staggered</li>
+                <li><strong>Availability Zones</strong>: minimum three physically separate zones in a zone-enabled region — used for high-availability across a region</li>
+                <li>Hierarchy: <strong>Management groups → subscriptions → resource groups → resources</strong></li>
+                <li><strong>Azure Resource Manager (ARM)</strong> as the deployment and management layer for every Azure resource</li>
+              </ul>
+            </div>
+            <div class="day-block resources">
+              <h4>Study</h4>
+              <ul>
+                <li><a href="https://learn.microsoft.com/en-us/training/modules/describe-core-architectural-components-of-azure/">MS Learn · Core architectural components of Azure</a></li>
+                <li><a href="https://learn.microsoft.com/en-us/azure/reliability/availability-zones-overview">Azure docs · Availability zones overview</a></li>
+                <li><a href="https://learn.microsoft.com/en-us/azure/azure-resource-manager/management/overview">Azure docs · Azure Resource Manager overview</a></li>
+                <li><a href="https://azure.microsoft.com/en-us/explore/global-infrastructure/geographies/">Azure global infrastructure map</a></li>
+              </ul>
+            </div>
+            <div class="day-block lab">
+              <h4>Hands-on</h4>
+              <p>Create a resource group in your subscription — pick a region close to you. Note the exact URL of the resource group; it will contain your subscription ID and resource-group name, showing the hierarchy in action.</p>
+              <p>In Cloud Shell run <code>az group list --output table</code> and <code>az account show --output table</code> to see the same hierarchy from the CLI.</p>
+            </div>
+            <div class="day-block check">
+              <h4>Self-check</h4>
+              <ul>
+                <li>Availability zone vs availability set — which protects against a datacentre failure and which against a rack failure?</li>
+                <li>What is a region pair and how many miles typically separate the two regions?</li>
+                <li>Can a resource group span multiple subscriptions? Can a resource belong to two resource groups?</li>
+                <li>What is the top of the Azure resource hierarchy?</li>
+              </ul>
+            </div>
+          </div>
+        </div>
+      </article>
+
+      <!-- ============ DAY 05 ============ -->
+      <article class="day phase-2" id="day-05">
+        <div class="day-rail">
+          <div class="day-num">05</div>
+          <div class="day-slug">Phase II · Compute</div>
+          <div class="day-budget"><strong>2 h</strong> reading<br><strong>1 h</strong> lab</div>
+        </div>
+        <div class="day-body">
+          <h3 class="day-title">Compute services — VMs, containers, apps, and serverless</h3>
+          <p class="day-summary">Six flavours of compute, each with a distinct sweet spot. Know which one to pick given a scenario: lift-and-shift, web app, microservices, batch, event-driven, or virtual desktop. This is where scenario questions concentrate.</p>
+
+          <div class="day-sections">
+            <div class="day-block">
+              <h4>Learn</h4>
+              <ul>
+                <li><strong>Azure Virtual Machines</strong> — full IaaS control. VM Scale Sets for horizontal scale; Availability Sets for rack-level HA</li>
+                <li><strong>Azure App Service</strong> — PaaS for web apps, APIs, mobile back-ends. Multi-language, auto-scale, deployment slots</li>
+                <li><strong>Azure Container Instances</strong> vs <strong>Container Apps</strong> vs <strong>Azure Kubernetes Service (AKS)</strong></li>
+                <li><strong>Azure Functions</strong> — serverless code execution, triggered by events, priced per execution</li>
+                <li><strong>Azure Virtual Desktop</strong> — desktop-as-a-service, multi-session Windows</li>
+              </ul>
+            </div>
+            <div class="day-block resources">
+              <h4>Study</h4>
+              <ul>
+                <li><a href="https://learn.microsoft.com/en-us/training/modules/describe-azure-compute-networking-services/">MS Learn · Describe Azure compute and networking services</a></li>
+                <li><a href="https://learn.microsoft.com/en-us/azure/architecture/guide/technology-choices/compute-decision-tree">Azure docs · Compute decision tree</a></li>
+                <li><a href="https://learn.microsoft.com/en-us/azure/azure-functions/functions-overview">Azure Functions overview</a></li>
+                <li><a href="https://learn.microsoft.com/en-us/azure/aks/what-is-aks">AKS overview</a></li>
+              </ul>
+            </div>
+            <div class="day-block lab">
+              <h4>Hands-on</h4>
+              <p>Create a small Linux VM (B1s size, in the resource group from yesterday). Note the resources auto-created alongside it: virtual network, subnet, NIC, public IP, disk, network security group. This is the "unit of compute" you'll deconstruct on Day 6 (networking) and Day 7 (storage).</p>
+              <p><strong>Important:</strong> stop and deallocate the VM the moment you finish so it stops billing.</p>
+            </div>
+            <div class="day-block check">
+              <h4>Self-check</h4>
+              <ul>
+                <li>You have a small event-driven Python script that runs a few times an hour. VM or Function?</li>
+                <li>You have a monolithic Windows app you need to move to Azure without code changes. Which service?</li>
+                <li>Container Instances vs AKS — pick the right one for a one-off batch job and for a production microservices platform.</li>
+                <li>What is the SLA difference between a single VM, a VM in an availability set, and a VM across availability zones?</li>
+              </ul>
+            </div>
+          </div>
+        </div>
+      </article>
+
+      <!-- ============ DAY 06 ============ -->
+      <article class="day phase-2" id="day-06">
+        <div class="day-rail">
+          <div class="day-num">06</div>
+          <div class="day-slug">Phase II · Networking</div>
+          <div class="day-budget"><strong>2 h</strong> reading<br><strong>45 m</strong> lab</div>
+        </div>
+        <div class="day-body">
+          <h3 class="day-title">Networking — VNets, gateways, and load balancing</h3>
+          <p class="day-summary">Azure networking is a rich topic; AZ-900 stays fundamentals. Focus on the identity of each service: what problem it solves, how it differs from adjacent services. Load-balancer questions are notoriously fond of testing OSI-layer distinctions.</p>
+
+          <div class="day-sections">
+            <div class="day-block">
+              <h4>Learn</h4>
+              <ul>
+                <li><strong>Virtual Networks (VNets)</strong> and subnets — isolated IP space in Azure</li>
+                <li><strong>VNet peering</strong> — connect VNets privately (local and global)</li>
+                <li><strong>VPN Gateway</strong> (site-to-site &amp; point-to-site over public internet) vs <strong>ExpressRoute</strong> (private connection through a partner, no public internet)</li>
+                <li><strong>Azure DNS</strong> and Private DNS zones</li>
+                <li>Load balancing: <strong>Load Balancer</strong> (L4), <strong>Application Gateway</strong> (L7, in-region), <strong>Front Door</strong> (L7, global), <strong>Traffic Manager</strong> (DNS-based)</li>
+              </ul>
+            </div>
+            <div class="day-block resources">
+              <h4>Study</h4>
+              <ul>
+                <li><a href="https://learn.microsoft.com/en-us/azure/virtual-network/virtual-networks-overview">Azure docs · Virtual Network overview</a></li>
+                <li><a href="https://learn.microsoft.com/en-us/azure/expressroute/expressroute-introduction">Azure docs · ExpressRoute introduction</a></li>
+                <li><a href="https://learn.microsoft.com/en-us/azure/architecture/guide/technology-choices/load-balancing-overview">Azure docs · Load-balancing decision tree</a></li>
+                <li><a href="https://learn.microsoft.com/en-us/azure/frontdoor/front-door-overview">Azure docs · Azure Front Door</a></li>
+              </ul>
+            </div>
+            <div class="day-block lab">
+              <h4>Hands-on</h4>
+              <p>Open yesterday's VM's associated <strong>virtual network</strong>. Explore subnets, address space, and the network security group attached to the NIC. Try adding an inbound rule to allow port 80.</p>
+              <p>Then delete the rule to leave the VM secure. Do not expose a live VM to the internet unnecessarily.</p>
+            </div>
+            <div class="day-block check">
+              <h4>Self-check</h4>
+              <ul>
+                <li>You need a dedicated private circuit from your datacentre to Azure with 10 Gbps and no public internet transit. Which service?</li>
+                <li>Application Gateway vs Front Door — one is regional, one is global. Which is which?</li>
+                <li>What OSI layer does Azure Load Balancer operate at, and what does that let it do (or not do)?</li>
+                <li>Two VNets in different regions — what connects them privately?</li>
+              </ul>
+            </div>
+          </div>
+        </div>
+      </article>
+
+      <!-- ============ DAY 07 ============ -->
+      <article class="day phase-2" id="day-07">
+        <div class="day-rail">
+          <div class="day-num">07</div>
+          <div class="day-slug">Phase II · Storage</div>
+          <div class="day-budget"><strong>2 h</strong> reading<br><strong>45 m</strong> lab</div>
+        </div>
+        <div class="day-body">
+          <h3 class="day-title">Storage services, redundancy, and access tiers</h3>
+          <p class="day-summary">Two acronym clusters you must fully own: redundancy (LRS, ZRS, GRS, GZRS + read-access variants) and tiers (Hot, Cool, Cold, Archive). Expect at least two exam questions on each. Also cover migration tools — Azure Migrate, Data Box, AzCopy, File Sync.</p>
+
+          <div class="day-sections">
+            <div class="day-block">
+              <h4>Learn</h4>
+              <ul>
+                <li>Storage account service types: <strong>Blob</strong>, <strong>File</strong>, <strong>Queue</strong>, <strong>Table</strong>, <strong>Disk</strong></li>
+                <li><strong>Redundancy</strong>: LRS (3 copies, one datacentre), ZRS (3 zones, one region), GRS (6 copies across two regions), GZRS (ZRS + geo), plus RA-GRS / RA-GZRS for read access to the secondary</li>
+                <li><strong>Access tiers</strong> for Blob: Hot &gt; Cool &gt; Cold &gt; Archive. Storage cost falls each step, access cost and latency rise (Archive requires rehydration, up to 15 hours)</li>
+                <li>Migration &amp; movement: <strong>Azure Migrate</strong> (discover / assess / migrate), <strong>Data Box</strong> (physical device for offline transfer), <strong>AzCopy</strong> (CLI), <strong>Storage Explorer</strong> (desktop GUI), <strong>Azure File Sync</strong> (hybrid SMB shares)</li>
+              </ul>
+            </div>
+            <div class="day-block resources">
+              <h4>Study</h4>
+              <ul>
+                <li><a href="https://learn.microsoft.com/en-us/training/modules/describe-azure-storage-services/">MS Learn · Describe Azure storage services</a></li>
+                <li><a href="https://learn.microsoft.com/en-us/azure/storage/common/storage-redundancy">Azure docs · Storage redundancy</a></li>
+                <li><a href="https://learn.microsoft.com/en-us/azure/storage/blobs/access-tiers-overview">Azure docs · Blob access tiers</a></li>
+                <li><a href="https://learn.microsoft.com/en-us/azure/migrate/migrate-services-overview">Azure docs · Azure Migrate</a></li>
+              </ul>
+            </div>
+            <div class="day-block lab">
+              <h4>Hands-on</h4>
+              <p>Create a storage account. During creation, walk through every option — redundancy, performance, access tier — and note how the estimated cost changes. Create a Blob container, upload a file, change its tier to Cool, then Archive. Try to download the archived blob and observe the rehydration behaviour.</p>
+            </div>
+            <div class="day-block check">
+              <h4>Self-check</h4>
+              <ul>
+                <li>You need protection against a full-region outage <em>and</em> read access to the secondary region. Which redundancy?</li>
+                <li>Data accessed rarely, if ever, but that must be retained for seven years. Which access tier?</li>
+                <li>You're shipping 100 TB of on-prem data to Azure over a slow uplink. What service saves you weeks?</li>
+                <li>ZRS protects against what specific failure that LRS does not?</li>
+              </ul>
+            </div>
+          </div>
+        </div>
+      </article>
+
+      <!-- ============ DAY 08 ============ -->
+      <article class="day phase-2" id="day-08">
+        <div class="day-rail">
+          <div class="day-num">08</div>
+          <div class="day-slug">Phase II · Identity &amp; Security</div>
+          <div class="day-budget"><strong>2.5 h</strong> reading<br><strong>30 m</strong> lab</div>
+        </div>
+        <div class="day-body">
+          <h3 class="day-title">Identity, access, and security — Entra ID and Zero Trust</h3>
+          <p class="day-summary">Microsoft has renamed Azure AD to <strong>Microsoft Entra ID</strong>; the exam uses the new name. Nail authentication vs authorisation, MFA vs Conditional Access, and the three principles of Zero Trust. Also: know Defender for Cloud, Sentinel, Key Vault, and Azure Firewall by their role.</p>
+
+          <div class="day-sections">
+            <div class="day-block">
+              <h4>Learn</h4>
+              <ul>
+                <li><strong>Microsoft Entra ID</strong> — identity and access management for cloud apps</li>
+                <li><strong>Authentication</strong> (who you are) vs <strong>Authorisation</strong> (what you can do)</li>
+                <li><strong>MFA</strong> (something you know / have / are), <strong>Conditional Access</strong> (rules that evaluate signals like device, location, risk), <strong>SSO</strong>, passwordless (FIDO2, Microsoft Authenticator, Windows Hello)</li>
+                <li><strong>External identities</strong> — B2B collaboration, B2C for customer apps</li>
+                <li><strong>Zero Trust</strong> — verify explicitly, use least-privilege access, assume breach</li>
+                <li><strong>Defense in depth</strong> — layered controls: data, application, compute, network, perimeter, identity, physical</li>
+                <li>Security tooling: <strong>Microsoft Defender for Cloud</strong> (CSPM + workload protection, Secure Score), <strong>Microsoft Sentinel</strong> (SIEM/SOAR), <strong>Azure Key Vault</strong>, <strong>Azure Firewall</strong>, <strong>Azure DDoS Protection</strong></li>
+              </ul>
+            </div>
+            <div class="day-block resources">
+              <h4>Study</h4>
+              <ul>
+                <li><a href="https://learn.microsoft.com/en-us/training/modules/describe-azure-identity-access-security/">MS Learn · Describe Azure identity, access, and security</a></li>
+                <li><a href="https://learn.microsoft.com/en-us/entra/fundamentals/whatis">Microsoft Entra ID · What is it?</a></li>
+                <li><a href="https://learn.microsoft.com/en-us/security/zero-trust/zero-trust-overview">Zero Trust overview</a></li>
+                <li><a href="https://learn.microsoft.com/en-us/azure/defender-for-cloud/defender-for-cloud-introduction">Microsoft Defender for Cloud</a></li>
+              </ul>
+            </div>
+            <div class="day-block lab">
+              <h4>Hands-on</h4>
+              <p>In the Entra ID blade, create a new user (a test identity, not your real one). Explore the <strong>Security</strong> section — Conditional Access, MFA, Identity Protection. Do <em>not</em> apply Conditional Access policies to your admin account.</p>
+              <p>Open <strong>Microsoft Defender for Cloud</strong> and look at your Secure Score for the subscription. Read one recommendation and note the remediation steps — don't apply them yet.</p>
+            </div>
+            <div class="day-block check">
+              <h4>Self-check</h4>
+              <ul>
+                <li>Authentication or authorisation: an app checks that you're a member of the "billing-admin" group before showing invoices?</li>
+                <li>List the three principles of Zero Trust from memory.</li>
+                <li>Sentinel vs Defender for Cloud — which is the SIEM and which is the CSPM?</li>
+                <li>Which service securely stores secrets, keys, and certificates so applications don't hard-code them?</li>
+              </ul>
+            </div>
+          </div>
+        </div>
+      </article>
+
+      <!-- ============ DAY 09 ============ -->
+      <article class="day phase-3" id="day-09">
+        <div class="day-rail">
+          <div class="day-num">09</div>
+          <div class="day-slug">Phase III · Cost</div>
+          <div class="day-budget"><strong>1.5 h</strong> reading<br><strong>1 h</strong> lab</div>
+        </div>
+        <div class="day-body">
+          <h3 class="day-title">Cost management — calculators, billing, and savings</h3>
+          <p class="day-summary">Six factors move the Azure bill; two calculators help you plan; one blade helps you police it. Own the difference between the Pricing Calculator (planning a new workload) and the TCO Calculator (comparing on-prem to Azure). Know Reserved Instances, Savings Plans, Spot, and Hybrid Benefit — that's how the exam tests "how do I spend less".</p>
+
+          <div class="day-sections">
+            <div class="day-block">
+              <h4>Learn</h4>
+              <ul>
+                <li><strong>Cost factors</strong>: resource type, consumption (metered), maintenance state (stopped-deallocated vs stopped), geography, network egress, subscription type</li>
+                <li><strong>Pricing Calculator</strong> vs <strong>TCO Calculator</strong> — planning new spend vs comparing against on-prem</li>
+                <li><strong>Cost Management + Billing</strong> — analysis, budgets, cost alerts, exports</li>
+                <li><strong>Tags</strong> for cost allocation (department, owner, environment)</li>
+                <li>Savings: <strong>Reserved Instances</strong> (1 or 3 yr, up to 72% off), <strong>Savings Plans</strong> (flexible commit), <strong>Azure Hybrid Benefit</strong> (bring your own Windows / SQL licences), <strong>Spot VMs</strong> (deep discount, can be evicted)</li>
+              </ul>
+            </div>
+            <div class="day-block resources">
+              <h4>Study</h4>
+              <ul>
+                <li><a href="https://learn.microsoft.com/en-us/training/modules/describe-cost-management-azure/">MS Learn · Describe cost management in Azure</a></li>
+                <li><a href="https://azure.microsoft.com/en-us/pricing/calculator/">Azure Pricing Calculator</a></li>
+                <li><a href="https://azure.microsoft.com/en-us/pricing/tco/calculator/">Azure TCO Calculator</a></li>
+                <li><a href="https://learn.microsoft.com/en-us/azure/cost-management-billing/costs/overview-cost-management">Cost Management + Billing overview</a></li>
+              </ul>
+            </div>
+            <div class="day-block lab">
+              <h4>Hands-on</h4>
+              <p>In the Pricing Calculator, size a small three-tier web app: two B2ms VMs, one Standard SQL DB, 100 GB blob storage, one Application Gateway. Note the monthly total. Change the region to a cheaper one and observe the delta. Add a 3-year Reserved Instance to the VMs and observe the further savings.</p>
+              <p>In the portal, go to <strong>Cost Management</strong> and set a $5 budget with an email alert on your subscription — this protects you from bill shock while you keep practising.</p>
+            </div>
+            <div class="day-block check">
+              <h4>Self-check</h4>
+              <ul>
+                <li>A VM is <em>stopped</em> vs <em>stopped-deallocated</em> — which one is still billing you for compute?</li>
+                <li>You have predictable steady workloads for the next three years. Which savings option?</li>
+                <li>Pricing Calculator or TCO Calculator: you want to convince your CFO that moving your datacentre to Azure will be cheaper over five years?</li>
+                <li>Which cost factor changes if you move a resource from one region to another with everything else identical?</li>
+              </ul>
+            </div>
+          </div>
+        </div>
+      </article>
+
+      <!-- ============ DAY 10 ============ -->
+      <article class="day phase-3" id="day-10">
+        <div class="day-rail">
+          <div class="day-num">10</div>
+          <div class="day-slug">Phase III · Governance</div>
+          <div class="day-budget"><strong>2 h</strong> reading<br><strong>45 m</strong> lab</div>
+        </div>
+        <div class="day-body">
+          <h3 class="day-title">Governance, policy, and compliance</h3>
+          <p class="day-summary">Domain 3's trickiest cluster of near-synonyms: Policy vs RBAC, resource locks vs Policy denials, Purview vs Service Trust Portal. A crisp mental model of "what enforces what, at what scope" is the fastest way to pick these questions apart.</p>
+
+          <div class="day-sections">
+            <div class="day-block">
+              <h4>Learn</h4>
+              <ul>
+                <li><strong>Azure Policy</strong> — evaluates resources against rules (definitions) and enforces compliance. Answers "what can be done?"</li>
+                <li><strong>Role-Based Access Control (RBAC)</strong> — grants identities permissions to perform actions. Answers "who can do what?"</li>
+                <li><strong>Resource locks</strong> — <em>Read-Only</em> (no modify or delete) and <em>Delete / CanNotDelete</em> (modify allowed, delete blocked). Applied at subscription, RG, or resource scope</li>
+                <li><strong>Microsoft Purview</strong> — data governance, discovery, and compliance across estates</li>
+                <li><strong>Service Trust Portal</strong> — Microsoft's public repository of audit reports, ISO / SOC / PCI attestations, and compliance guides</li>
+                <li>Common frameworks: <strong>ISO 27001</strong>, <strong>HIPAA</strong>, <strong>PCI-DSS</strong>, <strong>GDPR</strong>, <strong>FedRAMP</strong></li>
+              </ul>
+            </div>
+            <div class="day-block resources">
+              <h4>Study</h4>
+              <ul>
+                <li><a href="https://learn.microsoft.com/en-us/training/modules/describe-features-tools-azure-for-governance-compliance/">MS Learn · Describe features and tools in Azure for governance and compliance</a></li>
+                <li><a href="https://learn.microsoft.com/en-us/azure/governance/policy/overview">Azure Policy overview</a></li>
+                <li><a href="https://learn.microsoft.com/en-us/azure/role-based-access-control/overview">Azure RBAC overview</a></li>
+                <li><a href="https://servicetrust.microsoft.com/">Service Trust Portal</a></li>
+                <li><a href="https://learn.microsoft.com/en-us/purview/purview-overview">Microsoft Purview</a></li>
+              </ul>
+            </div>
+            <div class="day-block lab">
+              <h4>Hands-on</h4>
+              <p>Assign a built-in Azure Policy (for example, "Allowed locations") to your resource group, restricting resource creation to one region. Then try to create a resource in a different region — observe the policy denial.</p>
+              <p>Apply a <strong>ReadOnly</strong> lock to your resource group. Try to edit a resource. Remove the lock when done — locks persist across sessions and can block your future labs.</p>
+            </div>
+            <div class="day-block check">
+              <h4>Self-check</h4>
+              <ul>
+                <li>You want to prevent anyone in your subscription from deploying storage accounts without HTTPS-only. Policy or RBAC?</li>
+                <li>You want to prevent a specific team from deleting a specific database. Lock, RBAC, or both?</li>
+                <li>An auditor asks for Microsoft's SOC 2 Type II report. Where do you find it?</li>
+                <li>Purview or Policy: automatically classify sensitive customer data across storage accounts?</li>
+              </ul>
+            </div>
+          </div>
+        </div>
+      </article>
+
+      <!-- ============ DAY 11 ============ -->
+      <article class="day phase-3" id="day-11">
+        <div class="day-rail">
+          <div class="day-num">11</div>
+          <div class="day-slug">Phase III · Tools &amp; Monitoring</div>
+          <div class="day-budget"><strong>2 h</strong> reading<br><strong>1 h</strong> lab</div>
+        </div>
+        <div class="day-body">
+          <h3 class="day-title">Deployment tools and monitoring — Portal to Advisor</h3>
+          <p class="day-summary">The exam wants you fluent across every way to touch Azure (Portal, CLI, PowerShell, Cloud Shell, ARM/Bicep, Arc) and every way to observe it (Monitor, Log Analytics, App Insights, Service Health, Advisor). Know the five Advisor pillars — reliability, security, performance, cost, operational excellence.</p>
+
+          <div class="day-sections">
+            <div class="day-block">
+              <h4>Learn</h4>
+              <ul>
+                <li>Interfaces: <strong>Azure Portal</strong> (GUI), <strong>Azure CLI</strong> (Bash/cross-platform), <strong>Azure PowerShell</strong> (Az module), <strong>Cloud Shell</strong> (browser terminal), <strong>Azure mobile app</strong></li>
+                <li>Infrastructure as code: <strong>ARM templates</strong> (JSON), <strong>Bicep</strong> (a DSL that transpiles to ARM)</li>
+                <li><strong>Azure Arc</strong> — extends Azure management to on-prem, other clouds, and edge</li>
+                <li>Monitoring: <strong>Azure Monitor</strong> (metrics + logs + alerts), <strong>Log Analytics</strong> (KQL against logs), <strong>Application Insights</strong> (APM for apps), <strong>Service Health</strong> (Azure incidents), <strong>Resource Health</strong> (your specific resource's status)</li>
+                <li><strong>Azure Advisor</strong> — personalised recommendations across five pillars: <em>reliability, security, performance, cost, operational excellence</em></li>
+              </ul>
+            </div>
+            <div class="day-block resources">
+              <h4>Study</h4>
+              <ul>
+                <li><a href="https://learn.microsoft.com/en-us/training/modules/describe-features-tools-manage-deploy-azure-resources/">MS Learn · Describe features and tools to manage and deploy Azure resources</a></li>
+                <li><a href="https://learn.microsoft.com/en-us/training/modules/describe-monitoring-tools-azure/">MS Learn · Describe monitoring tools in Azure</a></li>
+                <li><a href="https://learn.microsoft.com/en-us/azure/azure-monitor/overview">Azure Monitor overview</a></li>
+                <li><a href="https://learn.microsoft.com/en-us/azure/advisor/advisor-overview">Azure Advisor overview</a></li>
+                <li><a href="https://learn.microsoft.com/en-us/azure/azure-resource-manager/bicep/overview">Bicep overview</a></li>
+              </ul>
+            </div>
+            <div class="day-block lab">
+              <h4>Hands-on</h4>
+              <p>Open Cloud Shell and create a storage account with a single CLI command: <code>az storage account create --name aztest$RANDOM --resource-group &lt;your-rg&gt; --sku Standard_LRS</code>. Compare the experience with clicking through the same in the portal.</p>
+              <p>Open <strong>Azure Advisor</strong> and read every recommendation on your subscription. Note which of the five pillars each falls under. Open <strong>Service Health</strong> to see any current Azure-side incidents.</p>
+            </div>
+            <div class="day-block check">
+              <h4>Self-check</h4>
+              <ul>
+                <li>Which service tells you about outages Microsoft is having (not your resource being down)?</li>
+                <li>ARM template or Bicep: which is JSON, which is a friendlier DSL that produces the same ARM output?</li>
+                <li>You have a VM running in AWS you'd like to manage centrally alongside your Azure fleet. Which service?</li>
+                <li>Recite the five Azure Advisor pillars from memory.</li>
+              </ul>
+            </div>
+          </div>
+        </div>
+      </article>
+
+      <!-- ============ DAY 12 ============ -->
+      <article class="day phase-4" id="day-12">
+        <div class="day-rail">
+          <div class="day-num">12</div>
+          <div class="day-slug">Phase IV · Mastery</div>
+          <div class="day-budget"><strong>1 h</strong> exam<br><strong>2 h</strong> review</div>
+        </div>
+        <div class="day-body">
+          <h3 class="day-title">Full-length practice exam #1</h3>
+          <p class="day-summary">Simulate exam conditions: one hour, no notes, no distractions. Then spend twice as long reviewing every question — including the ones you got right — to convert lucky guesses into confident knowledge. Log weak topics for tomorrow.</p>
+
+          <div class="day-sections">
+            <div class="day-block">
+              <h4>Learn</h4>
+              <ul>
+                <li>Sit the exam <em>timed</em>. Do not pause. Do not look up answers</li>
+                <li>Score yourself by domain, not just overall</li>
+                <li>For every wrong answer, write in your notes: <em>which topic</em>, <em>correct answer</em>, <em>one-sentence "why" and "why not the distractor"</em></li>
+                <li>For every right-but-guessed answer, do the same — luck is not knowledge</li>
+              </ul>
+            </div>
+            <div class="day-block resources">
+              <h4>Study</h4>
+              <ul>
+                <li><a href="https://learn.microsoft.com/en-us/credentials/certifications/azure-fundamentals/practice/assessment?assessment-type=practice&amp;assessmentId=23">MS Learn · Official AZ-900 practice assessment</a> (free, closest to real exam style)</li>
+                <li><a href="https://www.measureup.com/az-900-microsoft-azure-fundamentals.html">MeasureUp · Official practice test</a> (paid, Microsoft-authorised)</li>
+                <li><a href="https://www.whizlabs.com/microsoft-azure-certification-az-900/">Whizlabs · AZ-900 practice tests</a> (paid, large question bank)</li>
+                <li><a href="https://www.examtopics.com/exams/microsoft/az-900/">ExamTopics · AZ-900 community discussion</a> (free, use for question style but verify answers against docs)</li>
+              </ul>
+            </div>
+            <div class="day-block lab">
+              <h4>Hands-on</h4>
+              <p>After scoring, take every weak-area topic and re-read the corresponding Microsoft Learn module in full. Do not skim. If your weak areas are &gt; 3 topics, focus on the two heaviest-weighted ones first.</p>
+            </div>
+            <div class="day-block check">
+              <h4>Self-check</h4>
+              <ul>
+                <li>What was your score by domain? (Target ≥ 80% in each; anything below 70% is a study emergency.)</li>
+                <li>List your top three weak topics — these become tomorrow's study plan.</li>
+                <li>Were any of your correct answers guesses? They shouldn't be by Day 14.</li>
+              </ul>
+            </div>
+          </div>
+        </div>
+      </article>
+
+      <!-- ============ DAY 13 ============ -->
+      <article class="day phase-4" id="day-13">
+        <div class="day-rail">
+          <div class="day-num">13</div>
+          <div class="day-slug">Phase IV · Mastery</div>
+          <div class="day-budget"><strong>1 h</strong> exam<br><strong>2 h</strong> targeted</div>
+        </div>
+        <div class="day-body">
+          <h3 class="day-title">Weak-area drill, then full-length practice exam #2</h3>
+          <p class="day-summary">Morning: attack yesterday's weak areas with fresh eyes. Afternoon: a second full-length practice exam from a different source than Day 12. If both scores are &gt; 85% and consistent, you are ready.</p>
+
+          <div class="day-sections">
+            <div class="day-block">
+              <h4>Learn</h4>
+              <ul>
+                <li>Deep-dive the three weakest topics from Day 12 using Microsoft Learn <em>and</em> official docs</li>
+                <li>Watch John Savill's AZ-900 Study Cram (v3, ~3 hours) — treat it as revision, not first-exposure</li>
+                <li>Take a second practice exam from a different provider than yesterday's</li>
+                <li>Compare the two score profiles — persistent gaps in one topic across both exams are the highest-priority final study</li>
+              </ul>
+            </div>
+            <div class="day-block resources">
+              <h4>Study</h4>
+              <ul>
+                <li><a href="https://www.youtube.com/@NTFAQGuy">John Savill · YouTube channel</a> — search "AZ-900 Study Cram v3"</li>
+                <li><a href="https://learn.microsoft.com/en-us/credentials/certifications/exams/az-900/">AZ-900 exam page</a> — re-read the "skills measured" doc</li>
+                <li><a href="https://marczak.io/az-900/">Adam Marczak · AZ-900 course</a> — supplement any weak topic</li>
+              </ul>
+            </div>
+            <div class="day-block lab">
+              <h4>Hands-on</h4>
+              <p>Rebuild the cheat sheet at the bottom of this roadmap <em>from memory</em>, one column at a time. Every fact you can't produce becomes a flashcard.</p>
+              <p>Schedule the exam this evening for tomorrow or the day after. Pick a morning slot when you're freshest. Choose online proctoring or a test centre by preference.</p>
+            </div>
+            <div class="day-block check">
+              <h4>Self-check</h4>
+              <ul>
+                <li>Two full practice-exam scores, both &gt; 85%? You're ready.</li>
+                <li>Same topic weak in both? One more focused hour on it tonight.</li>
+                <li>Exam scheduled and confirmed? System check done for online proctoring?</li>
+              </ul>
+            </div>
+          </div>
+        </div>
+      </article>
+
+      <!-- ============ DAY 14 ============ -->
+      <article class="day phase-4" id="day-14">
+        <div class="day-rail">
+          <div class="day-num">14</div>
+          <div class="day-slug">Phase IV · Exam day</div>
+          <div class="day-budget"><strong>30 m</strong> review<br><strong>60 m</strong> exam</div>
+        </div>
+        <div class="day-body">
+          <h3 class="day-title">The final polish, then sit the exam</h3>
+          <p class="day-summary">Do not cram today. Do not take a fresh practice test in the two hours before the exam. Warm up on the cheat sheet, breathe, and go in confident. During the exam, mark-and-move on anything you're unsure about — you have time to return to it.</p>
+
+          <div class="day-sections">
+            <div class="day-block">
+              <h4>Learn</h4>
+              <ul>
+                <li><strong>Morning</strong>: read the cheat sheet at the bottom of this roadmap. Skim your notes of wrong answers from Days 12–13. Nothing new</li>
+                <li><strong>One hour before</strong>: eat light, water, no caffeine spikes. Prepare your testing area (online) or leave for the test centre with 30 minutes to spare</li>
+                <li><strong>During the exam</strong>: read every question <em>twice</em>. Watch for the words <em>always</em>, <em>never</em>, <em>only</em>, <em>most</em>, <em>least</em>. Eliminate the obvious wrong answers before choosing between the plausible ones. Flag and return to hard questions</li>
+                <li><strong>Case-study sections</strong>, if present, cannot be revisited once submitted. Read the case fully before answering any question in it</li>
+              </ul>
+            </div>
+            <div class="day-block resources">
+              <h4>Study</h4>
+              <ul>
+                <li><a href="https://learn.microsoft.com/en-us/credentials/certifications/exams/az-900/">Official exam page · AZ-900</a></li>
+                <li><a href="https://learn.microsoft.com/en-us/credentials/certifications/online-exam">Online exam requirements &amp; system check</a></li>
+                <li><a href="https://learn.microsoft.com/en-us/credentials/certifications/pearson-vue-testing-centers">Pearson VUE test centres</a></li>
+              </ul>
+            </div>
+            <div class="day-block lab">
+              <h4>After the exam</h4>
+              <p>You receive your score immediately. If you passed — and you will — your digital badge and certificate are available in your Microsoft Learn profile within 24 hours. Add it to LinkedIn today; the visibility compounds.</p>
+              <p>If you're going further: your next natural steps are <strong>AZ-104</strong> (Administrator), <strong>AZ-204</strong> (Developer), <strong>AI-900</strong>, or <strong>SC-900</strong> (Security). Rest for a day first.</p>
+            </div>
+            <div class="day-block check">
+              <h4>Self-check</h4>
+              <ul>
+                <li>Did you flag and return to at least one question you weren't 100% sure about?</li>
+                <li>Did you finish with time to spare? Ten minutes is comfortable; two minutes is tight.</li>
+                <li>You passed. What's next on your certification path?</li>
+              </ul>
+            </div>
+          </div>
+        </div>
+      </article>
+
+    </div>
+  </section>
+
+  <!-- ============ RESOURCE LIBRARY ============ -->
+  <section id="library">
+    <div class="section-head">
+      <div class="section-num">§ 04 · Library</div>
+      <div>
+        <h2 class="section-title">Curated <em>resources</em>.</h2>
+        <p class="section-lede">Every link below is either Microsoft's own documentation or a widely respected third-party creator. Free-first — the paid resources appear only where they meaningfully improve your odds.</p>
+      </div>
+    </div>
+
+    <div class="library-grid">
+      <div class="lib-card">
+        <h3>Official Microsoft Learn paths</h3>
+        <ul>
+          <li><span class="kind">Path</span><a href="https://learn.microsoft.com/en-us/training/paths/microsoft-azure-fundamentals-describe-cloud-concepts/">Describe cloud concepts</a></li>
+          <li><span class="kind">Path</span><a href="https://learn.microsoft.com/en-us/training/paths/azure-fundamentals-describe-azure-architecture-services/">Describe Azure architecture and services</a></li>
+          <li><span class="kind">Path</span><a href="https://learn.microsoft.com/en-us/training/paths/describe-azure-management-governance/">Describe Azure management and governance</a></li>
+          <li><span class="kind">Exam</span><a href="https://learn.microsoft.com/en-us/credentials/certifications/exams/az-900/">Exam AZ-900 · official page &amp; skills outline</a></li>
+          <li><span class="kind">Cert</span><a href="https://learn.microsoft.com/en-us/credentials/certifications/azure-fundamentals/">Azure Fundamentals certification page</a></li>
+        </ul>
+      </div>
+
+      <div class="lib-card">
+        <h3>Practice tests</h3>
+        <ul>
+          <li><span class="kind">Free</span><a href="https://learn.microsoft.com/en-us/credentials/certifications/azure-fundamentals/practice/assessment?assessment-type=practice&amp;assessmentId=23">Microsoft's official free practice assessment</a></li>
+          <li><span class="kind">Paid</span><a href="https://www.measureup.com/az-900-microsoft-azure-fundamentals.html">MeasureUp — the only Microsoft-authorised practice test</a></li>
+          <li><span class="kind">Paid</span><a href="https://www.whizlabs.com/microsoft-azure-certification-az-900/">Whizlabs · AZ-900 practice bank</a></li>
+          <li><span class="kind">Free</span><a href="https://www.examtopics.com/exams/microsoft/az-900/">ExamTopics · community question dumps</a> — check discussion tab for corrected answers</li>
+        </ul>
+      </div>
+
+      <div class="lib-card">
+        <h3>Video courses (free)</h3>
+        <ul>
+          <li><span class="kind">YouTube</span><a href="https://www.youtube.com/@NTFAQGuy">John Savill's Technical Training</a> — search "AZ-900 Study Cram v3", the single best free revision video</li>
+          <li><span class="kind">YouTube</span><a href="https://marczak.io/az-900/">Adam Marczak · Azure for Everyone — AZ-900 course</a></li>
+          <li><span class="kind">YouTube</span><a href="https://www.youtube.com/@MicrosoftReactor">Microsoft Reactor</a> — official beginner content, occasional AZ-900 study groups</li>
+        </ul>
+      </div>
+
+      <div class="lib-card">
+        <h3>Reference docs to bookmark</h3>
+        <ul>
+          <li><span class="kind">Docs</span><a href="https://azure.microsoft.com/en-us/explore/global-infrastructure/geographies/">Azure global infrastructure map</a></li>
+          <li><span class="kind">Docs</span><a href="https://learn.microsoft.com/en-us/azure/architecture/guide/technology-choices/compute-decision-tree">Compute decision tree</a></li>
+          <li><span class="kind">Docs</span><a href="https://learn.microsoft.com/en-us/azure/architecture/guide/technology-choices/load-balancing-overview">Load-balancing decision tree</a></li>
+          <li><span class="kind">Docs</span><a href="https://azure.microsoft.com/en-us/pricing/calculator/">Pricing Calculator</a> · <a href="https://azure.microsoft.com/en-us/pricing/tco/calculator/">TCO Calculator</a></li>
+          <li><span class="kind">Docs</span><a href="https://servicetrust.microsoft.com/">Service Trust Portal</a></li>
+        </ul>
+      </div>
+    </div>
+  </section>
+
+  <!-- ============ CHEAT SHEET ============ -->
+  <section id="cheatsheet">
+    <div class="section-head">
+      <div class="section-num">§ 05 · Cheat sheet</div>
+      <div>
+        <h2 class="section-title">The night-before <em>reference</em>.</h2>
+        <p class="section-lede">Every fact below has appeared in the AZ-900 exam bank in one form or another. Rebuild the table from memory on Day 13 and cross-check. If you can produce every row by exam morning, you're operating at the top of the score band.</p>
+      </div>
+    </div>
+
+    <div class="cheat-wrap">
+      <table class="cheat">
+        <thead>
+          <tr><th>Concept</th><th>The fact</th></tr>
+        </thead>
+        <tbody>
+          <tr><td class="k">Passing score</td><td class="v">700 / 1000. Score reported by domain, not question count.</td></tr>
+          <tr><td class="k">Regions worldwide</td><td class="v">60+ Azure regions, more than any other cloud provider. Each is a set of datacentres within a latency-defined perimeter.</td></tr>
+          <tr><td class="k">Availability Zones</td><td class="v">Minimum three physically separate zones in a zone-enabled region. Each is one or more datacentres with independent power, cooling, network.</td></tr>
+          <tr><td class="k">Region pairs</td><td class="v">Every region paired with another in the same geography (usually 300+ miles apart) for disaster recovery. Updates staggered across the pair.</td></tr>
+          <tr><td class="k">Resource hierarchy</td><td class="v">Management groups &gt; Subscriptions &gt; Resource groups &gt; Resources. A resource lives in exactly one RG and one region.</td></tr>
+          <tr><td class="k">Free account</td><td class="v">$200 credit for 30 days, 12 months of popular services free, plus always-free services (functions, blob to a limit, and more).</td></tr>
+          <tr><td class="k">VM SLA ladder</td><td class="v">Single Premium SSD VM: 99.9%. Availability set: 99.95%. Availability zones: 99.99%.</td></tr>
+          <tr><td class="k">Storage redundancy</td><td class="v">LRS = 3 copies in one DC. ZRS = 3 zones. GRS = 6 copies across 2 regions. GZRS = ZRS + geo. RA-* variants add read to secondary.</td></tr>
+          <tr><td class="k">Blob access tiers</td><td class="v">Hot &gt; Cool &gt; Cold &gt; Archive. Storage cost falls, access cost rises. Archive requires rehydration up to 15 hours.</td></tr>
+          <tr><td class="k">Load-balancing layers</td><td class="v">Load Balancer L4 (TCP/UDP). Application Gateway L7 regional. Front Door L7 global. Traffic Manager DNS-based global.</td></tr>
+          <tr><td class="k">VPN vs ExpressRoute</td><td class="v">VPN Gateway: encrypted tunnel over public internet. ExpressRoute: private circuit through a partner, higher bandwidth, higher SLA.</td></tr>
+          <tr><td class="k">Policy vs RBAC</td><td class="v">Policy governs <em>what can exist / happen</em>. RBAC governs <em>who can act</em>. They're complementary — use both.</td></tr>
+          <tr><td class="k">Resource locks</td><td class="v">ReadOnly (no modify or delete) and Delete (modify allowed, delete blocked). Inherit down the scope tree.</td></tr>
+          <tr><td class="k">Zero Trust principles</td><td class="v">Verify explicitly · Use least-privilege access · Assume breach.</td></tr>
+          <tr><td class="k">Defense in depth layers</td><td class="v">Physical · Identity &amp; access · Perimeter · Network · Compute · Application · Data.</td></tr>
+          <tr><td class="k">Defender vs Sentinel</td><td class="v">Defender for Cloud = CSPM + workload protection + Secure Score. Sentinel = cloud-native SIEM + SOAR.</td></tr>
+          <tr><td class="k">Entra ID name</td><td class="v">Formerly Azure Active Directory. Renamed in 2023. Both names appear in older content; exam uses the new one.</td></tr>
+          <tr><td class="k">Cost savings</td><td class="v">Reserved Instances (1 or 3 yr, up to 72% off), Savings Plans (flexible commit), Azure Hybrid Benefit (bring your own Windows/SQL licences), Spot VMs (deep discount, evictable).</td></tr>
+          <tr><td class="k">Advisor pillars</td><td class="v">Reliability · Security · Performance · Cost · Operational excellence.</td></tr>
+          <tr><td class="k">Service vs Resource Health</td><td class="v">Service Health: Azure-side incidents affecting your services. Resource Health: the health of your specific resources right now.</td></tr>
+          <tr><td class="k">Migration ladder</td><td class="v">The five R's: Rehost · Refactor · Rearchitect · Rebuild · Replace.</td></tr>
+          <tr><td class="k">SLA composition</td><td class="v">Composite SLA is the <em>product</em> of dependent-service SLAs. Two 99.9% services in series ≈ 99.8%.</td></tr>
+          <tr><td class="k">VM billing states</td><td class="v">Stopped: still billed for compute. Stopped-deallocated: not billed for compute. Storage always billed.</td></tr>
+          <tr><td class="k">ARM vs Bicep</td><td class="v">ARM: JSON templates. Bicep: cleaner DSL that transpiles to ARM. Same underlying engine.</td></tr>
+          <tr><td class="k">Azure Arc scope</td><td class="v">Manages non-Azure resources — servers on-prem, in AWS/GCP, Kubernetes clusters, data services — from the Azure control plane.</td></tr>
+        </tbody>
+      </table>
+    </div>
+  </section>
+
+  <!-- ============ EXAM DAY PLAYBOOK ============ -->
+  <section id="playbook">
+    <div class="section-head">
+      <div class="section-num">§ 06 · Playbook</div>
+      <div>
+        <h2 class="section-title">Exam day, <em>hour by hour</em>.</h2>
+        <p class="section-lede">A calm ritual beats last-minute cramming. Follow the timings below to arrive at the desk in the right state — knowledgeable, rested, unhurried.</p>
+      </div>
+    </div>
+
+    <div class="playbook">
+      <div class="play-card">
+        <div class="play-when">T – 12 hours</div>
+        <h3>The night before</h3>
+        <ul>
+          <li>Skim the cheat sheet once. Do not attempt new material</li>
+          <li>Confirm the exam booking, ID requirements, and time zone</li>
+          <li>Online: run the Pearson VUE system check on the exact device you'll use</li>
+          <li>Lay out ID, water, snacks (if allowed at your centre)</li>
+          <li>Sleep at your normal time. Don't sabotage yourself with an early night your body isn't used to</li>
+        </ul>
+      </div>
+
+      <div class="play-card">
+        <div class="play-when">T – 60 minutes</div>
+        <h3>The final hour</h3>
+        <ul>
+          <li>Light meal, water, small dose of caffeine only if you use it daily</li>
+          <li>Online proctoring: clear the room, phone away, single monitor, disconnect other displays</li>
+          <li>Test centre: leave 30 minutes early. Bring two forms of ID</li>
+          <li>Read the cheat sheet one last time. Set it aside — no phones or notes allowed in the exam</li>
+        </ul>
+      </div>
+
+      <div class="play-card">
+        <div class="play-when">During the exam</div>
+        <h3>Sixty minutes</h3>
+        <ul>
+          <li>Read each question <em>twice</em>. Note qualifiers: always, never, only, most, least, best</li>
+          <li>Eliminate obviously wrong answers first, then choose between the two that remain</li>
+          <li>Mark for review any question you're less than 90% on; return with fresh eyes</li>
+          <li>Time budget: about 60–90 seconds per question. Case studies read once, thoroughly, then answer</li>
+          <li>Case-study sections cannot be revisited after submission — check work before hitting next</li>
+          <li>Trust your first instinct on multiple-choice unless you find concrete evidence to change it</li>
+        </ul>
+      </div>
+    </div>
+
+    <div class="callout warn" style="margin-top: 28px;">
+      <strong>One thing not to do:</strong> take a full-length practice exam on the morning of the exam. A poor score will rattle you; a great score will make you cocky. The goal by exam-morning is calm confidence, not fresh data.
+    </div>
+  </section>
+
+  <footer>
+    <div class="mark">A fourteen-day plan for Microsoft's Azure Fundamentals certification.</div>
+    <div class="meta">Roadmap · v1 · Prepared for exam AZ-900</div>
+  </footer>
+
+</main>

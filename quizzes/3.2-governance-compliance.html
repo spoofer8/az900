@@ -1,0 +1,120 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>3.2 Governance &amp; compliance · AZ-900 quiz</title>
+  <link rel="stylesheet" href="quiz.css">
+</head>
+<body>
+<div class="container">
+
+  <header class="q-header">
+    <div class="q-crumb"><a href="index.html">All quizzes</a><span class="sep">Domain 3 · Management and governance</span></div>
+    <h1 class="q-title">Governance &amp; compliance</h1>
+    <p class="q-subtitle">Microsoft Purview, Azure Policy, resource locks, Service Trust Portal.</p>
+  </header>
+
+  <div id="setup">
+    <p class="setup-intro">Choose a difficulty tier. Easy tests recall, Medium tests scenarios, Hard tests distractor traps.</p>
+    <div class="setup-diff">
+      <button class="start-btn diff-easy" data-difficulty="easy"><span class="btn-label">Tier · Recall</span><span class="btn-title">Easy</span><span class="btn-count" id="count-easy">— questions</span></button>
+      <button class="start-btn diff-medium" data-difficulty="medium"><span class="btn-label">Tier · Scenarios</span><span class="btn-title">Medium</span><span class="btn-count" id="count-medium">— questions</span></button>
+      <button class="start-btn diff-hard" data-difficulty="hard"><span class="btn-label">Tier · Gotchas</span><span class="btn-title">Hard</span><span class="btn-count" id="count-hard">— questions</span></button>
+      <button class="start-btn diff-all" data-difficulty="all"><span class="btn-label">All tiers</span><span class="btn-title">Full quiz</span><span class="btn-count" id="count-all">— questions</span></button>
+    </div>
+  </div>
+
+  <div id="quiz" style="display: none;">
+    <div class="q-progress"><span>Q<span id="q-num">1</span> / <span id="q-total">0</span></span><div class="progress-track"><div class="progress-fill" id="progress-fill"></div></div></div>
+    <div class="q-card">
+      <div class="q-meta"><span class="chip diff-easy" id="q-difficulty">easy</span></div>
+      <div class="q-text" id="q-text"></div>
+      <div class="q-options" id="q-options"></div>
+      <div class="feedback" id="feedback"><div class="feedback-verdict" id="feedback-verdict"></div><div class="feedback-explanation" id="feedback-explanation"></div></div>
+      <div class="q-controls"><span></span><button class="btn btn-primary" id="next-btn" style="display: none;">Next question</button></div>
+    </div>
+  </div>
+
+  <div id="results" style="display: none;">
+    <div class="results-hero">
+      <div class="score-pct" id="score-pct">0%</div>
+      <div class="score-fraction"><span id="score-num">0</span> of <span id="score-total">0</span> correct</div>
+      <div class="verdict" id="score-verdict"></div>
+    </div>
+    <div class="results-actions">
+      <button class="btn btn-primary" id="retry-btn">Retry same tier</button>
+      <button class="btn btn-secondary" id="back-btn">Change tier</button>
+    </div>
+    <h2 class="review-title">Review</h2>
+    <div id="review"></div>
+  </div>
+
+</div>
+
+<script>
+window.QUIZ_META = { title: "Governance & compliance", code: "3.2", domain: "Domain 3" };
+
+window.QUIZ_QUESTIONS = [
+  // EASY
+  { q: "Microsoft Purview is used for:", o: ["Compute orchestration", "Data governance — discovery, classification, and lineage across your data estate", "Load balancing", "Cost management"], a: 1, d: "easy", e: "Purview is Microsoft's unified data governance platform — data discovery, classification, lineage, and compliance across sources." },
+  { q: "Azure Policy governs:", o: ["Who can access resources", "What configurations are allowed for resources", "How much resources cost", "Physical security"], a: 1, d: "easy", e: "Policy enforces resource configuration standards (e.g. allowed regions, required tags, secure transfer required)." },
+  { q: "RBAC governs:", o: ["Configuration standards", "Who (identity) can do what (actions) on resources", "The physical layer", "Only virtual networks"], a: 1, d: "easy", e: "RBAC is identity-based — it decides who can perform which actions on which resources." },
+  { q: "Which is TRUE about the relationship between Policy and RBAC?", o: ["They are alternatives — pick one", "They are complementary — Policy governs configuration, RBAC governs access; use both", "Policy replaces RBAC", "RBAC is deprecated"], a: 1, d: "easy", e: "Policy + RBAC are complementary. Policy = what's allowed to exist/happen. RBAC = who can act. Both are enforced by ARM at request time." },
+  { q: "A policy 'definition' in Azure Policy is:", o: ["An identity role", "A single rule (in JSON)", "A resource lock", "A subscription"], a: 1, d: "easy", e: "A policy definition is a single JSON rule (e.g. 'allowed locations = West Europe / UK South')." },
+  { q: "A policy 'initiative' is:", o: ["A single rule", "A group of policy definitions bundled together (e.g. an ISO 27001 baseline)", "A subscription", "A resource lock"], a: 1, d: "easy", e: "Initiatives (also called policy sets) group many definitions for coherent governance packages." },
+  { q: "Which of these is a valid Azure Policy effect?", o: ["Reboot", "Deny", "Format", "Deploy anywhere"], a: 1, d: "easy", e: "Common effects: audit, deny, append, modify, deployIfNotExists, auditIfNotExists, disabled." },
+  { q: "Which effect blocks a non-compliant resource from being created?", o: ["Audit", "Deny", "Modify", "Disabled"], a: 1, d: "easy", e: "The 'deny' effect blocks creation or modification if the resource doesn't meet policy criteria." },
+  { q: "Which effect only logs a violation but does NOT block the action?", o: ["Deny", "Audit", "Modify", "AppendIfNotExists"], a: 1, d: "easy", e: "Audit records non-compliance without blocking — useful for measuring drift or preparing a rollout." },
+  { q: "A resource lock has how many types?", o: ["1", "2 (ReadOnly and Delete/CanNotDelete)", "3", "5"], a: 1, d: "easy", e: "Two lock types: ReadOnly (no modify, no delete) and Delete/CanNotDelete (modify allowed, no delete)." },
+  { q: "A 'ReadOnly' lock:", o: ["Allows delete but blocks modify", "Blocks both modify and delete", "Blocks read only", "Has no effect"], a: 1, d: "easy", e: "ReadOnly = no modify AND no delete. Even Owners are affected — the lock must be removed first." },
+  { q: "A 'Delete' (CanNotDelete) lock:", o: ["Blocks both modify and delete", "Allows modify but blocks delete", "Blocks all read", "Only applies to blobs"], a: 1, d: "easy", e: "Delete lock allows modification but blocks deletion. Useful for critical resources that need updates but must not be removed." },
+  { q: "Resource locks can be applied at which scopes?", o: ["Management groups", "Subscription, resource group, or individual resource", "Only tenant level", "Only individual resource"], a: 1, d: "easy", e: "Locks work at subscription, RG, or resource scope. They inherit down." },
+  { q: "The Service Trust Portal is:", o: ["A billing tool", "Microsoft's public repository of audit reports, compliance guides, and attestations", "A monitoring tool", "A firewall"], a: 1, d: "easy", e: "Service Trust Portal (servicetrust.microsoft.com) hosts SOC / ISO / FedRAMP / HIPAA / PCI reports and compliance guides." },
+  { q: "Which compliance framework focuses on the EU personal-data protection?", o: ["FedRAMP", "GDPR", "PCI-DSS", "SOX"], a: 1, d: "easy", e: "GDPR = General Data Protection Regulation, EU's personal-data protection law." },
+  { q: "Which compliance framework applies to US healthcare data?", o: ["ISO 27001", "HIPAA / HITRUST", "PCI-DSS", "FedRAMP"], a: 1, d: "easy", e: "HIPAA (Health Insurance Portability and Accountability Act) governs US healthcare data protection. HITRUST is a common implementation framework." },
+  { q: "Which compliance framework applies to US federal government cloud use?", o: ["GDPR", "PCI-DSS", "FedRAMP", "HIPAA"], a: 2, d: "easy", e: "FedRAMP = Federal Risk and Authorization Management Program — standard for US federal cloud services." },
+  { q: "Which compliance framework applies to payment card data?", o: ["PCI-DSS", "HIPAA", "FedRAMP", "GDPR"], a: 0, d: "easy", e: "PCI-DSS = Payment Card Industry Data Security Standard. Applies to any org handling cardholder data." },
+  { q: "ISO 27001 is:", o: ["A payment framework", "An international standard for information security management systems (ISMS)", "A cloud pricing model", "A backup service"], a: 1, d: "easy", e: "ISO 27001 is the international standard for ISMS — widely adopted for security certification." },
+  { q: "SOC audit reports (SOC 1 / 2 / 3) apply to:", o: ["Only US healthcare", "Service organisation controls — how service providers protect customer data (widely used in North America)", "Payment processing only", "Government-only"], a: 1, d: "easy", e: "SOC reports assess how service providers manage security, availability, processing integrity, confidentiality, and privacy." },
+
+  // MEDIUM
+  { q: "You want to prevent anyone from deploying storage accounts without 'secure transfer required' (HTTPS-only). Best tool?", o: ["RBAC alone", "Azure Policy with a deny effect on the setting", "Resource lock", "Purview"], a: 1, d: "medium", e: "Policy with 'deny' can enforce configuration standards — RBAC governs who can act, not what's allowed." },
+  { q: "You want to prevent a specific team from deleting a specific database. Best combination?", o: ["Only RBAC Reader for that team", "Delete lock on the database + appropriate RBAC to prevent unlock", "Delete lock alone is enough", "Only Azure Firewall"], a: 1, d: "medium", e: "Locks apply on top of RBAC. Combine a Delete lock with restricting who has 'Microsoft.Authorization/*' to remove the lock." },
+  { q: "An auditor requests Microsoft's SOC 2 Type II attestation for Azure. Where do you find it?", o: ["Azure Advisor", "Service Trust Portal", "Cost Management", "Sentinel"], a: 1, d: "medium", e: "Service Trust Portal is the public library of Microsoft's audit reports and compliance documentation." },
+  { q: "You need to automatically classify PII across many storage accounts and databases. Best tool?", o: ["Azure Policy", "Microsoft Purview", "Cost Management", "Advisor"], a: 1, d: "medium", e: "Purview auto-scans data sources, classifies content (PII, financial, health), and tracks lineage across your estate." },
+  { q: "You want ONE policy to apply across 20 subscriptions in your organisation. Best approach?", o: ["Assign the policy to each subscription individually", "Put the subs under a Management Group and assign the policy at MG scope (inherits down)", "Use RBAC to enforce", "Use resource locks"], a: 1, d: "medium", e: "Policies at management group scope cascade to all child subs. Single assignment covers all 20." },
+  { q: "Which is TRUE about resource locks?", o: ["Owners bypass them automatically", "Locks apply to everyone; even Owners must remove the lock first (requires appropriate authorisation permissions)", "Only Readers are affected", "Locks are subscription-scoped only"], a: 1, d: "medium", e: "Locks apply universally regardless of RBAC. To bypass, you must first remove the lock — which requires 'Microsoft.Authorization/*' rights." },
+  { q: "You want Azure Policy to automatically add a diagnostic settings resource whenever a storage account is created. Best effect?", o: ["Audit", "Deny", "DeployIfNotExists", "Disabled"], a: 2, d: "medium", e: "DeployIfNotExists deploys a related resource (like diagnostic settings) when the target resource is created without one." },
+  { q: "You want to enforce that every new resource has an 'Environment' tag. Best effect?", o: ["Audit only", "Deny (block creation without the tag) or Modify (add the tag)", "Reader RBAC", "Delete lock"], a: 1, d: "medium", e: "Deny blocks resource creation without the tag. Modify (or append) can auto-add it. Both are valid strategies." },
+  { q: "Which is TRUE about Azure Policy vs RBAC in terms of enforcement?", o: ["Only Policy is enforced at deploy time", "Both are enforced by ARM at request time — a request must satisfy BOTH policy compliance AND RBAC to succeed", "RBAC is enforced later", "Neither is enforced automatically"], a: 1, d: "medium", e: "Every ARM request must pass RBAC (who) AND Policy (what). If either fails, the request is rejected." },
+  { q: "Which is TRUE about ReadOnly locks and VMs?", o: ["They have no side effects", "They can block operations like start/stop because those change state", "They only apply to disks", "They only affect Networking"], a: 1, d: "medium", e: "ReadOnly is strict — even start/stop, which change VM state, can be blocked. Use Delete lock instead if operations must remain possible." },
+  { q: "Which is TRUE about Microsoft Purview's scope?", o: ["It only covers Azure Blob Storage", "It spans Azure services, on-prem sources, other clouds (AWS S3), and SaaS (M365) via connectors", "It's on-prem only", "It's a backup tool"], a: 1, d: "medium", e: "Purview scans a wide range of data sources across your estate — Azure, AWS, on-prem, and SaaS." },
+  { q: "A company wants to run an audit against ISO 27001 controls in Azure. Best resource?", o: ["Purview only", "Service Trust Portal for evidence + Microsoft Purview Compliance Manager for live posture management", "Azure Bastion", "Only Advisor"], a: 1, d: "medium", e: "Service Trust Portal provides evidence documentation. Compliance Manager (within Purview) helps assess and manage your ongoing compliance posture." },
+  { q: "Which is TRUE about built-in Azure Policy definitions?", o: ["There are only 5", "There are hundreds, covering topics like security best practices, allowed locations, allowed SKUs, and compliance frameworks", "You must always write custom policies", "They only apply to VMs"], a: 1, d: "medium", e: "Azure ships with 100s of built-in policies. Custom policies are also possible when built-ins don't cover a specific need." },
+  { q: "You want to prevent VMs from being created outside three approved regions. Best policy configuration?", o: ["'Allowed locations' policy with a deny effect, assigned at subscription or MG scope", "Only RBAC", "Delete lock everywhere", "Purview classification"], a: 0, d: "medium", e: "The built-in 'Allowed locations' policy enforces region restrictions with deny." },
+  { q: "Which is FALSE about the difference between Purview and Azure Policy?", o: ["Purview governs DATA discovery and classification", "Policy governs RESOURCE configuration", "They are the same product", "They can complement each other in a governance strategy"], a: 2, d: "medium", e: "Purview = data. Policy = resource configuration. Different tools for different governance layers." },
+  { q: "You need to prove Microsoft's Azure Government offering meets FedRAMP High. Best source?", o: ["Guess", "Service Trust Portal → Compliance documents", "Reddit", "Delete the workload"], a: 1, d: "medium", e: "Service Trust Portal has FedRAMP attestations and boundary documents for Azure and Azure Government." },
+  { q: "Which effect will BOTH block non-compliant resources and log them?", o: ["Audit", "Deny (blocks + logs)", "Modify only", "AuditIfNotExists"], a: 1, d: "medium", e: "'Deny' blocks the request. Any denied deployment is also visible in activity logs and compliance reports." },
+  { q: "You need to ensure a legal hold on a specific storage container — no deletion for 7 years. Best fit?", o: ["Only RBAC Reader", "Storage-level immutable blob policies (legal hold or time-based retention) + a Delete lock on the account", "Delete the container", "Rely on backups only"], a: 1, d: "medium", e: "Storage-level immutable policies + resource locks + Policy give layered protection for legally-mandated retention." },
+  { q: "Which is TRUE about Microsoft Purview Compliance Manager?", o: ["It's a firewall", "It's a live compliance-posture management tool (recommended actions, controls, scoring) that integrates with your Azure environment", "It only shows reports", "It replaces the Service Trust Portal"], a: 1, d: "medium", e: "Compliance Manager is a live tool for tracking and improving your compliance posture. Service Trust Portal is the doc repository." },
+  { q: "Which is a valid way to standardise deployment configurations while also meeting policy?", o: ["Manual deployment only", "Combine IaC (ARM/Bicep) templates with Azure Policy — templates encode the intended config, policy enforces it", "Only rely on user memory", "Never automate deployments"], a: 1, d: "medium", e: "IaC + Policy is the modern pattern — templates express intent, policy ensures compliance even when someone bypasses templates." },
+
+  // HARD
+  { q: "Which is TRUE about the difference between Policy audit and deny effects?", o: ["Both block deployments", "Audit logs violations only; deny blocks the request. Use audit first to measure, then move to deny once tolerated", "Deny only affects reads", "They are the same"], a: 1, d: "hard", e: "Progressive rollout pattern: start with audit to see what breaks. Analyse, exempt where needed, then flip to deny." },
+  { q: "You accidentally applied a ReadOnly lock to a critical VM and now cannot restart it. What's the fix?", o: ["Delete and redeploy the VM", "Remove the ReadOnly lock (need Microsoft.Authorization permissions), then restart the VM", "Wait 24 hours", "Call Microsoft Support to unlock"], a: 1, d: "hard", e: "Remove the lock (requires appropriate authorisation permissions), perform the operation, and (if needed) reapply the lock." },
+  { q: "Which is TRUE about the scope inheritance of Azure Policy?", o: ["Policies apply only at the exact scope assigned", "Policies applied at a management group or subscription cascade down to all children (subs, RGs, resources)", "Policies never cascade", "Only 'audit' effects cascade"], a: 1, d: "hard", e: "Policies inherit down: MG → Sub → RG → Resource. Assign at the highest useful scope for organisation-wide coverage." },
+  { q: "Which is TRUE about the difference between 'audit' and 'auditIfNotExists' effects?", o: ["They are the same", "'audit' evaluates the target resource itself; 'auditIfNotExists' checks whether a related resource exists (e.g. diagnostic settings on a VM)", "audit is stronger", "auditIfNotExists blocks deployments"], a: 1, d: "hard", e: "'auditIfNotExists' fires when a related dependent resource doesn't exist (e.g. audit a VM if it lacks a required extension)." },
+  { q: "You have a policy assigned to a management group that denies certain SKUs. A subscription under it deploys via ARM template — will the policy prevent the deploy?", o: ["No, ARM templates bypass policy", "Yes — policy is enforced by ARM at every deploy path (Portal, CLI, PowerShell, REST, ARM template, Bicep)", "Only if triggered manually", "Only if the deployer is a Reader"], a: 1, d: "hard", e: "Policy is enforced by ARM, so every deployment path is subject to it — including ARM templates and Bicep." },
+  { q: "Which is TRUE about custom RBAC roles vs Azure Policy?", o: ["Custom roles enforce configuration", "Custom RBAC roles change what a user can do; Policy changes what configurations are allowed — they solve different problems", "They are the same", "Custom roles replace Policy"], a: 1, d: "hard", e: "Custom RBAC = tailored identity permissions. Custom Policy = tailored configuration rules. Different governance dimensions." },
+  { q: "Which is TRUE about resource locks and cost?", o: ["Locks cost money", "Resource locks are free; they add zero cost to the resources they protect", "Locks require Premium tier", "Locks only work with reservations"], a: 1, d: "hard", e: "Locks are a free governance feature — no additional cost beyond the resource itself." },
+  { q: "You want to enforce that any new resource without an 'Owner' tag gets tagged with 'Owner = <creator>'. Best effect?", o: ["Deny (blocks creation)", "Modify (adds the tag automatically at creation)", "Audit", "Disabled"], a: 1, d: "hard", e: "'Modify' adds/removes/updates properties (like tags) on resource creation or update — the right tool for auto-tagging." },
+  { q: "Which is TRUE about the layers of governance in Azure?", o: ["Only RBAC matters", "Effective governance layers policy (what), RBAC (who), locks (protect critical), tags (organise), Purview (data)", "There's only one control", "Governance is optional in cloud"], a: 1, d: "hard", e: "Real-world governance uses several complementary tools. Each addresses a different dimension." },
+  { q: "Which is TRUE about compliance in Azure?", o: ["Microsoft handles compliance; customer has no role", "Compliance is shared — Microsoft attests the platform (SOC/ISO/FedRAMP), customer configures resources correctly and manages data properly", "Customer handles all compliance alone", "Compliance is impossible in cloud"], a: 1, d: "hard", e: "Compliance is shared. Microsoft attests the platform's controls; the customer must configure services (data, encryption, access) to meet their obligations." },
+  { q: "Which is TRUE about the interaction between Policy and IaC templates (ARM/Bicep)?", o: ["Templates bypass Policy", "Templates are deployed through ARM, which enforces Policy — a template that violates Policy will fail to deploy", "Policy applies only to Portal deployments", "IaC replaces Policy"], a: 1, d: "hard", e: "All deployments go through ARM. Policy is enforced by ARM. A non-compliant template will be rejected at deploy time." },
+  { q: "Which is TRUE about scope narrowing for Policy assignments?", o: ["Always assign at root MG", "Assign at the tightest useful scope — root MG for org-wide rules, subscription for env-specific, RG for project-specific", "Assign at resource level only", "Never assign policy"], a: 1, d: "hard", e: "Choose the tightest scope that meets the intent. Root MG for global rules, subs / RGs for narrower ones." }
+];
+</script>
+<script src="quiz.js"></script>
+</body>
+</html>

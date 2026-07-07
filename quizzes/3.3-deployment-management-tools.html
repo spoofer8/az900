@@ -1,0 +1,120 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>3.3 Deployment &amp; management tools · AZ-900 quiz</title>
+  <link rel="stylesheet" href="quiz.css">
+</head>
+<body>
+<div class="container">
+
+  <header class="q-header">
+    <div class="q-crumb"><a href="index.html">All quizzes</a><span class="sep">Domain 3 · Management and governance</span></div>
+    <h1 class="q-title">Deployment &amp; management tools</h1>
+    <p class="q-subtitle">Portal, CLI, PowerShell, Cloud Shell, ARM templates, Bicep, Azure Arc.</p>
+  </header>
+
+  <div id="setup">
+    <p class="setup-intro">Choose a difficulty tier. Easy tests recall, Medium tests scenarios, Hard tests distractor traps.</p>
+    <div class="setup-diff">
+      <button class="start-btn diff-easy" data-difficulty="easy"><span class="btn-label">Tier · Recall</span><span class="btn-title">Easy</span><span class="btn-count" id="count-easy">— questions</span></button>
+      <button class="start-btn diff-medium" data-difficulty="medium"><span class="btn-label">Tier · Scenarios</span><span class="btn-title">Medium</span><span class="btn-count" id="count-medium">— questions</span></button>
+      <button class="start-btn diff-hard" data-difficulty="hard"><span class="btn-label">Tier · Gotchas</span><span class="btn-title">Hard</span><span class="btn-count" id="count-hard">— questions</span></button>
+      <button class="start-btn diff-all" data-difficulty="all"><span class="btn-label">All tiers</span><span class="btn-title">Full quiz</span><span class="btn-count" id="count-all">— questions</span></button>
+    </div>
+  </div>
+
+  <div id="quiz" style="display: none;">
+    <div class="q-progress"><span>Q<span id="q-num">1</span> / <span id="q-total">0</span></span><div class="progress-track"><div class="progress-fill" id="progress-fill"></div></div></div>
+    <div class="q-card">
+      <div class="q-meta"><span class="chip diff-easy" id="q-difficulty">easy</span></div>
+      <div class="q-text" id="q-text"></div>
+      <div class="q-options" id="q-options"></div>
+      <div class="feedback" id="feedback"><div class="feedback-verdict" id="feedback-verdict"></div><div class="feedback-explanation" id="feedback-explanation"></div></div>
+      <div class="q-controls"><span></span><button class="btn btn-primary" id="next-btn" style="display: none;">Next question</button></div>
+    </div>
+  </div>
+
+  <div id="results" style="display: none;">
+    <div class="results-hero">
+      <div class="score-pct" id="score-pct">0%</div>
+      <div class="score-fraction"><span id="score-num">0</span> of <span id="score-total">0</span> correct</div>
+      <div class="verdict" id="score-verdict"></div>
+    </div>
+    <div class="results-actions">
+      <button class="btn btn-primary" id="retry-btn">Retry same tier</button>
+      <button class="btn btn-secondary" id="back-btn">Change tier</button>
+    </div>
+    <h2 class="review-title">Review</h2>
+    <div id="review"></div>
+  </div>
+
+</div>
+
+<script>
+window.QUIZ_META = { title: "Deployment & management tools", code: "3.3", domain: "Domain 3" };
+
+window.QUIZ_QUESTIONS = [
+  // EASY
+  { q: "What is the Azure Portal?", o: ["A CLI tool", "The web-based GUI at portal.azure.com for managing Azure resources", "A monitoring product", "A migration service"], a: 1, d: "easy", e: "Azure Portal is Microsoft's web GUI for Azure. Discoverable, visual, good for exploration and one-off tasks." },
+  { q: "Azure CLI is:", o: ["A GUI tool", "A cross-platform command-line tool with 'az' commands", "PowerShell-only", "A monitoring service"], a: 1, d: "easy", e: "Azure CLI is cross-platform. Command style: 'az <group> <subcommand>' (e.g. 'az vm create')." },
+  { q: "Azure PowerShell uses which command style?", o: ["az verb noun", "Verb-Noun cmdlets (e.g. New-AzResourceGroup)", "SQL statements", "REST-only"], a: 1, d: "easy", e: "Azure PowerShell uses PowerShell's Verb-Noun cmdlet convention." },
+  { q: "Cloud Shell is:", o: ["A monitoring product", "A browser-hosted terminal (Bash or PowerShell) pre-authenticated with your Azure identity", "A backup service", "A load balancer"], a: 1, d: "easy", e: "Cloud Shell lets you run CLI/PowerShell in the browser (shell.azure.com) without local install. Includes az, git, docker, kubectl, terraform." },
+  { q: "Cloud Shell supports which shell environments?", o: ["Only Bash", "Only PowerShell", "Both Bash and PowerShell", "Only DOS"], a: 2, d: "easy", e: "Cloud Shell offers both Bash (with Azure CLI + Linux tools) and PowerShell (with Az module + PS tools)." },
+  { q: "Cloud Shell persists your home directory using:", o: ["Local browser storage", "A small Azure Storage account (created on first use)", "Blob only", "In-memory"], a: 1, d: "easy", e: "Cloud Shell needs an Azure Storage account (auto-created if needed) to persist $HOME across sessions." },
+  { q: "ARM templates are written in:", o: ["YAML", "JSON", "Python", "PowerShell"], a: 1, d: "easy", e: "ARM templates are JSON declarative documents that describe desired Azure infrastructure." },
+  { q: "Bicep is:", o: ["A monitoring product", "A domain-specific language (DSL) for Azure infrastructure that transpiles to ARM JSON", "A load balancer", "Only for VMs"], a: 1, d: "easy", e: "Bicep is Microsoft's cleaner DSL for Azure IaC. It transpiles to ARM JSON but is far more concise and readable." },
+  { q: "Which is TRUE about ARM templates and Bicep?", o: ["They are entirely different engines", "They use the same underlying engine (ARM); Bicep is syntactic sugar", "Bicep is deprecated", "ARM only works in the US"], a: 1, d: "easy", e: "Bicep transpiles to ARM JSON — same engine, same behaviour, cleaner syntax." },
+  { q: "'Idempotent' in IaC means:", o: ["The template only runs once", "Applying the same template repeatedly produces the same end state (no unwanted side effects)", "The template deletes resources", "Only for VMs"], a: 1, d: "easy", e: "Idempotent = repeatable with the same result. A key property of both ARM and Bicep deployments." },
+  { q: "Azure Arc allows you to:", o: ["Provide backups", "Extend Azure's control plane to on-prem, other clouds, and edge resources", "Only manage VMs", "Improve networking"], a: 1, d: "easy", e: "Azure Arc lets you manage non-Azure resources (on-prem servers, AWS EC2, GCP VMs, K8s clusters) as if they were in Azure." },
+  { q: "Which resources can Azure Arc manage?", o: ["Only Azure resources", "Servers, Kubernetes clusters, and Azure data services running anywhere", "Only databases", "Only web apps"], a: 1, d: "easy", e: "Arc extends Azure management to servers, K8s clusters, and Azure data services (SQL MI, PostgreSQL) running outside Azure." },
+  { q: "The Azure Mobile app is used for:", o: ["Running production workloads", "Monitoring, responding to alerts, running Cloud Shell commands from your phone", "Managing subscriptions", "Storage transfer"], a: 1, d: "easy", e: "The mobile app is for on-the-go admin — check resource status, respond to alerts, run quick Cloud Shell commands." },
+  { q: "Every Azure management call ultimately goes through:", o: ["The mobile app", "Azure Resource Manager (ARM)", "The Portal only", "Windows Task Scheduler"], a: 1, d: "easy", e: "ARM is the single control plane. Portal, CLI, PowerShell, REST, SDKs — all end at ARM." },
+  { q: "Which is CROSS-PLATFORM?", o: ["Only Azure PowerShell", "Both Azure CLI and Azure PowerShell (via PowerShell Core)", "Only Azure CLI", "Neither"], a: 1, d: "easy", e: "Both are cross-platform. Azure CLI is bash-friendly; Azure PowerShell runs on PS Core on Linux/macOS/Windows." },
+  { q: "Which is FREE to use in Cloud Shell?", o: ["Storage account is required (small cost)", "The compute and CLI usage are free; the small backing storage account has minimal cost", "All Cloud Shell use is expensive", "Only in Government cloud"], a: 1, d: "easy", e: "Cloud Shell compute is free — you only pay for the tiny storage account that persists your $HOME." },
+  { q: "Which tool is BEST for a first-time Azure user exploring services visually?", o: ["Azure CLI", "Azure Portal", "Bicep", "REST API"], a: 1, d: "easy", e: "Portal is designed for discoverability and visual navigation — best for learning and one-off admin." },
+  { q: "Which tool is BEST for scripted automation of Azure resource management?", o: ["Azure Portal only", "Azure CLI or Azure PowerShell", "Only the mobile app", "Only via REST"], a: 1, d: "easy", e: "CLI/PowerShell are the standard scripting interfaces. Portal is not suited for automation." },
+  { q: "Which is Microsoft's recommended IaC for NEW Azure projects?", o: ["ARM templates (JSON)", "Bicep", "Manual portal deployment", "Terraform (Microsoft doesn't recommend it)"], a: 1, d: "easy", e: "For new Azure-native projects, Microsoft recommends Bicep — cleaner and more concise than ARM JSON. (Terraform is fully supported but not Microsoft's default.)" },
+  { q: "Which is TRUE about Azure Arc pricing?", o: ["It's expensive per resource", "The core Arc capability is free; certain add-on services (Defender, monitoring) have their own pricing", "Only Enterprise Agreement customers can use it", "Only in preview"], a: 1, d: "easy", e: "Onboarding a server or K8s cluster to Arc is free. Optional Azure services applied via Arc (Policy, Defender for Cloud plans, Monitor) have their own charges." },
+
+  // MEDIUM
+  { q: "You want to write a reusable, version-controlled deployment for a 3-tier web app across dev / test / prod. Best approach?", o: ["Manual portal deployment each time", "IaC (Bicep or ARM templates) checked into Git", "Screenshots of the portal", "Only PowerShell scripts"], a: 1, d: "medium", e: "IaC + version control = reproducible, reviewable, rollback-able deployments." },
+  { q: "You want to run a quick 'az vm list' from any device without installing anything. Best fit?", o: ["Cloud Shell in the browser", "Install CLI locally on every device", "The mobile app only", "REST API"], a: 0, d: "medium", e: "Cloud Shell is the zero-install option — open a browser, sign in, run commands." },
+  { q: "You need to manage on-prem Windows servers with Azure Policy, RBAC, and Defender for Cloud. Best fit?", o: ["Only Azure Portal", "Enrol them into Azure Arc", "Migrate them to Azure IaaS", "Nothing — impossible"], a: 1, d: "medium", e: "Azure Arc extends Azure Policy, RBAC, and Defender coverage to on-prem servers. No migration required." },
+  { q: "Which is TRUE about ARM templates vs Bicep in terms of features?", o: ["Bicep has fewer features", "Both are equivalent in capability; Bicep is preferred for readability and modularity", "ARM has more capabilities", "Bicep only supports storage"], a: 1, d: "medium", e: "Bicep transpiles to ARM, so anything you can deploy with ARM you can deploy with Bicep. Bicep just does it more cleanly." },
+  { q: "You need to reset a colleague's password from your phone quickly. Best fit?", o: ["Azure CLI", "Azure Mobile app", "Portal on a colleague's device", "Not possible"], a: 1, d: "medium", e: "The Azure mobile app supports common admin tasks including user management, alerts, and Cloud Shell." },
+  { q: "You want to enforce that all future deployments use Bicep, not portal clicks. Best approach?", o: ["Ban the Portal via NSGs", "Cultural + process controls; Azure Policy can enforce configuration but not the deployment tool used", "Delete the Portal", "Only PowerShell"], a: 1, d: "medium", e: "Policy governs *what* gets deployed, not *how*. Enforcing tool choice is a process/culture matter (code review, PR gates)." },
+  { q: "Which is TRUE about Azure Arc-enabled Kubernetes?", o: ["Only AKS is supported", "Any CNCF-conformant Kubernetes cluster (on-prem, EKS, GKE, OpenShift) can be enrolled", "Only Windows K8s", "Only Managed K8s in Azure"], a: 1, d: "medium", e: "Arc-enabled K8s supports any CNCF-conformant cluster. Once enrolled, you can apply Azure Policy, GitOps configs, and Monitor." },
+  { q: "In Cloud Shell, which tools are pre-installed?", o: ["Only az", "Az CLI, PowerShell, git, docker, kubectl, terraform, and text editors", "Just SSH", "Nothing"], a: 1, d: "medium", e: "Cloud Shell is a full DevOps toolbox: CLI, PS, git, docker, kubectl, helm, terraform, vim, nano, and even VS Code." },
+  { q: "Which format is ARM templates in?", o: ["JSON", "YAML", "Python", "TOML"], a: 0, d: "medium", e: "ARM templates are JSON. Bicep is a cleaner DSL that transpiles to ARM JSON." },
+  { q: "You need to enforce that non-Azure servers appear in Azure Policy reports. Best fit?", o: ["Migrate them", "Onboard them to Azure Arc, then apply Policy at MG/Sub scope", "Ignore them", "Only VPN"], a: 1, d: "medium", e: "Arc-enabled servers appear as Azure resources and can be governed by Policy just like native Azure VMs." },
+  { q: "You want to script an idempotent deployment that can be re-run without duplicating resources. Best approach?", o: ["Manual portal every time", "ARM template or Bicep — declarative + idempotent", "Only shell commands", "REST API with imperative POSTs"], a: 1, d: "medium", e: "Declarative IaC (ARM/Bicep) is idempotent by design — apply repeatedly, end state is identical." },
+  { q: "Which is TRUE about Cloud Shell session limits?", o: ["Sessions run forever", "Sessions time out after ~20 minutes of inactivity; storage persists", "Sessions must be scheduled", "Cloud Shell is only available in Government cloud"], a: 1, d: "medium", e: "Cloud Shell sessions time out after inactivity (~20 min). Your $HOME storage persists between sessions." },
+  { q: "You want to modify an existing Azure resource via API from a custom script. Best approach?", o: ["Only Portal", "Use the Azure REST API or an SDK (Python, .NET, Java, JS, Go)", "Bicep only", "Not possible"], a: 1, d: "medium", e: "REST APIs and SDKs are the raw ways to talk to ARM. CLI/PowerShell/IaC are convenient wrappers." },
+  { q: "Which is TRUE about Azure PowerShell vs Azure CLI in terms of capability?", o: ["CLI can do more things", "PowerShell can do more things", "They have equivalent capabilities — choose by preference", "Neither can create VMs"], a: 2, d: "medium", e: "Both wrappers hit the same ARM API. Feature parity is the goal; both can create VMs, storage, networks, etc." },
+  { q: "You want to run an ARM template deployment from your local machine. Best tool?", o: ["Azure Portal only", "Azure CLI ('az deployment') or Azure PowerShell (New-AzResourceGroupDeployment)", "Excel", "None — must upload to Portal"], a: 1, d: "medium", e: "CLI and PowerShell can deploy ARM/Bicep templates from local files. The Portal supports upload/paste, but scripting is more repeatable." },
+  { q: "Which is TRUE about the Azure Mobile app?", o: ["It replaces the Portal entirely", "It provides a subset of Portal features + Cloud Shell for admin on the go", "It's read-only", "It's only for developers"], a: 1, d: "medium", e: "The mobile app is a portable admin tool — check resources, respond to alerts, run Cloud Shell commands." },
+  { q: "Which is TRUE about ARM's role in Azure?", o: ["It's a monitoring tool", "It's the unified control plane; every Azure management operation ultimately goes through ARM", "It's only for templates", "It's an on-prem service"], a: 1, d: "medium", e: "ARM = the single control plane. All interfaces (Portal, CLI, PS, REST, SDK, IaC) end at ARM." },
+  { q: "You have 200 similar VMs across 5 regions. Best approach for consistent, versioned management?", o: ["Manual portal work", "IaC (Bicep) + CI/CD pipelines + policy enforcement", "Only PowerShell scripts, not version-controlled", "Ignore consistency"], a: 1, d: "medium", e: "At scale, IaC + CI/CD + Policy is the only sustainable approach for consistent, auditable configuration." },
+  { q: "Which is TRUE about Bicep modules?", o: ["Not supported", "Bicep supports modules for reusable sub-templates, aiding modular composition", "Only for VMs", "Modules require ARM JSON"], a: 1, d: "medium", e: "Bicep supports modules — one of the reasons it's easier to modularise infrastructure vs raw ARM JSON." },
+  { q: "You need to trigger a script whenever a specific Azure event occurs (e.g. a new VM is created). Best fit?", o: ["Manual watching", "Event Grid + Function / Logic App handler", "Cloud Shell always open", "Portal notifications"], a: 1, d: "medium", e: "Event Grid publishes Azure resource events. Functions or Logic Apps can subscribe and act — the automation pattern for Azure events." },
+
+  // HARD
+  { q: "Which is TRUE about the choice between ARM templates and Bicep for new projects?", o: ["ARM is preferred", "Bicep is preferred by Microsoft — cleaner, modular, type-safe; transpiles to identical ARM behaviour", "They cannot deploy the same resources", "Bicep is a legacy format"], a: 1, d: "hard", e: "Bicep is Microsoft's forward direction for Azure-native IaC. Use it for new projects unless you have a strong reason not to." },
+  { q: "You have a mix of Azure VMs, on-prem Windows servers, and AWS EC2. You need one policy assignment to enforce a rule across all of them. Best approach?", o: ["Impossible", "Enrol non-Azure resources into Azure Arc, then assign Policy at MG scope", "Only manage Azure resources", "Buy AWS Config"], a: 1, d: "hard", e: "Arc brings non-Azure resources into Azure's control plane, so a single Policy assignment can cover heterogeneous fleets." },
+  { q: "Which is TRUE about idempotency in ARM/Bicep?", o: ["Applying the same template twice creates duplicate resources", "The template's declared state is compared to the current state; ARM makes only the changes needed to converge", "Idempotency requires deleting first", "Idempotency isn't supported"], a: 1, d: "hard", e: "Declarative IaC compares desired vs current, then applies minimal changes. Safe to re-apply the same template." },
+  { q: "Which is TRUE about the security of the Azure Portal?", o: ["It's a special network you must configure", "It's an HTTPS web app hitting ARM APIs; access is governed by Entra ID + RBAC + Conditional Access; the same identity/authz rules apply as with CLI/PowerShell", "It bypasses RBAC", "It requires ExpressRoute"], a: 1, d: "hard", e: "The Portal is just a UI on top of ARM. All security (identity, RBAC, Policy, MFA, Conditional Access) is enforced at ARM regardless of interface." },
+  { q: "Which is TRUE about Azure Arc-enabled data services?", o: ["Only Azure-native databases are supported", "Azure Arc lets you run Azure SQL Managed Instance and PostgreSQL anywhere (on-prem, other cloud, edge) with Azure management", "Data services can't be Arc-enabled", "Only in Azure Government"], a: 1, d: "hard", e: "Arc-enabled data services let you run Azure PaaS databases wherever you have Kubernetes — with Azure-consistent management." },
+  { q: "You need to deploy a large ARM template that references a URI-hosted linked template. What must the deployer have access to?", o: ["Just Owner role", "The linked template URI must be accessible to ARM at deploy time (public or SAS-protected in storage)", "Nothing", "Only Reader"], a: 1, d: "hard", e: "ARM must be able to fetch linked templates. Store them in a storage account with an accessible URL or SAS." },
+  { q: "Which is TRUE about the Portal's dashboard feature?", o: ["It's identical for everyone", "Each user can customise a dashboard with tiles for the resources and metrics they care about", "Only Owners can customise", "It's read-only"], a: 1, d: "hard", e: "Portal dashboards are per-user customisable, pinning tiles for common resources, metrics, and shortcuts." },
+  { q: "Which is TRUE about the interaction of Azure Arc + Azure Policy?", o: ["Arc-enabled resources cannot be governed by Policy", "Policy assignments cascade to Arc-enabled resources just like native Azure resources at the same scope", "Only Reader RBAC works on Arc", "Policy requires migration"], a: 1, d: "hard", e: "Arc-enabled resources appear as Azure resources in your subscription. Policy applies to them just like it does to native Azure resources." },
+  { q: "You are deploying to five different subscriptions with the same Bicep template. Best pattern?", o: ["Copy-paste and modify per subscription", "Use Bicep parameter files per subscription; store templates in Git; deploy via CI/CD", "Only manual deployment", "Redeploy from scratch each time"], a: 1, d: "hard", e: "Parameter files per environment + CI/CD + Git = the modern IaC pattern. Same template, different parameters." },
+  { q: "Which is TRUE about the level of authorisation required to deploy via ARM template?", o: ["Reader role is enough", "The identity must have RBAC permissions to CREATE the specific resources being deployed", "Only Owner can deploy", "No RBAC needed"], a: 1, d: "hard", e: "Deploying a template requires having permissions equivalent to what the deployment does. Reader can't deploy anything." },
+  { q: "Which is TRUE about ARM's role in Policy enforcement?", o: ["Policy is enforced only for CLI deployments", "Policy is enforced by ARM at every request path — Portal, CLI, PowerShell, REST, ARM/Bicep template — no bypass", "Policy applies only via the mobile app", "Policy is optional"], a: 1, d: "hard", e: "Policy is central and unavoidable — as long as you go through ARM, Policy is enforced. Since everything goes through ARM, there's no bypass." },
+  { q: "Which is TRUE about the difference between the Azure Portal and Azure Arc?", o: ["They are the same", "The Portal is the GUI; Arc is the on-ramp to extend the Portal's/ARM's management scope to non-Azure resources", "Arc replaces the Portal", "The Portal only works with Arc"], a: 1, d: "hard", e: "Portal = interface. Arc = the mechanism to bring non-Azure resources into that interface." }
+];
+</script>
+<script src="quiz.js"></script>
+</body>
+</html>

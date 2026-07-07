@@ -1,0 +1,155 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>1.1 Cloud computing · AZ-900 quiz</title>
+  <link rel="stylesheet" href="quiz.css">
+</head>
+<body>
+<div class="container">
+
+  <header class="q-header">
+    <div class="q-crumb">
+      <a href="index.html">All quizzes</a>
+      <span class="sep">Domain 1 · Cloud concepts</span>
+    </div>
+    <h1 class="q-title" id="quiz-title">Cloud computing</h1>
+    <p class="q-subtitle" id="quiz-subtitle">Shared responsibility, deployment models, CapEx vs OpEx, consumption pricing.</p>
+  </header>
+
+  <div id="setup">
+    <p class="setup-intro">Choose a difficulty tier. Easy tests recall, Medium tests scenarios, Hard tests distractor traps. Questions in each run are shuffled.</p>
+    <div class="setup-diff">
+      <button class="start-btn diff-easy" data-difficulty="easy">
+        <span class="btn-label">Tier · Recall</span>
+        <span class="btn-title">Easy</span>
+        <span class="btn-count" id="count-easy">— questions</span>
+      </button>
+      <button class="start-btn diff-medium" data-difficulty="medium">
+        <span class="btn-label">Tier · Scenarios</span>
+        <span class="btn-title">Medium</span>
+        <span class="btn-count" id="count-medium">— questions</span>
+      </button>
+      <button class="start-btn diff-hard" data-difficulty="hard">
+        <span class="btn-label">Tier · Gotchas</span>
+        <span class="btn-title">Hard</span>
+        <span class="btn-count" id="count-hard">— questions</span>
+      </button>
+      <button class="start-btn diff-all" data-difficulty="all">
+        <span class="btn-label">All tiers</span>
+        <span class="btn-title">Full quiz</span>
+        <span class="btn-count" id="count-all">— questions</span>
+      </button>
+    </div>
+  </div>
+
+  <div id="quiz" style="display: none;">
+    <div class="q-progress">
+      <span>Q<span id="q-num">1</span> / <span id="q-total">0</span></span>
+      <div class="progress-track"><div class="progress-fill" id="progress-fill"></div></div>
+    </div>
+    <div class="q-card">
+      <div class="q-meta">
+        <span class="chip diff-easy" id="q-difficulty">easy</span>
+      </div>
+      <div class="q-text" id="q-text"></div>
+      <div class="q-options" id="q-options"></div>
+      <div class="feedback" id="feedback">
+        <div class="feedback-verdict" id="feedback-verdict"></div>
+        <div class="feedback-explanation" id="feedback-explanation"></div>
+      </div>
+      <div class="q-controls">
+        <span></span>
+        <button class="btn btn-primary" id="next-btn" style="display: none;">Next question</button>
+      </div>
+    </div>
+  </div>
+
+  <div id="results" style="display: none;">
+    <div class="results-hero">
+      <div class="score-pct" id="score-pct">0%</div>
+      <div class="score-fraction"><span id="score-num">0</span> of <span id="score-total">0</span> correct</div>
+      <div class="verdict" id="score-verdict"></div>
+    </div>
+    <div class="results-actions">
+      <button class="btn btn-primary" id="retry-btn">Retry same tier</button>
+      <button class="btn btn-secondary" id="back-btn">Change tier</button>
+    </div>
+    <h2 class="review-title">Review</h2>
+    <div id="review"></div>
+  </div>
+
+</div>
+
+<script>
+window.QUIZ_META = {
+  title: "Cloud computing",
+  code: "1.1",
+  domain: "Domain 1",
+  subtitle: "Shared responsibility, deployment models, CapEx vs OpEx, consumption pricing."
+};
+
+window.QUIZ_QUESTIONS = [
+  // ============ EASY (recall) ============
+  { q: "What is cloud computing?", o: ["Storing files on your local hard drive", "The on-demand delivery of computing services over the internet with pay-as-you-go pricing", "A specific programming language for the web", "A type of physical server rack"], a: 1, d: "easy", e: "Cloud computing is the delivery of computing services (servers, storage, networking, databases, software) over the internet, on-demand, priced per use." },
+  { q: "What does CapEx stand for?", o: ["Cloud Expense", "Capital Expenditure", "Capacity Expenditure", "Cash Position Extension"], a: 1, d: "easy", e: "CapEx = Capital Expenditure — up-front purchase of physical assets that are depreciated over years." },
+  { q: "What does OpEx stand for?", o: ["Operational Expenditure", "Optional Expense", "Operating External cost", "On-premises Expenditure"], a: 0, d: "easy", e: "OpEx = Operational Expenditure — ongoing costs like cloud usage, deducted the year they're incurred." },
+  { q: "In a consumption-based pricing model, you pay for:", o: ["A fixed monthly subscription regardless of use", "Only the resources you actually consume", "The number of employees using the service", "Nothing until you cancel"], a: 1, d: "easy", e: "Consumption-based (pay-as-you-go) means you pay for what you use, when you use it. Stop using it and you stop paying." },
+  { q: "In Azure, which type of network traffic is generally free?", o: ["Data leaving Azure (egress)", "Data flowing into Azure (ingress)", "All cross-region traffic", "All network traffic is billed"], a: 1, d: "easy", e: "Ingress is free. Egress is billed. This is a consistent Azure pricing pattern." },
+  { q: "In Azure, which type of network traffic is billed?", o: ["Data ingress into Azure", "Data egress out of Azure", "Data at rest inside a storage account", "Traffic between resources in the same VNet"], a: 1, d: "easy", e: "Egress (data leaving Azure) is billed. Ingress is free." },
+  { q: "A cloud environment operated for a single organisation, on-prem or hosted, is called:", o: ["Public cloud", "Private cloud", "Hybrid cloud", "Multi-cloud"], a: 1, d: "easy", e: "Private cloud is single-tenant — dedicated to one organisation. It can be on-prem or hosted by a provider for one customer." },
+  { q: "A cloud environment that combines public and private infrastructure is called:", o: ["Public cloud", "Private cloud", "Hybrid cloud", "Multi-cloud"], a: 2, d: "easy", e: "Hybrid cloud combines public + private infrastructure, typically connected via VPN or ExpressRoute." },
+  { q: "Using two or more different public cloud providers (e.g. Azure and AWS) is called:", o: ["Hybrid cloud", "Public cloud", "Multi-cloud", "Private cloud"], a: 2, d: "easy", e: "Multi-cloud = using two or more public cloud providers, often to avoid vendor lock-in." },
+  { q: "Cloud services hosted by a third-party provider and shared across many customers are:", o: ["Private cloud", "Public cloud", "On-prem cloud", "Sovereign cloud"], a: 1, d: "easy", e: "Public cloud is multi-tenant, hosted by a hyperscaler like Azure, AWS, or GCP." },
+  { q: "Which of the following is ALWAYS the customer's responsibility, regardless of service type?", o: ["Physical datacentre security", "Data and information", "Physical hardware", "Network cabling"], a: 1, d: "easy", e: "Data, devices, and identities are always the customer's responsibility — in IaaS, PaaS, and SaaS." },
+  { q: "In IaaS, who is responsible for patching the guest operating system?", o: ["Provider", "Customer", "Shared between both", "Neither — it's automatic"], a: 1, d: "easy", e: "In IaaS the customer manages everything from the guest OS up, including patches, antivirus, and hardening." },
+  { q: "In SaaS, who manages the application code?", o: ["Customer", "Provider", "Third-party contractor", "The customer's IT department"], a: 1, d: "easy", e: "In SaaS the provider manages the entire application. The customer manages only data, users, and configuration." },
+  { q: "The physical datacentre is the responsibility of:", o: ["Customer (for any cloud service type)", "Provider (for any cloud service type)", "Customer for IaaS, provider for others", "It varies by region"], a: 1, d: "easy", e: "Physical hosts, physical network, and physical datacentre are always the provider's responsibility in cloud." },
+  { q: "Which term describes provisioning resources without needing human interaction from the provider?", o: ["Broad network access", "Resource pooling", "On-demand self-service", "Measured service"], a: 2, d: "easy", e: "On-demand self-service is one of the five NIST cloud characteristics — you spin up what you need without a ticket to the provider." },
+  { q: "Which term describes multi-tenant sharing of provider resources across customers?", o: ["Rapid elasticity", "Resource pooling", "Broad network access", "Measured service"], a: 1, d: "easy", e: "Resource pooling — the provider's resources are shared across many customers (multi-tenant)." },
+  { q: "Which cloud property allows you to scale resources quickly to meet demand?", o: ["Rapid elasticity", "Measured service", "On-demand self-service", "Broad network access"], a: 0, d: "easy", e: "Rapid elasticity — resources can be scaled quickly, often automatically, to match demand." },
+  { q: "Cloud services are billed based on measured consumption. What is this characteristic called?", o: ["On-demand self-service", "Measured service", "Resource pooling", "Broad network access"], a: 1, d: "easy", e: "Measured service — usage is metered and billed accordingly." },
+  { q: "Which cloud deployment model offers the lowest up-front cost and fastest time to deploy?", o: ["Private cloud", "Public cloud", "Hybrid cloud", "On-prem"], a: 1, d: "easy", e: "Public cloud has the lowest up-front cost (no hardware to buy) and can be provisioned in minutes." },
+  { q: "Which Microsoft service enables management of resources across on-prem, other clouds, and Azure from a single control plane?", o: ["Azure Front Door", "Azure Arc", "Azure Monitor", "Azure Firewall"], a: 1, d: "easy", e: "Azure Arc extends Azure's control plane to on-prem, other clouds, and edge — enabling unified Policy, RBAC, and management." },
+
+  // ============ MEDIUM (scenarios/comparisons) ============
+  { q: "A company keeps sensitive customer data on-prem but uses Azure for elastic compute during peak traffic. Which cloud model?", o: ["Public", "Private", "Hybrid", "Community"], a: 2, d: "medium", e: "Hybrid cloud combines private (on-prem sensitive data) with public (Azure elastic compute), connected via VPN or ExpressRoute." },
+  { q: "A startup wants to launch a new app in one week with no up-front hardware purchase. Best fit?", o: ["Public cloud", "Private cloud", "Hybrid cloud", "Multi-cloud"], a: 0, d: "medium", e: "Public cloud offers fastest time to deploy and lowest up-front cost — ideal for a startup with variable demand." },
+  { q: "A bank must keep all customer data on infrastructure fully controlled by them for regulatory reasons. Which cloud model fits?", o: ["Public", "Private", "Hybrid", "Multi-cloud"], a: 1, d: "medium", e: "Private cloud gives the highest control and can be easier to align to strict regulatory or sovereignty requirements." },
+  { q: "The CFO wants to reduce capital expenditure by using a variable-cost IT model. Which financial shift describes cloud migration?", o: ["OpEx → CapEx", "CapEx → OpEx", "ROI → NPV", "Fixed → Variable expenses only, no accounting change"], a: 1, d: "medium", e: "Cloud shifts spending from CapEx (buy hardware) to OpEx (pay for what you use) — the classic executive value proposition." },
+  { q: "Which is TRUE about the consumption-based cloud pricing model?", o: ["You pay a fixed monthly fee regardless of usage", "You pay for what you use, with no up-front cost", "You must commit to a minimum yearly spend", "It only applies to storage"], a: 1, d: "medium", e: "Consumption-based = no commitment, no up-front cost, pay for what you actually use." },
+  { q: "A company splits workloads across Azure and AWS to avoid vendor lock-in. This is:", o: ["Hybrid cloud", "Community cloud", "Multi-cloud", "Private cloud"], a: 2, d: "medium", e: "Multi-cloud is two or more public cloud providers. Avoiding lock-in is a common reason to adopt it." },
+  { q: "Which security responsibility is ALWAYS the customer's, regardless of IaaS/PaaS/SaaS?", o: ["Physical hosts", "Physical network", "Information and data", "Building security"], a: 2, d: "medium", e: "Data, identities, and endpoints (devices) are always customer-owned — even in SaaS." },
+  { q: "In PaaS, which is the provider's responsibility?", o: ["Application code", "Operating system", "Data", "User identities"], a: 1, d: "medium", e: "In PaaS the provider manages the OS, runtime, and infrastructure. The customer supplies application code and data." },
+  { q: "In IaaS, which is the CUSTOMER's responsibility?", o: ["Physical network", "Guest operating system patching", "Underlying hypervisor", "Physical datacentre security"], a: 1, d: "medium", e: "In IaaS the customer patches the guest OS. Physical layers are always the provider's." },
+  { q: "Which is a benefit of public cloud over private cloud?", o: ["More control", "Better compliance for sovereignty needs", "Faster time to deploy and lower up-front cost", "Guaranteed dedicated hardware"], a: 2, d: "medium", e: "Public cloud wins on speed and cost. Private cloud wins on control and (often) compliance ease." },
+  { q: "In hybrid cloud, private-to-Azure communication is typically established with:", o: ["Only public internet", "A VPN Gateway or ExpressRoute connection", "Physical fibre from the customer to Azure DCs", "Manual data transfer"], a: 1, d: "medium", e: "VPN Gateway (encrypted over internet) or ExpressRoute (private circuit) provides the hybrid connectivity." },
+  { q: "If you deallocate a VM in Azure but keep its managed disk, what happens to billing?", o: ["Nothing is billed", "Compute is not billed; storage is still billed", "Compute is still billed; storage is not", "Both are still billed"], a: 1, d: "medium", e: "Deallocation frees the compute (no more VM-hour charges). The managed disk (storage) still accrues charges." },
+  { q: "In SaaS, what does the customer typically still need to manage?", o: ["Physical servers", "Application code", "Data, users, and configuration", "The underlying operating system"], a: 2, d: "medium", e: "Even in SaaS you own your data, your user identities, and how you configure the product." },
+  { q: "Which is an example of SaaS?", o: ["Azure Virtual Machines", "Azure SQL Database", "Microsoft 365", "Azure Kubernetes Service"], a: 2, d: "medium", e: "Microsoft 365 is finished, subscription-delivered productivity software — the canonical SaaS example." },
+  { q: "Which is an example of IaaS?", o: ["Microsoft 365", "Azure Virtual Machines", "Dynamics 365", "Salesforce"], a: 1, d: "medium", e: "Azure Virtual Machines is pure IaaS — you rent virtualised infrastructure and manage the guest OS up." },
+  { q: "Which is an example of PaaS?", o: ["Azure VMs", "Azure App Service", "Microsoft 365", "On-prem Windows Server"], a: 1, d: "medium", e: "Azure App Service is PaaS — you deploy code, Azure manages the runtime and OS." },
+  { q: "A hospital keeps patient records in a private datacentre for compliance and runs analytics in Azure. This architecture is:", o: ["Public cloud only", "Private cloud only", "Hybrid cloud", "Multi-cloud"], a: 2, d: "medium", e: "Hybrid — private (on-prem PHI) + public (Azure analytics) working together." },
+  { q: "Your company runs workloads in both Azure and Google Cloud. This is:", o: ["Hybrid cloud", "Private cloud", "Multi-cloud", "Community cloud"], a: 2, d: "medium", e: "Multi-cloud = more than one public provider. Azure + GCP qualifies." },
+  { q: "Physical security of datacentres is the responsibility of:", o: ["Customer (all types)", "Provider (in cloud service types)", "Customer only in IaaS", "It depends on the region"], a: 1, d: "medium", e: "Physical security is always the provider's job in cloud — one of the biggest security wins in the shift to cloud." },
+  { q: "Which is a characteristic of \"resource pooling\" in cloud computing?", o: ["Dedicated single-tenant infrastructure", "Multi-tenant sharing of provider resources", "Customer buys hardware", "Static allocation of resources"], a: 1, d: "medium", e: "Resource pooling means the provider's resources are shared across many customers using logical isolation." },
+
+  // ============ HARD (nuance, gotchas, edge cases) ============
+  { q: "Under the shared responsibility model, who is responsible for network controls in PaaS?", o: ["Fully the customer", "Fully the provider", "Shared between both", "Neither — networking is automatic"], a: 2, d: "hard", e: "In PaaS network controls are shared — the provider manages the underlying network, but the customer still configures VNet integration, firewalls, and app-level controls." },
+  { q: "Which is CORRECT about cross-region data transfer costs in Azure?", o: ["All cross-region transfer is free", "Data ingress is free, but cross-region egress incurs cost", "Only intra-region traffic is billed", "Cross-region ingress is billed, egress is free"], a: 1, d: "hard", e: "Ingress is always free. Egress is billed, and cross-region egress (moving data between regions) is typically more expensive than internet egress." },
+  { q: "A multi-cloud deployment offers which benefit over hybrid cloud?", o: ["Lower cost due to consolidation", "Avoids vendor lock-in and enables best-of-breed selection", "Requires fewer identities to manage", "Better latency for on-prem users"], a: 1, d: "hard", e: "Multi-cloud diversifies across providers, reducing lock-in risk. Hybrid connects public to private but doesn't diversify providers." },
+  { q: "In the CapEx model, IT equipment is depreciated. In the OpEx cloud model, the equivalent accounting behaviour is:", o: ["You still depreciate the resource", "Costs are expensed the year they are incurred", "You must reserve capacity for 5 years", "The provider capitalises your usage"], a: 1, d: "hard", e: "OpEx is expensed in the period incurred, not depreciated. That's part of what makes it more flexible for finance teams." },
+  { q: "If a SaaS vendor experiences a breach that exposes your customer records, whose data is at risk?", o: ["Only the vendor's — customer is protected", "The customer's data — data is always the customer's responsibility", "Neither — SaaS vendors are self-insured", "Only if the customer misconfigured the app"], a: 1, d: "hard", e: "Data is always the customer's responsibility regardless of service type. Contractual liability may still fall on the vendor for negligence, but the data's fate is the customer's concern." },
+  { q: "A key trade-off of private cloud vs public cloud is:", o: ["Public cloud costs more up-front", "Private cloud has less scalability but more control and possibly easier compliance", "Private cloud has better global reach", "Public cloud offers dedicated hardware"], a: 1, d: "hard", e: "Private cloud sacrifices scale and elasticity for control and compliance. Public cloud is the inverse trade." },
+  { q: "Which is TRUE about the shared responsibility line?", o: ["It's fixed regardless of service type", "It's determined by the deployment model (public/private/hybrid)", "It moves depending on the service type (IaaS/PaaS/SaaS)", "It's determined by the region chosen"], a: 2, d: "hard", e: "The shared responsibility line depends on the *service type*: more customer responsibility in IaaS, less in SaaS." },
+  { q: "An Azure IaaS VM has an unpatched OS-level vulnerability that is exploited. Who is responsible?", o: ["Microsoft (as the provider)", "The customer (guest OS is customer's responsibility in IaaS)", "Shared 50/50", "The exploit's original author"], a: 1, d: "hard", e: "In IaaS the customer owns everything from the guest OS up, including patching. Microsoft is not responsible for a customer's unpatched OS." },
+  { q: "Which of these is NOT a cloud deployment model?", o: ["Public", "Private", "Serverless", "Hybrid"], a: 2, d: "hard", e: "Serverless is a *compute/consumption model*, not a deployment model. Deployment models = public / private / hybrid / (multi-cloud)." },
+  { q: "What is the correct order from LEAST to MOST customer control?", o: ["IaaS → PaaS → SaaS", "SaaS → PaaS → IaaS", "PaaS → SaaS → IaaS", "SaaS → IaaS → PaaS"], a: 1, d: "hard", e: "SaaS has the least customer control (data only). IaaS has the most (everything up from the OS). PaaS is in the middle." },
+  { q: "To standardise Azure Policy across on-prem servers, AWS EC2 instances, and Azure VMs, what enables this?", o: ["Azure Bastion", "Azure Arc", "Azure Front Door", "Azure Monitor alone"], a: 1, d: "hard", e: "Azure Arc extends Azure's control plane (including Policy) to non-Azure resources — on-prem, other clouds, and edge." },
+  { q: "In which service types does the customer NOT manage the runtime or middleware?", o: ["IaaS only", "PaaS and SaaS", "On-prem only", "SaaS only"], a: 1, d: "hard", e: "In both PaaS and SaaS the provider manages the runtime and middleware. In IaaS the customer manages them (they run inside the VM's guest OS)." }
+];
+</script>
+<script src="quiz.js"></script>
+</body>
+</html>

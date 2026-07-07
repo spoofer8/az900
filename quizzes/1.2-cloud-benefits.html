@@ -1,0 +1,123 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>1.2 Cloud benefits · AZ-900 quiz</title>
+  <link rel="stylesheet" href="quiz.css">
+</head>
+<body>
+<div class="container">
+
+  <header class="q-header">
+    <div class="q-crumb">
+      <a href="index.html">All quizzes</a>
+      <span class="sep">Domain 1 · Cloud concepts</span>
+    </div>
+    <h1 class="q-title">Cloud benefits</h1>
+    <p class="q-subtitle">Availability, reliability, scalability, elasticity, predictability, SLAs.</p>
+  </header>
+
+  <div id="setup">
+    <p class="setup-intro">Choose a difficulty tier. Easy tests recall, Medium tests scenarios, Hard tests distractor traps. Questions in each run are shuffled.</p>
+    <div class="setup-diff">
+      <button class="start-btn diff-easy" data-difficulty="easy"><span class="btn-label">Tier · Recall</span><span class="btn-title">Easy</span><span class="btn-count" id="count-easy">— questions</span></button>
+      <button class="start-btn diff-medium" data-difficulty="medium"><span class="btn-label">Tier · Scenarios</span><span class="btn-title">Medium</span><span class="btn-count" id="count-medium">— questions</span></button>
+      <button class="start-btn diff-hard" data-difficulty="hard"><span class="btn-label">Tier · Gotchas</span><span class="btn-title">Hard</span><span class="btn-count" id="count-hard">— questions</span></button>
+      <button class="start-btn diff-all" data-difficulty="all"><span class="btn-label">All tiers</span><span class="btn-title">Full quiz</span><span class="btn-count" id="count-all">— questions</span></button>
+    </div>
+  </div>
+
+  <div id="quiz" style="display: none;">
+    <div class="q-progress"><span>Q<span id="q-num">1</span> / <span id="q-total">0</span></span><div class="progress-track"><div class="progress-fill" id="progress-fill"></div></div></div>
+    <div class="q-card">
+      <div class="q-meta"><span class="chip diff-easy" id="q-difficulty">easy</span></div>
+      <div class="q-text" id="q-text"></div>
+      <div class="q-options" id="q-options"></div>
+      <div class="feedback" id="feedback"><div class="feedback-verdict" id="feedback-verdict"></div><div class="feedback-explanation" id="feedback-explanation"></div></div>
+      <div class="q-controls"><span></span><button class="btn btn-primary" id="next-btn" style="display: none;">Next question</button></div>
+    </div>
+  </div>
+
+  <div id="results" style="display: none;">
+    <div class="results-hero">
+      <div class="score-pct" id="score-pct">0%</div>
+      <div class="score-fraction"><span id="score-num">0</span> of <span id="score-total">0</span> correct</div>
+      <div class="verdict" id="score-verdict"></div>
+    </div>
+    <div class="results-actions">
+      <button class="btn btn-primary" id="retry-btn">Retry same tier</button>
+      <button class="btn btn-secondary" id="back-btn">Change tier</button>
+    </div>
+    <h2 class="review-title">Review</h2>
+    <div id="review"></div>
+  </div>
+
+</div>
+
+<script>
+window.QUIZ_META = { title: "Cloud benefits", code: "1.2", domain: "Domain 1" };
+
+window.QUIZ_QUESTIONS = [
+  // EASY
+  { q: "What does 'availability' measure in a cloud service?", o: ["The percentage of time the service is operational and reachable", "How many features the service has", "The speed at which the service loads", "The number of users the service supports"], a: 0, d: "easy", e: "Availability is uptime — the percentage of time a system is operational and reachable." },
+  { q: "What does 'reliability' describe in a cloud service?", o: ["Uptime percentage", "The ability to recover from failures and continue functioning", "The speed of API calls", "The number of features"], a: 1, d: "easy", e: "Reliability is fault-recovery. Availability = is it up? Reliability = can it recover if something breaks?" },
+  { q: "What is 'scalability'?", o: ["Automatic scaling based on load", "The ability to increase or decrease capacity to meet demand", "Always running the same amount of resources", "The maximum number of users"], a: 1, d: "easy", e: "Scalability is the *capability* to change capacity. Elasticity adds automation to that capability." },
+  { q: "'Vertical scaling' means:", o: ["Adding more instances (more boxes)", "Changing the size of an existing resource (bigger CPU, more RAM)", "Moving to a different region", "Changing pricing tiers"], a: 1, d: "easy", e: "Vertical = up/down. Bigger or smaller instance." },
+  { q: "'Horizontal scaling' means:", o: ["Adding or removing instances (more or fewer boxes)", "Making an existing VM bigger", "Moving to a cheaper SKU", "Cross-region replication"], a: 0, d: "easy", e: "Horizontal = out/in. More or fewer identical instances." },
+  { q: "What is 'elasticity'?", o: ["The maximum number of instances allowed", "Automatic scaling in response to real-time demand", "Manual scaling by an operator", "The ability to burst network bandwidth"], a: 1, d: "easy", e: "Elasticity is a subset of scalability — scaling that happens *automatically* without operator intervention." },
+  { q: "Approximately how much downtime per year does 99.9% availability allow?", o: ["About 5 minutes", "About 52 minutes", "About 8.76 hours", "About 3.65 days"], a: 2, d: "easy", e: "99.9% (three nines) ≈ 8.76 hours of downtime per year." },
+  { q: "Approximately how much downtime per year does 99.99% availability allow?", o: ["About 5 minutes", "About 52 minutes", "About 8.76 hours", "About 3.65 days"], a: 1, d: "easy", e: "99.99% (four nines) ≈ 52 minutes of downtime per year." },
+  { q: "What is an SLA?", o: ["A pricing tier", "A Service Level Agreement — the provider's promise for a service", "A security control", "A geographic region"], a: 1, d: "easy", e: "SLA = Service Level Agreement. It's the provider's contractual promise about availability, performance, or support." },
+  { q: "The Azure SLA for a single VM using Premium SSD or Ultra Disk is:", o: ["99.9%", "99.95%", "99.99%", "99%"], a: 0, d: "easy", e: "A single VM with Premium/Ultra Disk gets 99.9%. Move to an Availability Set → 99.95%. Move to Availability Zones → 99.99%." },
+  { q: "The Azure VM SLA when deployed in an Availability Set is:", o: ["99.9%", "99.95%", "99.99%", "100%"], a: 1, d: "easy", e: "Availability Sets deliver 99.95% by distributing VMs across fault + update domains inside a single datacentre." },
+  { q: "The Azure VM SLA when deployed across Availability Zones is:", o: ["99.9%", "99.95%", "99.99%", "100%"], a: 2, d: "easy", e: "Availability Zones deliver the highest VM SLA — 99.99% — by spreading VMs across separate datacentres inside a region." },
+  { q: "Predictability in cloud services has two important aspects. Which ones?", o: ["Performance and cost", "Speed and security", "Latency and throughput", "Region and time"], a: 0, d: "easy", e: "Cloud predictability covers both *performance predictability* (consistent behaviour under load) and *cost predictability* (clear pricing tools)." },
+  { q: "'Manageability of the cloud' refers to:", o: ["Configuring Azure itself", "How you interact with Azure resources (Portal, CLI, IaC)", "The physical hardware", "The provider's employees"], a: 1, d: "easy", e: "Management *of* the cloud = how you interact with resources. Management *in* the cloud = how you configure Azure itself." },
+  { q: "What is 'governance' in a cloud context?", o: ["Physical building security", "Enforcing organisational standards and staying compliant", "The provider's headquarters", "A network protocol"], a: 1, d: "easy", e: "Governance = enforcing rules (like Policy), controlling access (RBAC), and staying compliant across your Azure estate." },
+  { q: "Which is TRUE about cloud security responsibilities?", o: ["The provider handles all security", "The customer handles all security", "Cloud shifts *some* security to the provider but the customer still owns data and identities", "Cloud has no security responsibilities"], a: 2, d: "easy", e: "Cloud shifts *some* responsibilities (physical, hypervisor) to the provider. Data, identities, and applications remain the customer's." },
+  { q: "What does 'composite SLA' mean?", o: ["The sum of all SLAs added together", "The product (multiplication) of dependent-service SLAs", "The average of all service SLAs", "The lowest SLA of any dependent service"], a: 1, d: "easy", e: "Composite SLA is the *product* of dependent SLAs. Two 99.9% services in series ≈ 99.8% combined." },
+  { q: "In cloud, which type of scaling changes the *size* of a resource?", o: ["Horizontal", "Vertical", "Diagonal", "Elastic"], a: 1, d: "easy", e: "Vertical scaling changes the size (SKU) of one resource — bigger CPU, more RAM." },
+  { q: "In cloud, which type of scaling changes the *number* of resources?", o: ["Vertical", "Horizontal", "Automatic", "Rapid"], a: 1, d: "easy", e: "Horizontal scaling changes the number of identical instances (scale out / scale in)." },
+  { q: "Elasticity is a subset of which broader cloud property?", o: ["Reliability", "Scalability", "Security", "Availability"], a: 1, d: "easy", e: "Elasticity = scalability with automation. It's a subset of scalability, adding automatic response to demand." },
+
+  // MEDIUM
+  { q: "You need to guarantee no downtime if a rack in a single datacentre fails. What's the minimum you should use?", o: ["A single VM", "Availability Set", "Availability Zones", "Region pair"], a: 1, d: "medium", e: "Availability Sets distribute VMs across fault + update domains inside a single datacentre — protecting against rack-level failure." },
+  { q: "You need to guarantee no downtime if an entire datacentre inside a region fails. What should you use?", o: ["A single VM", "Availability Set", "Availability Zones", "Local disk redundancy"], a: 2, d: "medium", e: "Availability Zones spread VMs across separate datacentres inside a region, protecting against a full-DC failure." },
+  { q: "A composite service uses three dependent services, each with a 99.9% SLA. What is the approximate composite SLA?", o: ["99.9%", "99.7%", "99.99%", "99.6%"], a: 1, d: "medium", e: "0.999 × 0.999 × 0.999 ≈ 0.997 = 99.7%. Composite SLA is the *product*, not the average or the minimum." },
+  { q: "Your web app experiences unpredictable traffic spikes. You want capacity to grow and shrink automatically. What do you need?", o: ["Vertical scaling", "Elasticity (automatic horizontal scaling)", "Reliability", "High availability"], a: 1, d: "medium", e: "Elasticity — automatic scaling in response to real-time demand — is exactly the fit for unpredictable, bursty workloads." },
+  { q: "A team resizes a VM from Standard_D2s_v3 to Standard_D8s_v3. This is:", o: ["Horizontal scaling", "Vertical scaling", "Elastic scaling", "Region scaling"], a: 1, d: "medium", e: "Changing the size (SKU) of a resource is vertical scaling — 'up/down', not 'out/in'." },
+  { q: "A VM Scale Set adds three more instances during a traffic spike. This is:", o: ["Vertical scaling", "Horizontal scaling", "Vertical elasticity", "Regional replication"], a: 1, d: "medium", e: "Adding more instances = horizontal scaling. If it's automatic (which VMSS supports), it's also elasticity." },
+  { q: "Which is TRUE about scalability vs elasticity?", o: ["They are synonyms", "Elasticity is a subset of scalability with automation added", "Scalability requires elasticity", "Elasticity is horizontal, scalability is vertical"], a: 1, d: "medium", e: "Scalability = *capability* to change capacity. Elasticity = scalability + automation." },
+  { q: "Availability and reliability differ in that:", o: ["They mean the same thing", "Availability = uptime; reliability = ability to recover from failures", "Availability = performance; reliability = security", "Reliability is a subset of availability"], a: 1, d: "medium", e: "Availability answers 'is it up right now?'. Reliability answers 'can it recover if something breaks?'." },
+  { q: "You want cost predictability for a stable production workload. Which combination helps most?", o: ["Spot VMs and Autoscale", "Reservations, budgets, and cost alerts", "Public IPs and load balancers", "Availability Sets"], a: 1, d: "medium", e: "Predictable spend comes from reserving capacity (RIs / Savings Plans) and monitoring with budgets + alerts." },
+  { q: "Vertical scaling has which key limitation?", o: ["It's more expensive per second", "It has a ceiling — you can't go beyond the largest available SKU", "It's slower to configure", "It requires more region planning"], a: 1, d: "medium", e: "Vertical scaling has an upper limit (the largest SKU). Horizontal scaling is theoretically unbounded." },
+  { q: "Horizontal scaling typically requires which application property?", o: ["Windows OS", "Statelessness or externalised state", "Public IP", "A relational database"], a: 1, d: "medium", e: "Horizontal scaling assumes any instance can serve any request. That requires the app to be stateless (or store state externally)." },
+  { q: "Which cloud benefit is BEST addressed by geo-redundant storage and region pairs?", o: ["Elasticity", "Reliability", "Cost predictability", "Security"], a: 1, d: "medium", e: "Reliability = fault recovery. Region pairs + geo-redundant storage provide DR capability, which is a reliability capability." },
+  { q: "You need consistent performance for a workload with steady demand and no bursts. Which capability matters most?", o: ["Elasticity", "Predictability", "Manageability", "Multi-cloud"], a: 1, d: "medium", e: "For steady predictable workloads, cost and performance predictability matter more than elasticity." },
+  { q: "Cloud manageability includes which of these?", o: ["Physical wiring", "Central template-driven configuration (like ARM/Bicep) and automated responses to events", "Building maintenance", "HVAC monitoring"], a: 1, d: "medium", e: "Cloud manageability = IaC, autoscale, alerts, automation — the operational tools that let a small team manage a lot of resources." },
+  { q: "You must satisfy a compliance requirement that all Azure resources have an 'Environment' tag. Which cloud capability enables enforcement?", o: ["Elasticity", "Governance (Azure Policy)", "Reliability", "Availability"], a: 1, d: "medium", e: "Governance — specifically Azure Policy — enforces organisational rules like required tags." },
+  { q: "Which is FALSE about cloud SLAs?", o: ["Different services have different SLA percentages", "SLAs may vary based on redundancy configuration", "All Azure services have identical SLAs", "Some services offer no SLA in preview"], a: 2, d: "medium", e: "SLAs vary widely by service, tier, and configuration. Free / preview services often have no SLA at all." },
+  { q: "Availability Zones protect against which of these failures?", o: ["Rack-level power loss only", "Datacentre-wide outage inside a region", "Region-wide meteor strike", "Provider ceasing operations"], a: 1, d: "medium", e: "AZs cover datacentre-level failures within a region. Region-wide loss needs region pairs / geo-redundant patterns." },
+  { q: "Which capability makes it possible to standardise deployments across environments (dev/test/prod)?", o: ["Elasticity", "Manageability (via Infrastructure as Code)", "Availability Zones", "Multi-cloud"], a: 1, d: "medium", e: "IaC (ARM / Bicep) is a manageability capability — reproducible, versioned infrastructure across environments." },
+  { q: "In Azure, which is TRUE about cloud governance features?", o: ["Policy and RBAC are alternatives — pick one", "Policy governs configuration, RBAC governs identity access; use both", "Governance only matters for compliance regulations", "Only large enterprises need governance"], a: 1, d: "medium", e: "Policy (what configurations are allowed) and RBAC (who can do what) are complementary tools, not alternatives." },
+  { q: "Which is true about the cost predictability aspect of the cloud?", o: ["Cloud costs cannot be predicted", "Tools like Pricing Calculator, TCO Calculator, budgets, and cost alerts enable prediction and control", "Cost predictability requires a 3-year commitment", "Only Reserved Instances offer cost predictability"], a: 1, d: "medium", e: "Cost predictability comes from planning tools (Pricing / TCO Calculators) + operational tools (Cost Management + Billing, budgets, alerts)." },
+
+  // HARD
+  { q: "Two services with 99.95% SLAs run in series in a critical path. What is the approximate composite SLA?", o: ["99.95%", "99.90%", "99.98%", "99.99%"], a: 1, d: "hard", e: "0.9995 × 0.9995 ≈ 0.9990 = 99.9%. Composite SLA is the product of dependent SLAs." },
+  { q: "Which of these is closest to five nines (99.999%) of downtime per year?", o: ["About 5 minutes", "About 52 minutes", "About 8.76 hours", "About 3.65 days"], a: 0, d: "hard", e: "99.999% ≈ 5.26 minutes per year. Rare in Azure — most Azure services target 99.9–99.99%." },
+  { q: "You have a workload that MUST be available even if an entire Azure region fails. Which combination protects you?", o: ["Availability Sets in one region", "Availability Zones in one region", "Multi-region deployment with geo-redundant data replication", "Reserved Instances"], a: 2, d: "hard", e: "AZs only protect against DC-level failure inside a region. To survive a whole-region outage you need cross-region deployment + geo-redundant data." },
+  { q: "In an availability set, how are VMs distributed?", o: ["Across regions", "Across fault domains and update domains within one datacentre", "Across availability zones", "Randomly across the entire subscription"], a: 1, d: "hard", e: "Availability Sets use fault domains (racks) + update domains (maintenance windows) inside a single datacentre." },
+  { q: "Which is TRUE about how elasticity is implemented for Azure Functions on the consumption plan?", o: ["It requires an Availability Set", "It's automatic and scales to zero when idle", "It uses horizontal scaling of pre-provisioned VMs", "It requires a Bicep template"], a: 1, d: "hard", e: "Azure Functions consumption plan is inherently elastic — scales to zero when idle, up automatically on trigger." },
+  { q: "Reliability and availability sometimes conflict in design. Which choice sacrifices availability for reliability?", o: ["Running one VM in one region", "Failing over to a secondary region during maintenance", "Running behind a load balancer", "Using premium storage"], a: 1, d: "hard", e: "Deliberate failover for maintenance windows may briefly reduce availability but improves the system's ability to survive real failure — a reliability improvement." },
+  { q: "Cost predictability in Azure is BEST supported by which combination of tools?", o: ["Pricing Calculator + TCO Calculator + Cost Management budgets", "Only Reserved Instances", "Autoscale rules and load balancers", "Just checking the Portal daily"], a: 0, d: "hard", e: "Pricing Calculator (plan new spend) + TCO Calculator (compare vs on-prem) + Cost Management + Billing (analyse + alert on actual spend)." },
+  { q: "Which of these MOST accurately captures the difference between scalability and elasticity?", o: ["Scalability is manual, elasticity is automatic", "Scalability is horizontal, elasticity is vertical", "Scalability is a capability; elasticity adds automation to it", "There is no meaningful difference"], a: 2, d: "hard", e: "Scalability = *capability* to change capacity. Elasticity = scalability *with automation* to react to real-time demand." },
+  { q: "Why does horizontal scaling generally provide better resilience than vertical scaling?", o: ["Vertical scaling is only supported in some regions", "Multiple smaller instances tolerate individual failures; a single large instance is a single point of failure", "Vertical scaling costs more", "Horizontal scaling requires less network"], a: 1, d: "hard", e: "A single big instance is one failure domain. Many small instances behind a load balancer tolerate individual instance losses." },
+  { q: "Availability Zones protect an application only if the application is:", o: ["Vertically scaled", "Deployed across multiple zones with load balancing / data replication", "Running on premium storage", "In an Availability Set"], a: 1, d: "hard", e: "Just having AZs is not enough — you must deploy across them AND route traffic / replicate data accordingly." },
+  { q: "Which is TRUE about cloud manageability?", o: ["It only refers to the Azure Portal", "It includes IaC (ARM/Bicep), autoscale, alerting, and automated responses", "It's optional in Azure", "It requires third-party tools"], a: 1, d: "hard", e: "Manageability spans everything from the Portal to CLI/PowerShell, IaC, autoscale rules, and alert-driven automation." },
+  { q: "A team argues that 'cloud is automatically highly available.' Correct them:", o: ["They're right", "Cloud provides HA *building blocks*, but you must architect for HA (multi-zone, multi-region, load balancers)", "HA only applies to storage", "HA is only available with Reserved Instances"], a: 1, d: "hard", e: "Cloud gives you HA capabilities (AZs, LBs, region pairs) but you must design for HA. A single-VM deployment is not automatically HA." }
+];
+</script>
+<script src="quiz.js"></script>
+</body>
+</html>

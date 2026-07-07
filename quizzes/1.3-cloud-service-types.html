@@ -1,0 +1,120 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>1.3 Cloud service types · AZ-900 quiz</title>
+  <link rel="stylesheet" href="quiz.css">
+</head>
+<body>
+<div class="container">
+
+  <header class="q-header">
+    <div class="q-crumb"><a href="index.html">All quizzes</a><span class="sep">Domain 1 · Cloud concepts</span></div>
+    <h1 class="q-title">Cloud service types</h1>
+    <p class="q-subtitle">IaaS, PaaS, SaaS, serverless — responsibility, examples, scenarios.</p>
+  </header>
+
+  <div id="setup">
+    <p class="setup-intro">Choose a difficulty tier. Easy tests recall, Medium tests scenarios, Hard tests distractor traps.</p>
+    <div class="setup-diff">
+      <button class="start-btn diff-easy" data-difficulty="easy"><span class="btn-label">Tier · Recall</span><span class="btn-title">Easy</span><span class="btn-count" id="count-easy">— questions</span></button>
+      <button class="start-btn diff-medium" data-difficulty="medium"><span class="btn-label">Tier · Scenarios</span><span class="btn-title">Medium</span><span class="btn-count" id="count-medium">— questions</span></button>
+      <button class="start-btn diff-hard" data-difficulty="hard"><span class="btn-label">Tier · Gotchas</span><span class="btn-title">Hard</span><span class="btn-count" id="count-hard">— questions</span></button>
+      <button class="start-btn diff-all" data-difficulty="all"><span class="btn-label">All tiers</span><span class="btn-title">Full quiz</span><span class="btn-count" id="count-all">— questions</span></button>
+    </div>
+  </div>
+
+  <div id="quiz" style="display: none;">
+    <div class="q-progress"><span>Q<span id="q-num">1</span> / <span id="q-total">0</span></span><div class="progress-track"><div class="progress-fill" id="progress-fill"></div></div></div>
+    <div class="q-card">
+      <div class="q-meta"><span class="chip diff-easy" id="q-difficulty">easy</span></div>
+      <div class="q-text" id="q-text"></div>
+      <div class="q-options" id="q-options"></div>
+      <div class="feedback" id="feedback"><div class="feedback-verdict" id="feedback-verdict"></div><div class="feedback-explanation" id="feedback-explanation"></div></div>
+      <div class="q-controls"><span></span><button class="btn btn-primary" id="next-btn" style="display: none;">Next question</button></div>
+    </div>
+  </div>
+
+  <div id="results" style="display: none;">
+    <div class="results-hero">
+      <div class="score-pct" id="score-pct">0%</div>
+      <div class="score-fraction"><span id="score-num">0</span> of <span id="score-total">0</span> correct</div>
+      <div class="verdict" id="score-verdict"></div>
+    </div>
+    <div class="results-actions">
+      <button class="btn btn-primary" id="retry-btn">Retry same tier</button>
+      <button class="btn btn-secondary" id="back-btn">Change tier</button>
+    </div>
+    <h2 class="review-title">Review</h2>
+    <div id="review"></div>
+  </div>
+
+</div>
+
+<script>
+window.QUIZ_META = { title: "Cloud service types", code: "1.3", domain: "Domain 1" };
+
+window.QUIZ_QUESTIONS = [
+  // EASY
+  { q: "What does IaaS stand for?", o: ["Infrastructure as a Solution", "Infrastructure as a Service", "Internet as a Service", "Integrated as a Service"], a: 1, d: "easy", e: "IaaS = Infrastructure as a Service — virtualised compute, storage, and networking rented from a provider." },
+  { q: "What does PaaS stand for?", o: ["Platform as a Service", "Platform as a Solution", "Product as a Service", "Program as a Service"], a: 0, d: "easy", e: "PaaS = Platform as a Service — a managed runtime for your applications." },
+  { q: "What does SaaS stand for?", o: ["Storage as a Service", "Software as a Service", "System as a Service", "Solution as a Service"], a: 1, d: "easy", e: "SaaS = Software as a Service — a finished application delivered via subscription." },
+  { q: "Which Azure service is a canonical example of IaaS?", o: ["Azure App Service", "Azure Virtual Machines", "Microsoft 365", "Azure SQL Database"], a: 1, d: "easy", e: "Azure VMs are the classic IaaS offering — you get virtualised infrastructure and manage the guest OS up." },
+  { q: "Which Azure service is a canonical example of PaaS?", o: ["Azure VMs", "Azure App Service", "Microsoft 365", "Windows Server 2022"], a: 1, d: "easy", e: "Azure App Service is PaaS — you push code, Azure runs it on a managed platform." },
+  { q: "Which Microsoft product is an example of SaaS?", o: ["Azure Virtual Machines", "Azure Kubernetes Service", "Microsoft 365", "Azure Storage"], a: 2, d: "easy", e: "Microsoft 365 (Word, Excel, Outlook, Teams) is finished, subscription-delivered software — canonical SaaS." },
+  { q: "In IaaS, the customer is responsible for:", o: ["Physical hardware", "Guest operating system and above (OS, runtime, apps, data)", "Only the data", "Nothing"], a: 1, d: "easy", e: "In IaaS the customer manages everything from the guest OS up." },
+  { q: "In PaaS, the customer is responsible for:", o: ["Operating system + application + data", "Application + data", "Only data", "Nothing"], a: 1, d: "easy", e: "In PaaS the provider manages the OS and runtime. The customer supplies application code and data." },
+  { q: "In SaaS, the customer is responsible for:", o: ["The entire stack", "OS + apps + data", "Data, users, and configuration", "Nothing at all"], a: 2, d: "easy", e: "In SaaS the provider manages the software; the customer manages their data, users, and how the software is configured." },
+  { q: "Which service model gives the customer the MOST control?", o: ["SaaS", "PaaS", "IaaS", "Serverless"], a: 2, d: "easy", e: "IaaS = most control (and most responsibility). SaaS = least control." },
+  { q: "Which service model gives the customer the LEAST operational burden?", o: ["IaaS", "PaaS", "SaaS", "On-prem"], a: 2, d: "easy", e: "SaaS = least burden — the provider runs and maintains everything except your data and user setup." },
+  { q: "What does 'serverless' typically mean in cloud?", o: ["There are no physical servers involved", "The customer doesn't manage or provision servers; billing is per execution/resource used", "The service has no backend", "It runs only in the browser"], a: 1, d: "easy", e: "Serverless doesn't mean no servers — it means the *customer* doesn't manage them, and pays only for actual usage." },
+  { q: "Which Azure service is the primary example of serverless compute?", o: ["Azure VMs", "Azure Functions", "Azure Kubernetes Service", "Azure App Service standard tier"], a: 1, d: "easy", e: "Azure Functions is Microsoft's flagship serverless compute — event-driven, pay-per-execution." },
+  { q: "In which service model does the CUSTOMER patch the guest OS?", o: ["IaaS", "PaaS", "SaaS", "Serverless"], a: 0, d: "easy", e: "Only IaaS gives the customer the guest OS to patch. PaaS/SaaS/serverless: provider handles it." },
+  { q: "Data is the customer's responsibility in:", o: ["Only SaaS", "Only IaaS", "IaaS, PaaS, and SaaS", "Only on-prem"], a: 2, d: "easy", e: "Data (and identities) is always the customer's responsibility regardless of service type." },
+  { q: "Which service model is Azure SQL Database?", o: ["IaaS", "PaaS", "SaaS", "On-prem"], a: 1, d: "easy", e: "Azure SQL Database is a managed database service — PaaS. Azure runs SQL Server for you." },
+  { q: "Which is a valid example of serverless?", o: ["Azure Virtual Machines", "Azure Functions consumption plan", "SQL Server on a VM", "Windows Server 2022"], a: 1, d: "easy", e: "Azure Functions on the consumption plan is truly serverless — pay per execution, scale to zero." },
+  { q: "Salesforce is an example of:", o: ["IaaS", "PaaS", "SaaS", "Serverless"], a: 2, d: "easy", e: "Salesforce is SaaS — a finished CRM product delivered via subscription over the web." },
+  { q: "Which service model requires the customer to install and configure the operating system?", o: ["IaaS", "PaaS", "SaaS", "Serverless"], a: 0, d: "easy", e: "IaaS gives the customer a bare VM (or image) and requires them to manage the OS. PaaS/SaaS abstract that away." },
+  { q: "Which of these is a PaaS offering?", o: ["Azure Virtual Machines", "Azure App Service", "Microsoft 365", "Dynamics 365"], a: 1, d: "easy", e: "Azure App Service is PaaS. VMs = IaaS. M365 / Dynamics 365 = SaaS." },
+
+  // MEDIUM
+  { q: "A team needs to migrate a 20-year-old Windows app that requires specific OS drivers, without recoding. Which service model?", o: ["SaaS", "PaaS", "IaaS", "Serverless"], a: 2, d: "medium", e: "Lift-and-shift of a legacy app with OS-level dependencies needs full OS control — IaaS." },
+  { q: "You want to deploy a Node.js API with automatic scaling and built-in deployment slots. Which service model?", o: ["IaaS", "PaaS", "SaaS", "Serverless (only)"], a: 1, d: "medium", e: "Azure App Service (PaaS) is designed for this — auto-scale, deployment slots, no OS management." },
+  { q: "Your company needs email and calendaring for 500 employees. Which service model provides this fastest?", o: ["IaaS", "PaaS", "SaaS", "Serverless"], a: 2, d: "medium", e: "Email/calendaring is standard business functionality — SaaS (like Microsoft 365) is fastest and cheapest." },
+  { q: "A small script runs a few times per hour when a blob is uploaded. Which service model fits best?", o: ["IaaS VM running 24/7", "PaaS App Service standard tier", "Serverless (Azure Functions)", "SaaS"], a: 2, d: "medium", e: "Bursty, event-driven, infrequent workloads are the sweet spot for serverless." },
+  { q: "You need full control of the guest OS to install a specific proprietary driver. Which service model?", o: ["SaaS", "PaaS", "IaaS", "Serverless"], a: 2, d: "medium", e: "Only IaaS gives you the guest OS to configure — PaaS abstracts it away." },
+  { q: "A managed relational database with automatic backups, no OS to patch, best fits as:", o: ["IaaS", "PaaS", "SaaS", "Serverless"], a: 1, d: "medium", e: "Managed databases (like Azure SQL Database, Cosmos DB) are PaaS." },
+  { q: "You must be up and running in one hour with no dev time. Which service model?", o: ["IaaS", "PaaS", "SaaS", "Serverless"], a: 2, d: "medium", e: "SaaS = fastest time to value. No dev required. The trade-off is you accept the vendor's feature set." },
+  { q: "In IaaS, the customer is NOT responsible for:", o: ["Guest OS patching", "Application security", "The physical hypervisor", "Network Security Groups"], a: 2, d: "medium", e: "The hypervisor is the provider's virtualisation layer — always the provider's responsibility." },
+  { q: "In PaaS, which layer is the provider's responsibility?", o: ["Application code", "Data", "Runtime and OS", "User identities"], a: 2, d: "medium", e: "PaaS = provider handles OS, runtime, middleware. Customer brings app code and data." },
+  { q: "Which is TRUE about serverless?", o: ["It uses no computer hardware", "It's a form of PaaS with automatic scale and per-execution billing", "It requires manual scaling", "It's the same as IaaS"], a: 1, d: "medium", e: "Serverless is a consumption mode of PaaS — the customer never provisions capacity, and pays per execution." },
+  { q: "You need to run a Kubernetes cluster with a managed control plane but self-managed node pools. Which service?", o: ["Azure VMs", "Azure Kubernetes Service (AKS)", "Microsoft 365", "Azure Functions"], a: 1, d: "medium", e: "AKS is PaaS — Microsoft runs the K8s control plane; you manage the node pools." },
+  { q: "You want to migrate a monolithic Windows app to Azure with zero code changes. Best fit?", o: ["Refactor into serverless", "Lift-and-shift into an IaaS VM", "Redeploy on SaaS", "Rewrite as PaaS App Service"], a: 1, d: "medium", e: "Zero-code-change migration is the classic 'rehost' → IaaS VM approach." },
+  { q: "Container Instances (ACI) is best classified as:", o: ["IaaS", "PaaS (serverless container hosting)", "SaaS", "On-prem"], a: 1, d: "medium", e: "ACI is a serverless PaaS for containers — you specify the container, Azure runs it with per-second billing." },
+  { q: "Dynamics 365 is:", o: ["IaaS", "PaaS", "SaaS", "Serverless"], a: 2, d: "medium", e: "Dynamics 365 is Microsoft's ERP/CRM SaaS — a finished business application." },
+  { q: "Which service model requires the customer to manage OS patching, backup schedules, and antivirus?", o: ["IaaS", "PaaS", "SaaS", "Serverless"], a: 0, d: "medium", e: "IaaS. In PaaS/SaaS/serverless the provider handles OS-level concerns." },
+  { q: "You need bursty, event-driven code that runs occasionally and shouldn't cost anything when idle. Which service model?", o: ["IaaS", "SaaS", "Serverless", "PaaS in a fixed tier"], a: 2, d: "medium", e: "Serverless scales to zero when idle — you pay only for actual executions." },
+  { q: "Which is a downside of SaaS compared to PaaS?", o: ["Slower to deploy", "Less flexibility — you accept the vendor's feature set", "You must manage the OS", "You need to buy hardware"], a: 1, d: "medium", e: "SaaS is fastest but least flexible. You can configure but not customise deeply. That's the trade-off for speed." },
+  { q: "A managed key-value store you don't have to install or maintain is BEST classified as:", o: ["IaaS", "PaaS", "SaaS", "On-prem"], a: 1, d: "medium", e: "Managed databases (like Cosmos DB) are PaaS — you don't manage the OS or engine, just data and configuration." },
+  { q: "Which service model is BEST for a team of developers building a new cloud-native web app?", o: ["IaaS", "PaaS", "SaaS", "On-prem"], a: 1, d: "medium", e: "PaaS lets developers focus on code and skip infrastructure work — usually the fastest path for a new cloud-native app." },
+  { q: "Which of these tasks is the CUSTOMER's responsibility in a PaaS App Service deployment?", o: ["OS patching", "Middleware updates", "Application code and its dependencies", "The physical network"], a: 2, d: "medium", e: "In PaaS the customer owns the app (code + dependencies + data). The provider owns the OS, runtime, and infrastructure." },
+
+  // HARD
+  { q: "Azure Kubernetes Service is officially classified as:", o: ["IaaS", "PaaS (control plane managed by Microsoft)", "SaaS", "It varies per node"], a: 1, d: "hard", e: "AKS is PaaS — the K8s control plane is fully managed by Microsoft (and free). Node pools are IaaS-like but the service itself is PaaS." },
+  { q: "In PaaS, which layer is a SHARED responsibility?", o: ["The physical datacentre", "Network controls", "The application code", "The hypervisor"], a: 1, d: "hard", e: "Network controls in PaaS are shared — provider manages the underlying network, customer configures app-level networking (VNet integration, firewall, private endpoints)." },
+  { q: "'Serverless' most accurately means:", o: ["No servers exist", "Customer doesn't manage servers; billing is per-request/execution; scales to zero", "Runs client-side in the browser", "Cannot connect to a database"], a: 1, d: "hard", e: "Servers still exist — the customer just doesn't manage them. Combined with pay-per-use and scale-to-zero." },
+  { q: "Which of these is NOT usually considered a serverless service?", o: ["Azure Functions", "Azure Logic Apps", "Azure Virtual Machines", "Azure Container Apps (in scale-to-zero mode)"], a: 2, d: "hard", e: "Azure VMs are IaaS — you manage them and pay for them whether they're used or not." },
+  { q: "Under the shared responsibility model, in SaaS the CUSTOMER still manages:", o: ["Application code", "OS patching", "Data classification, identity management, and endpoint devices", "Physical security"], a: 2, d: "hard", e: "Even in SaaS the customer owns their data, their identities, and (usually) their devices. Application code and OS are the provider's." },
+  { q: "Which is TRUE about the shared responsibility line between customer and provider?", o: ["It's fixed regardless of service type", "It moves depending on service type — more customer in IaaS, less in SaaS", "It moves depending on deployment model (public/private/hybrid)", "It's determined by the region"], a: 1, d: "hard", e: "The line shifts with service type: IaaS = most customer responsibility, SaaS = least. Deployment model doesn't change it." },
+  { q: "You have a workload that occasionally spikes to hundreds of requests per second but is idle most of the day. Which is MOST cost-effective?", o: ["IaaS VM running 24/7", "PaaS App Service on a dedicated plan running 24/7", "Serverless (Azure Functions, consumption plan)", "SaaS"], a: 2, d: "hard", e: "Serverless is ideal for bursty workloads with idle time — pays only for actual executions, scales to zero." },
+  { q: "In which service model is the customer usually responsible for endpoint (device) protection?", o: ["Only IaaS", "Only SaaS", "All service types", "None"], a: 2, d: "hard", e: "Endpoint devices (laptops, phones) accessing the service are ALWAYS the customer's responsibility, regardless of service type." },
+  { q: "Which is FALSE about the differences between IaaS, PaaS, and SaaS?", o: ["The physical layer is always the provider's", "Data is always the customer's", "In PaaS the customer is responsible for the operating system", "Serverless is a consumption model within PaaS"], a: 2, d: "hard", e: "In PaaS the provider manages the OS. The customer manages application code and data only." },
+  { q: "Azure Container Instances (ACI) vs Azure Virtual Machines — which statement is CORRECT?", o: ["Both are IaaS", "ACI is serverless PaaS; VMs are IaaS", "ACI is SaaS; VMs are PaaS", "Both are serverless"], a: 1, d: "hard", e: "ACI is serverless PaaS (fire-and-forget containers, per-second billing). VMs are IaaS (you manage the guest OS)." },
+  { q: "Under IaaS shared responsibility, which layer is a SHARED responsibility between customer and provider?", o: ["Physical hosts", "Identity and directory infrastructure", "Physical network", "Data"], a: 1, d: "hard", e: "Identity/directory infrastructure is shared in IaaS — provider provides Entra ID or DC hosting building blocks, customer configures and secures usage." },
+  { q: "Which of these is BEST described as 'PaaS delivered as a serverless consumption model'?", o: ["A VM with autoscale", "Azure Functions on the Consumption plan", "Microsoft 365", "Azure Blob Storage"], a: 1, d: "hard", e: "Functions on Consumption is PaaS underneath, delivered as serverless — no capacity to size, pay only for executions." }
+];
+</script>
+<script src="quiz.js"></script>
+</body>
+</html>

@@ -1,0 +1,120 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>3.1 Cost management · AZ-900 quiz</title>
+  <link rel="stylesheet" href="quiz.css">
+</head>
+<body>
+<div class="container">
+
+  <header class="q-header">
+    <div class="q-crumb"><a href="index.html">All quizzes</a><span class="sep">Domain 3 · Management and governance</span></div>
+    <h1 class="q-title">Cost management</h1>
+    <p class="q-subtitle">Cost factors, calculators, Cost Management + Billing, savings options.</p>
+  </header>
+
+  <div id="setup">
+    <p class="setup-intro">Choose a difficulty tier. Easy tests recall, Medium tests scenarios, Hard tests distractor traps.</p>
+    <div class="setup-diff">
+      <button class="start-btn diff-easy" data-difficulty="easy"><span class="btn-label">Tier · Recall</span><span class="btn-title">Easy</span><span class="btn-count" id="count-easy">— questions</span></button>
+      <button class="start-btn diff-medium" data-difficulty="medium"><span class="btn-label">Tier · Scenarios</span><span class="btn-title">Medium</span><span class="btn-count" id="count-medium">— questions</span></button>
+      <button class="start-btn diff-hard" data-difficulty="hard"><span class="btn-label">Tier · Gotchas</span><span class="btn-title">Hard</span><span class="btn-count" id="count-hard">— questions</span></button>
+      <button class="start-btn diff-all" data-difficulty="all"><span class="btn-label">All tiers</span><span class="btn-title">Full quiz</span><span class="btn-count" id="count-all">— questions</span></button>
+    </div>
+  </div>
+
+  <div id="quiz" style="display: none;">
+    <div class="q-progress"><span>Q<span id="q-num">1</span> / <span id="q-total">0</span></span><div class="progress-track"><div class="progress-fill" id="progress-fill"></div></div></div>
+    <div class="q-card">
+      <div class="q-meta"><span class="chip diff-easy" id="q-difficulty">easy</span></div>
+      <div class="q-text" id="q-text"></div>
+      <div class="q-options" id="q-options"></div>
+      <div class="feedback" id="feedback"><div class="feedback-verdict" id="feedback-verdict"></div><div class="feedback-explanation" id="feedback-explanation"></div></div>
+      <div class="q-controls"><span></span><button class="btn btn-primary" id="next-btn" style="display: none;">Next question</button></div>
+    </div>
+  </div>
+
+  <div id="results" style="display: none;">
+    <div class="results-hero">
+      <div class="score-pct" id="score-pct">0%</div>
+      <div class="score-fraction"><span id="score-num">0</span> of <span id="score-total">0</span> correct</div>
+      <div class="verdict" id="score-verdict"></div>
+    </div>
+    <div class="results-actions">
+      <button class="btn btn-primary" id="retry-btn">Retry same tier</button>
+      <button class="btn btn-secondary" id="back-btn">Change tier</button>
+    </div>
+    <h2 class="review-title">Review</h2>
+    <div id="review"></div>
+  </div>
+
+</div>
+
+<script>
+window.QUIZ_META = { title: "Cost management", code: "3.1", domain: "Domain 3" };
+
+window.QUIZ_QUESTIONS = [
+  // EASY
+  { q: "Which is NOT a factor affecting Azure cost?", o: ["Resource type", "Geographic region", "Consumption/usage", "The colour of your logo"], a: 3, d: "easy", e: "Cost factors: resource type, consumption, maintenance state, region, network egress, subscription type. Colour doesn't feature." },
+  { q: "Which tool estimates the cost of new Azure workloads BEFORE deployment?", o: ["TCO Calculator", "Pricing Calculator", "Cost Management + Billing", "Azure Advisor"], a: 1, d: "easy", e: "Pricing Calculator estimates cost of new Azure workloads. TCO Calculator compares Azure to on-prem." },
+  { q: "Which tool compares Azure's cost with running the same workload on-premises?", o: ["Pricing Calculator", "TCO Calculator", "Cost Management + Billing", "Azure Monitor"], a: 1, d: "easy", e: "TCO (Total Cost of Ownership) Calculator projects the 5-year cost of on-prem vs Azure — a business-case tool." },
+  { q: "Which is used to view actual spend, set budgets, and get cost alerts in Azure?", o: ["Pricing Calculator", "TCO Calculator", "Cost Management + Billing", "Advisor"], a: 2, d: "easy", e: "Cost Management + Billing is the portal blade for tracking actual spend, setting budgets, and receiving alerts." },
+  { q: "Which VM billing state means COMPUTE is NOT billed?", o: ["Stopped (from OS)", "Running", "Stopped-deallocated (from Portal/CLI)", "Rebooting"], a: 2, d: "easy", e: "Stopped-deallocated releases the VM from the host and stops compute billing. Just 'Stopped' (from OS) still incurs compute charges." },
+  { q: "Which is TRUE about Azure network billing?", o: ["Ingress is billed; egress is free", "Ingress is free; egress is billed", "Both are billed at the same rate", "Neither is billed"], a: 1, d: "easy", e: "Data into Azure (ingress) is free. Data leaving Azure (egress) is billed." },
+  { q: "Reserved Instances offer up to what percentage discount vs pay-as-you-go?", o: ["10%", "30%", "72%", "95%"], a: 2, d: "easy", e: "Reserved Instances can save up to 72% for 1- or 3-year commitments on predictable workloads." },
+  { q: "Reserved Instance commitment periods are:", o: ["30 days or 90 days", "1 year or 3 years", "Only 5 years", "1 month only"], a: 1, d: "easy", e: "RI commitments: 1 year or 3 years. Longer commitments = deeper discount." },
+  { q: "Azure Hybrid Benefit lets you:", o: ["Get free Azure credits", "Bring your existing Windows Server / SQL Server / Linux licences to Azure for savings", "Skip all licensing", "Reserve VM capacity"], a: 1, d: "easy", e: "Hybrid Benefit = BYOL (Bring Your Own Licence) for Windows / SQL / RHEL / SUSE. Combines with Reservations for further savings." },
+  { q: "Spot VMs offer up to what discount?", o: ["10%", "30%", "72%", "90%"], a: 3, d: "easy", e: "Spot VMs can be up to 90% off — but can be evicted at any time with 30 seconds notice." },
+  { q: "The main trade-off of Spot VMs is:", o: ["They cost more", "They can be evicted when Azure needs the capacity", "They only run in one region", "They require ExpressRoute"], a: 1, d: "easy", e: "Spot VMs are cheap but evictable. Ideal for interruptible batch work with checkpointing." },
+  { q: "What are Azure Tags?", o: ["Physical labels on servers", "Key-value metadata attached to Azure resources for organisation and cost allocation", "Backup markers", "Regions"], a: 1, d: "easy", e: "Tags are metadata (key/value pairs) — used for cost allocation, ownership, environment, etc." },
+  { q: "The maximum number of tags per Azure resource is:", o: ["10", "25", "50", "Unlimited"], a: 2, d: "easy", e: "Up to 50 tags per resource, key-value format, case-insensitive keys." },
+  { q: "Tags are inherited from a resource group by default:", o: ["Yes, automatically", "No, tags are NOT inherited by default — Azure Policy can enforce inheritance", "Only in production tier", "Only for VMs"], a: 1, d: "easy", e: "Tags are NOT auto-inherited. If you want inheritance, use Azure Policy to append parent tags to child resources." },
+  { q: "Dev/Test subscriptions in Azure offer:", o: ["No discount", "Reduced pricing for non-production workloads (requires Visual Studio subscription)", "Only for production", "Only in Government cloud"], a: 1, d: "easy", e: "Dev/Test subs give discounted rates for non-production — must have a Visual Studio subscription. Using them for prod violates licensing." },
+  { q: "Azure Savings Plans commit you to:", o: ["A specific SKU for 1 or 3 years", "A fixed hourly spend for 1 or 3 years, applicable across VM families/sizes/regions", "Unlimited spend", "Nothing"], a: 1, d: "easy", e: "Savings Plans = commit to $X/hour for 1/3 years. More flexible than RIs — applies across SKUs and regions." },
+  { q: "Cross-region data transfer in Azure:", o: ["Is always free", "Incurs egress cost, typically higher than internet egress", "Is only free for VMs", "Only applies in China"], a: 1, d: "easy", e: "Moving data between Azure regions is billed as egress, and cross-region egress rates are typically higher than internet egress." },
+  { q: "Which of these is TRUE about Azure region pricing?", o: ["All regions cost the same", "Prices vary by region; some regions are cheaper than others", "Only Azure Government charges more", "Only Azure China charges less"], a: 1, d: "easy", e: "Prices vary by region — for the same SKU, some regions are cheaper than others due to local operating costs." },
+  { q: "What is the primary purpose of setting a budget in Azure Cost Management?", o: ["To physically limit spending automatically", "To track spend against a target and receive alerts when thresholds are crossed", "To buy Reserved Instances", "To disable services"], a: 1, d: "easy", e: "Budgets track actual and forecasted spend, and send alerts. They do NOT automatically block resource creation — pair with automation for that." },
+  { q: "Azure Advisor provides recommendations in which category related to cost?", o: ["Only reliability", "Cost — including right-sizing, buying reservations, and deleting idle resources", "Only performance", "Only security"], a: 1, d: "easy", e: "Advisor's five pillars: reliability, security, performance, cost, operational excellence. Cost recs include right-sizing and buying reservations." },
+
+  // MEDIUM
+  { q: "A dev VM is used 8 hours per day. To minimize cost:", o: ["Delete the VM every evening", "Stop-deallocate the VM outside business hours (compute stops billing; disk retained)", "Leave it running", "Use a P1 tier"], a: 1, d: "medium", e: "Stop-deallocating pauses compute billing while retaining the disk — ready to resume in the morning." },
+  { q: "A CFO asks for a 5-year financial comparison of moving your datacentre to Azure. Best tool?", o: ["Pricing Calculator", "TCO Calculator", "Cost Management + Billing", "Advisor"], a: 1, d: "medium", e: "TCO Calculator compares the 5-year cost of on-prem vs Azure — exactly a CFO-oriented business case." },
+  { q: "You want to spec out the monthly cost of a new 3-tier web app in Azure. Best tool?", o: ["TCO Calculator", "Pricing Calculator", "Cost Management + Billing", "Reserved Instance portal"], a: 1, d: "medium", e: "Pricing Calculator estimates monthly Azure cost for a specific proposed workload." },
+  { q: "You have a predictable, steady production workload for the next 3 years. Best savings option?", o: ["Spot VMs", "Reserved Instances (3-year)", "Pay-as-you-go", "Dev/Test subscription"], a: 1, d: "medium", e: "Predictable, long-term workloads are the classic Reserved Instance use case." },
+  { q: "A large batch processing job runs overnight and can restart if interrupted. Best cost option?", o: ["Reserved Instances", "Spot VMs", "Standard pay-as-you-go", "Dev/Test subs"], a: 1, d: "medium", e: "Interruptible + checkpointable workloads are ideal for Spot VMs (up to 90% off, evictable)." },
+  { q: "You want to track costs by department (Marketing, Finance, R&D). Best approach?", o: ["Create a subscription per department (heavy)", "Apply tags like 'Department = Marketing' and filter Cost Analysis by tag", "Change the region", "Buy separate reservations"], a: 1, d: "medium", e: "Tags are Azure's canonical mechanism for cost allocation without splitting into many subscriptions." },
+  { q: "A workload uses Windows Server VMs. You already own the Windows Server licences. Which saves money?", o: ["Standard VM pricing", "Azure Hybrid Benefit (BYOL Windows/SQL to Azure)", "Only Spot VMs", "Not possible"], a: 1, d: "medium", e: "Hybrid Benefit lets you apply existing on-prem Windows / SQL licences to Azure resources, saving on the licensing portion." },
+  { q: "Which VM state incurs compute billing?", o: ["Stopped-deallocated (from Portal/CLI)", "Deleted", "Stopped from within the OS (still allocated)", "Never in Azure"], a: 2, d: "medium", e: "Stopping the OS keeps the VM allocated on a host — compute is still billed. Only Deallocation frees the host and stops compute billing." },
+  { q: "You want to be alerted when your monthly spend reaches 80% of a target. Use:", o: ["Azure Firewall", "Cost Management budget with alert thresholds", "Azure Advisor", "Sentinel"], a: 1, d: "medium", e: "Budgets support percentage-based alert thresholds (50/75/90/100%) that notify via email or Action Group." },
+  { q: "Which is TRUE about Savings Plans vs Reserved Instances?", o: ["They are the same product", "Savings Plans give flexibility across VM families/sizes/regions in exchange for a slightly smaller discount than RIs", "RIs are more flexible", "Savings Plans are dev-only"], a: 1, d: "medium", e: "Savings Plans: commit to $X/hour, applied broadly. RIs: commit to specific SKU/region. RIs deeper discount, Savings Plans more flexible." },
+  { q: "You want to automate cost reports delivered to a storage account for BI tools. Use:", o: ["Azure Firewall", "Cost Management exports (scheduled CSV to storage)", "Azure Advisor", "Reserved Instance dashboard"], a: 1, d: "medium", e: "Cost Management supports scheduled exports of usage data to a storage account for reporting." },
+  { q: "A resource's cost depends on region. Which is TRUE?", o: ["Every region costs identically", "Some regions are cheaper than others for the same SKU (due to operating cost differences)", "Only Azure Government is cheaper", "Only Azure Government is more expensive"], a: 1, d: "medium", e: "Region pricing varies. Moving a resource to a cheaper region (if latency/compliance allow) is a common cost optimisation." },
+  { q: "Which is TRUE about Reserved Instances scope?", o: ["Only apply to VMs", "Available for VMs, Azure SQL Database, Cosmos DB, Storage, Databricks, and more", "Only apply to dev tier", "Only available for on-prem"], a: 1, d: "medium", e: "Reservations exist for many services beyond VMs — RI is a broad Azure discount mechanism." },
+  { q: "Which is TRUE about Azure Advisor cost recommendations?", o: ["They cost money to view", "They surface underused / idle resources and suggest actions like right-sizing, deallocating, or buying reservations", "They automatically make changes", "They only work in the US"], a: 1, d: "medium", e: "Advisor surfaces cost recommendations you can act on manually — right-size VMs, shut down idle ones, buy RIs, etc." },
+  { q: "A VM running in West Europe is deallocated. You are billed for:", o: ["Compute + storage", "Only storage (managed disk)", "Only compute", "Nothing"], a: 1, d: "medium", e: "Deallocation stops compute billing. Managed disks (storage) continue to bill." },
+  { q: "You want to prevent development teams from deploying VMs larger than a certain SKU (cost control). Best tool?", o: ["Cost Management budget alone", "Azure Policy 'Allowed VM SKUs'", "Delete their subscription", "Only Reader RBAC"], a: 1, d: "medium", e: "Azure Policy can enforce allowed VM SKUs, preventing expensive VMs from being created. Budgets alert but don't block deployment." },
+  { q: "Which is FALSE about tags in Azure?", o: ["You can have up to 50 per resource", "Tag keys are case-insensitive", "Tags are automatically inherited from resource group by default", "Tags can be enforced via Policy"], a: 2, d: "medium", e: "Tags are NOT automatically inherited by default. Policy can enforce inheritance (via 'append' or 'modify' effects)." },
+  { q: "Which type of Azure subscription is BEST for a large enterprise with negotiated pricing and multiple departments?", o: ["Pay-as-you-go", "Free trial", "Enterprise Agreement (EA)", "Dev/Test"], a: 2, d: "medium", e: "EA subscriptions are for large enterprises with negotiated committed spend, department-level cost management, and prepaid credits." },
+  { q: "You've bought a Reserved Instance for a specific region and VM family, but your workload is now in a different region. Which is TRUE?", o: ["The RI is lost", "You can exchange the RI (with some limits) for a different one", "You must delete it", "It converts automatically"], a: 1, d: "medium", e: "Reservations can be exchanged or refunded (with limits). Savings Plans are more flexible from the start." },
+  { q: "You need to prevent 'bill shock' while learning Azure. What's the safest first action?", o: ["Delete all subscriptions", "Set a small monthly budget with email alerts", "Disable Cost Management", "Buy a 3-year RI"], a: 1, d: "medium", e: "A small budget with alerts (e.g. $5/month) is a low-friction way to be notified if usage grows unexpectedly." },
+
+  // HARD
+  { q: "Which is TRUE about the interaction of Reserved Instances + Hybrid Benefit?", o: ["They cannot be combined", "They stack — Hybrid Benefit + RI can reach up to 85% savings on some Windows/SQL workloads", "Hybrid Benefit replaces RIs", "RIs replace Hybrid Benefit"], a: 1, d: "hard", e: "Reservations + Hybrid Benefit stack. Combined savings can reach ~85% on eligible Windows / SQL workloads." },
+  { q: "A budget in Cost Management fires at 100%. What happens by default?", o: ["Resources stop deploying automatically", "Notifications are sent; deployments continue unless you've automated action via Action Group / Logic App / Function", "The subscription is disabled", "All resources are deleted"], a: 1, d: "hard", e: "Budgets alert but don't block. If you want a hard cap, wire the budget's Action Group to a runbook/Function that disables deployment." },
+  { q: "Which is TRUE about Pricing Calculator estimates?", o: ["They are exact final invoices", "They are estimates based on public list prices; actual bills may differ due to region variance, RIs, taxes, and consumption", "They only work for VMs", "They require Cost Management access"], a: 1, d: "hard", e: "Pricing Calculator uses public list prices. Actual bills reflect your usage, negotiated rates, RIs, and Hybrid Benefit — often lower." },
+  { q: "A VM is in Standard_D8s_v3 for 24/7 production. Which sequence is likely to save the most?", o: ["Buy 3-year RI + apply Hybrid Benefit if licences are owned", "Only apply Hybrid Benefit", "Switch to Spot", "Deallocate nightly"], a: 0, d: "hard", e: "For 24/7 production workloads, stacking 3-year RI + Hybrid Benefit is the deepest predictable discount. Spot risks eviction. Deallocation contradicts 24/7." },
+  { q: "Which of these is TRUE about Azure's free-tier services?", o: ["All Azure services are free forever", "$200 credit for 30 days, plus 12 months of free popular services, plus some always-free services", "Only VMs are free for 12 months", "Free tier is only in the US"], a: 1, d: "hard", e: "Free account: $200 credit (30 days), 12 months of specific popular services free with limits, and some always-free services." },
+  { q: "Which is a valid reason cross-region egress costs more than internet egress in some cases?", o: ["It doesn't — internet egress is more expensive", "Cross-region traffic uses dedicated Microsoft backbone infrastructure with a higher priced rate; some scenarios are the reverse", "There is no cross-region egress cost", "Only VMs pay egress"], a: 1, d: "hard", e: "Egress pricing depends on paths and destinations. Cross-region often has higher per-GB rates than internet in some regions — check the pricing sheet for specifics." },
+  { q: "You have a VMSS with autoscale. Best cost-monitoring approach?", o: ["Manual monthly check", "Set a Cost Management budget scoped to that VMSS's resource group, with alerts at 50/80/100% of expected spend", "Delete the VMSS nightly", "Ignore it"], a: 1, d: "hard", e: "Budgets can be scoped to RGs, subscriptions, or MGs — the tightest useful scope is best for early warning." },
+  { q: "Which is TRUE about buying a Reserved Instance?", o: ["Applies retroactively to past usage", "Applies to matching running resources going forward, up to the reserved capacity", "Locks all your workloads", "Requires a full 3-year commitment always"], a: 1, d: "hard", e: "RIs apply to matching running resources going forward. Past usage isn't refunded. Terms are 1 or 3 years." },
+  { q: "Which subscription type is best for INTERNAL training with dev/test workloads?", o: ["Enterprise Agreement", "Dev/Test subscription (requires Visual Studio subscription)", "Pay-as-you-go for prod", "Sponsorship only"], a: 1, d: "hard", e: "Dev/Test subs offer reduced rates for non-production — but require a Visual Studio subscription and can't legally run production workloads." },
+  { q: "Which is TRUE about the cost model for Azure Functions on the Consumption plan?", o: ["Fixed monthly fee", "Pay per execution + resource consumption (GB-seconds) — includes a monthly free grant", "Pay only for storage", "Free"], a: 1, d: "hard", e: "Consumption plan bills for executions + GB-seconds (memory × duration). Includes a generous free monthly grant." },
+  { q: "You've forgotten a set of test resources in an RG. Best way to see if they're costing you money?", o: ["Wait for the invoice", "Use Cost Management + Billing → Cost analysis, filter by RG, check daily spend", "Delete random resources", "Only check Advisor"], a: 1, d: "hard", e: "Cost Analysis (filter by RG or tag) shows daily/monthly spend broken down by service — the fastest way to spot forgotten resources." },
+  { q: "Which is TRUE about the tag-based cost allocation strategy for a large org?", o: ["Impossible in Azure", "Apply consistent tags (Environment, Department, CostCenter, Owner) at deploy time, ideally enforced by Policy, and export Cost data for chargeback", "Only viable with Enterprise Agreement", "Requires no planning"], a: 1, d: "hard", e: "Tag-driven chargeback needs discipline: consistent taxonomy, Policy-enforced tags at deploy, and periodic exports. Well worth it at scale." }
+];
+</script>
+<script src="quiz.js"></script>
+</body>
+</html>
