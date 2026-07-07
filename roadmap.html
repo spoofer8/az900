@@ -534,6 +534,41 @@
   }
   .day-block.lab p + p { margin-top: 8px; }
 
+  /* ---------------- In-kit links per day ---------------- */
+  .kit-links {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 8px;
+    margin: 14px 0 24px;
+  }
+  .kit-links a {
+    display: inline-flex;
+    align-items: baseline;
+    gap: 8px;
+    padding: 6px 12px 7px;
+    font-size: 13px;
+    color: var(--ink-2);
+    background: var(--panel);
+    border: 1px solid var(--rule);
+    border-radius: 999px;
+    text-decoration: none;
+    transition: border-color 0.15s ease, color 0.15s ease, background 0.15s ease;
+  }
+  .kit-links a:hover {
+    color: var(--accent-deep);
+    border-color: var(--accent);
+    background: var(--accent-tint);
+  }
+  .kit-links .kit-label {
+    font-family: var(--mono);
+    font-size: 9.5px;
+    letter-spacing: 0.14em;
+    text-transform: uppercase;
+    color: var(--muted);
+    font-weight: 500;
+  }
+  .kit-links a:hover .kit-label { color: var(--accent); }
+
   /* ---------------- Library / cheatsheet ---------------- */
   .library-grid {
     display: grid;
@@ -1121,6 +1156,11 @@
           <h3 class="day-title">Cloud computing, shared responsibility, and CapEx vs OpEx</h3>
           <p class="day-summary">Ground zero. What "the cloud" actually is, why organisations move to it, and the single model that governs who owns what between the customer and the cloud provider. Also: create your free Azure account today so you can practise from Day 4 onward.</p>
 
+          <div class="kit-links">
+            <a href="notes/01-cloud-concepts/1.1-cloud-computing.md"><span class="kit-label">Notes</span> 1.1 Cloud computing</a>
+            <a href="quizzes/1.1-cloud-computing.html"><span class="kit-label">Quiz</span> 1.1 Cloud computing</a>
+          </div>
+
           <div class="day-sections">
             <div class="day-block">
               <h4>Learn</h4>
@@ -1167,6 +1207,13 @@
         <div class="day-body">
           <h3 class="day-title">Benefits, cloud models, and service categories</h3>
           <p class="day-summary">The vocabulary the exam expects you to use fluently: availability vs reliability vs scalability; public vs private vs hybrid vs multi-cloud; IaaS vs PaaS vs SaaS vs serverless. Distractor questions live in these boundaries.</p>
+
+          <div class="kit-links">
+            <a href="notes/01-cloud-concepts/1.2-cloud-benefits.md"><span class="kit-label">Notes</span> 1.2 Cloud benefits</a>
+            <a href="notes/01-cloud-concepts/1.3-cloud-service-types.md"><span class="kit-label">Notes</span> 1.3 Service types</a>
+            <a href="quizzes/1.2-cloud-benefits.html"><span class="kit-label">Quiz</span> 1.2 Cloud benefits</a>
+            <a href="quizzes/1.3-cloud-service-types.html"><span class="kit-label">Quiz</span> 1.3 Service types</a>
+          </div>
 
           <div class="day-sections">
             <div class="day-block">
@@ -1216,6 +1263,11 @@
           <h3 class="day-title">Domain 1 consolidation and first quiz</h3>
           <p class="day-summary">Half study, half assessment. Close out the Cloud Concepts learning path on Microsoft Learn, then take a domain-scoped practice quiz to catch any conceptual gaps before you move into services. Weak answers today become tomorrow's re-read list.</p>
 
+          <div class="kit-links">
+            <a href="quizzes/index.html"><span class="kit-label">Quizzes</span> Domain 1 · re-run all three</a>
+            <a href="notes/EXAM-CHEATSHEET.md"><span class="kit-label">Cheat sheet</span> Domain 1 section</a>
+          </div>
+
           <div class="day-sections">
             <div class="day-block">
               <h4>Learn</h4>
@@ -1259,6 +1311,11 @@
         <div class="day-body">
           <h3 class="day-title">Azure's core architectural components</h3>
           <p class="day-summary">Regions, Availability Zones, and the four-level resource hierarchy. This is the single most heavily tested topic in Domain 2 — get it precise. Know the difference between an availability <em>zone</em> and an availability <em>set</em>, and where region pairs fit in disaster recovery.</p>
+
+          <div class="kit-links">
+            <a href="notes/02-architecture-services/2.1-core-architecture.md"><span class="kit-label">Notes</span> 2.1 Core architecture</a>
+            <a href="quizzes/2.1-core-architecture.html"><span class="kit-label">Quiz</span> 2.1 Core architecture</a>
+          </div>
 
           <div class="day-sections">
             <div class="day-block">
@@ -1309,6 +1366,11 @@
           <h3 class="day-title">Compute services — VMs, containers, apps, and serverless</h3>
           <p class="day-summary">Six flavours of compute, each with a distinct sweet spot. Know which one to pick given a scenario: lift-and-shift, web app, microservices, batch, event-driven, or virtual desktop. This is where scenario questions concentrate.</p>
 
+          <div class="kit-links">
+            <a href="notes/02-architecture-services/2.2-compute-networking.md"><span class="kit-label">Notes</span> 2.2 Compute &amp; networking</a>
+            <a href="quizzes/2.2-compute-networking.html"><span class="kit-label">Quiz</span> 2.2 Compute &amp; networking</a>
+          </div>
+
           <div class="day-sections">
             <div class="day-block">
               <h4>Learn</h4>
@@ -1357,6 +1419,11 @@
         <div class="day-body">
           <h3 class="day-title">Networking — VNets, gateways, and load balancing</h3>
           <p class="day-summary">Azure networking is a rich topic; AZ-900 stays fundamentals. Focus on the identity of each service: what problem it solves, how it differs from adjacent services. Load-balancer questions are notoriously fond of testing OSI-layer distinctions.</p>
+
+          <div class="kit-links">
+            <a href="notes/02-architecture-services/2.2-compute-networking.md"><span class="kit-label">Notes</span> 2.2 Networking half</a>
+            <a href="quizzes/2.2-compute-networking.html"><span class="kit-label">Quiz</span> 2.2 Compute &amp; networking</a>
+          </div>
 
           <div class="day-sections">
             <div class="day-block">
@@ -1407,6 +1474,11 @@
           <h3 class="day-title">Storage services, redundancy, and access tiers</h3>
           <p class="day-summary">Two acronym clusters you must fully own: redundancy (LRS, ZRS, GRS, GZRS + read-access variants) and tiers (Hot, Cool, Cold, Archive). Expect at least two exam questions on each. Also cover migration tools — Azure Migrate, Data Box, AzCopy, File Sync.</p>
 
+          <div class="kit-links">
+            <a href="notes/02-architecture-services/2.3-storage.md"><span class="kit-label">Notes</span> 2.3 Storage</a>
+            <a href="quizzes/2.3-storage.html"><span class="kit-label">Quiz</span> 2.3 Storage</a>
+          </div>
+
           <div class="day-sections">
             <div class="day-block">
               <h4>Learn</h4>
@@ -1453,6 +1525,11 @@
         <div class="day-body">
           <h3 class="day-title">Identity, access, and security — Entra ID and Zero Trust</h3>
           <p class="day-summary">Microsoft has renamed Azure AD to <strong>Microsoft Entra ID</strong>; the exam uses the new name. Nail authentication vs authorisation, MFA vs Conditional Access, and the three principles of Zero Trust. Also: know Defender for Cloud, Sentinel, Key Vault, and Azure Firewall by their role.</p>
+
+          <div class="kit-links">
+            <a href="notes/02-architecture-services/2.4-identity-access-security.md"><span class="kit-label">Notes</span> 2.4 Identity, access &amp; security</a>
+            <a href="quizzes/2.4-identity-access-security.html"><span class="kit-label">Quiz</span> 2.4 Identity, access &amp; security</a>
+          </div>
 
           <div class="day-sections">
             <div class="day-block">
@@ -1505,6 +1582,11 @@
           <h3 class="day-title">Cost management — calculators, billing, and savings</h3>
           <p class="day-summary">Six factors move the Azure bill; two calculators help you plan; one blade helps you police it. Own the difference between the Pricing Calculator (planning a new workload) and the TCO Calculator (comparing on-prem to Azure). Know Reserved Instances, Savings Plans, Spot, and Hybrid Benefit — that's how the exam tests "how do I spend less".</p>
 
+          <div class="kit-links">
+            <a href="notes/03-management-governance/3.1-cost-management.md"><span class="kit-label">Notes</span> 3.1 Cost management</a>
+            <a href="quizzes/3.1-cost-management.html"><span class="kit-label">Quiz</span> 3.1 Cost management</a>
+          </div>
+
           <div class="day-sections">
             <div class="day-block">
               <h4>Learn</h4>
@@ -1553,6 +1635,11 @@
         <div class="day-body">
           <h3 class="day-title">Governance, policy, and compliance</h3>
           <p class="day-summary">Domain 3's trickiest cluster of near-synonyms: Policy vs RBAC, resource locks vs Policy denials, Purview vs Service Trust Portal. A crisp mental model of "what enforces what, at what scope" is the fastest way to pick these questions apart.</p>
+
+          <div class="kit-links">
+            <a href="notes/03-management-governance/3.2-governance-compliance.md"><span class="kit-label">Notes</span> 3.2 Governance &amp; compliance</a>
+            <a href="quizzes/3.2-governance-compliance.html"><span class="kit-label">Quiz</span> 3.2 Governance &amp; compliance</a>
+          </div>
 
           <div class="day-sections">
             <div class="day-block">
@@ -1605,6 +1692,13 @@
           <h3 class="day-title">Deployment tools and monitoring — Portal to Advisor</h3>
           <p class="day-summary">The exam wants you fluent across every way to touch Azure (Portal, CLI, PowerShell, Cloud Shell, ARM/Bicep, Arc) and every way to observe it (Monitor, Log Analytics, App Insights, Service Health, Advisor). Know the five Advisor pillars — reliability, security, performance, cost, operational excellence.</p>
 
+          <div class="kit-links">
+            <a href="notes/03-management-governance/3.3-deployment-management-tools.md"><span class="kit-label">Notes</span> 3.3 Deployment tools</a>
+            <a href="notes/03-management-governance/3.4-monitoring-tools.md"><span class="kit-label">Notes</span> 3.4 Monitoring tools</a>
+            <a href="quizzes/3.3-deployment-management-tools.html"><span class="kit-label">Quiz</span> 3.3 Deployment tools</a>
+            <a href="quizzes/3.4-monitoring-tools.html"><span class="kit-label">Quiz</span> 3.4 Monitoring tools</a>
+          </div>
+
           <div class="day-sections">
             <div class="day-block">
               <h4>Learn</h4>
@@ -1655,6 +1749,11 @@
           <h3 class="day-title">Full-length practice exam #1</h3>
           <p class="day-summary">Simulate exam conditions: one hour, no notes, no distractions. Then spend twice as long reviewing every question — including the ones you got right — to convert lucky guesses into confident knowledge. Log weak topics for tomorrow.</p>
 
+          <div class="kit-links">
+            <a href="quizzes/index.html"><span class="kit-label">Quizzes</span> Full bank · pick any 60</a>
+            <a href="notes/EXAM-CHEATSHEET.md"><span class="kit-label">Cheat sheet</span> Post-mortem reference</a>
+          </div>
+
           <div class="day-sections">
             <div class="day-block">
               <h4>Learn</h4>
@@ -1701,6 +1800,11 @@
           <h3 class="day-title">Weak-area drill, then full-length practice exam #2</h3>
           <p class="day-summary">Morning: attack yesterday's weak areas with fresh eyes. Afternoon: a second full-length practice exam from a different source than Day 12. If both scores are &gt; 85% and consistent, you are ready.</p>
 
+          <div class="kit-links">
+            <a href="quizzes/index.html"><span class="kit-label">Quizzes</span> Weak-domain drill</a>
+            <a href="notes/EXAM-CHEATSHEET.md"><span class="kit-label">Cheat sheet</span> Fill any remaining gaps</a>
+          </div>
+
           <div class="day-sections">
             <div class="day-block">
               <h4>Learn</h4>
@@ -1746,6 +1850,10 @@
         <div class="day-body">
           <h3 class="day-title">The final polish, then sit the exam</h3>
           <p class="day-summary">Do not cram today. Do not take a fresh practice test in the two hours before the exam. Warm up on the cheat sheet, breathe, and go in confident. During the exam, mark-and-move on anything you're unsure about — you have time to return to it.</p>
+
+          <div class="kit-links">
+            <a href="notes/EXAM-CHEATSHEET.md"><span class="kit-label">Cheat sheet</span> One-page warm-up · nothing else</a>
+          </div>
 
           <div class="day-sections">
             <div class="day-block">
