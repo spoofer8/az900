@@ -49,6 +49,17 @@ The complete distillation. Every table below has appeared in AZ-900 exam questio
 - **Vertical scale** = bigger box (up/down). **Horizontal scale** = more boxes (out/in).
 - **Composite SLA is the *product*** of dependent SLAs.
 
+### SLA nines — yearly downtime cheat
+
+| SLA %           | Yearly downtime | Typical shape                     |
+| --------------- | --------------- | --------------------------------- |
+| 99%             | ~3.65 days      | Single VM, no redundancy          |
+| 99.9%           | ~8.76 hours     | Single VM with Premium SSD        |
+| 99.95%          | ~4.38 hours     | Availability Set                  |
+| 99.99%          | ~52 minutes     | Availability Zones                |
+| 99.999%         | ~5 minutes      | Multi-region active-active        |
+| **0% / no SLA** | —               | **Preview + Free-tier services**  |
+
 ---
 
 ## Azure architecture
